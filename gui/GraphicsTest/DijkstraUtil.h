@@ -2,12 +2,13 @@
 #define DIJKSTRAUTIL_H
 
 #include <vector>
+#include <mainwindow.h>
 
 using namespace std;
 
 class Node {
     public:
-        float x, y;
+        float x, y; // display purposes
         bool known;
         int cost;
         vector<int> adj_nodes;
@@ -20,6 +21,8 @@ class Graph {
     static const int NODEMINDIST = 50;
     public:
         Graph(int); // num of nodes
+        void update();
+        void draw(QGraphicsScene*);
         vector<Node> nodes;
 };
 
