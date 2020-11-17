@@ -15,6 +15,8 @@ public:
     explicit AlgDisplayWindow(QWidget *parent = nullptr);
     ~AlgDisplayWindow();
 
+private slots:
+
 private:
     Ui::AlgDisplayWindow *ui;
 };

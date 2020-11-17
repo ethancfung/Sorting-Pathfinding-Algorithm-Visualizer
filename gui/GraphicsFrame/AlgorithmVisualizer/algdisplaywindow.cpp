@@ -12,3 +12,4 @@ AlgDisplayWindow::~AlgDisplayWindow()
 {
     delete ui;
 }
+
