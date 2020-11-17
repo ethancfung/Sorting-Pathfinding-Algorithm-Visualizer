@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>678</width>
+    <height>488</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Interactive Algorithm Visualizer</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(29, 54, 71);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(66, 154, 170);</string>
+      </property>
+      <property name="text">
+       <string>Algorithm Visualizer!</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="title">
+       <string>Pick an Algorithm</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="4" column="0">
+        <widget class="QRadioButton" name="radioButton_5">
+         <property name="text">
+          <string>Bubble Sort</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Path Finding:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QRadioButton" name="radioButton_2">
+         <property name="text">
+          <string>Dijkstra's</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QRadioButton" name="radioButton_6">
+         <property name="text">
+          <string>Bogo</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QRadioButton" name="radioButton_3">
+         <property name="text">
+          <string>Shell Sort</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Sorting:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QRadioButton" name="radioButton">
+         <property name="text">
+          <string>Quick Sort</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QRadioButton" name="radioButton_7">
+         <property name="text">
+          <string>Breadth First</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QRadioButton" name="radioButton_4">
+         <property name="text">
+          <string>Merge Sort</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QRadioButton" name="radioButton_8">
+         <property name="text">
+          <string>Depth First</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(103, 194, 149);</string>
+      </property>
+      <property name="text">
+       <string>Visualize!</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
