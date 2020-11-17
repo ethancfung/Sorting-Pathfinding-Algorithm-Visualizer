@@ -9,13 +9,16 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    algdisplaywindow.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    algdisplaywindow.h \
     mainwindow.h
 
 FORMS += \
+    algdisplaywindow.ui \
     mainwindow.ui
 
 # Default rules for deployment.
