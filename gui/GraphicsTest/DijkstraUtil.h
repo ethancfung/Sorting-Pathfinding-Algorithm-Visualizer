@@ -20,7 +20,7 @@ class Graph {
     static const int NODESCATTER = 600; // graph generation constants
     static const int NODEMINDIST = 100;
     public:
-        Graph(int); // num of nodes
+        Graph(int, float); // num of nodes. Recommended: 8, 0-1 probability of creating additional adjacency between nodes. Recommended: 0.2
         void update(); // call draw after update
         void draw(QGraphicsScene*);
     private:

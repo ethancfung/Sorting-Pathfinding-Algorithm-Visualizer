@@ -6,7 +6,7 @@
 #include <QGraphicsTextItem>
 //#include <iostream>
 
-Graph::Graph(int num) {
+Graph::Graph(int num, float connectivity) {
     static int seeded = 0;
     if (seeded == 0) {
         seeded = 1;
@@ -33,7 +33,7 @@ Graph::Graph(int num) {
 
         bool has_adj = false; // have at least 1 adjacent node
         for (int j = 0; j < i; ++j) {
-            if ((float)rand()/(float)RAND_MAX < ((float)1 / num) || (!has_adj && j == i - 1)) {
+            if ((float)rand()/(float)RAND_MAX < connectivity || (!has_adj && j == i - 1)) {
                 has_adj = true;
                 int dist = (int)(sqrt(pow(n.x - nodes[j].x, 2) + pow(n.y - nodes[j].y, 2)) / 50) + 1;
                 n.adj_dist.push_back(dist);
