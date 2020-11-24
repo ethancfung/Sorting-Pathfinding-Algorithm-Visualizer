@@ -1,20 +1,20 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "DijkstraUtil.h"
-
-#include <iostream>
-
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
-    Graph g(8);
-    g.draw(scene);
+
+    connect(ui->nextButton, SIGNAL(released()), this, SLOT(nextPressed()));
+
+    graph = new Graph(8);
+    graph->draw(scene);
+}
+
+void MainWindow::nextPressed() {
+    graph->update();
+    graph->draw(scene);
 }
 
 MainWindow::~MainWindow()
