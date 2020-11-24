@@ -15,18 +15,25 @@ MainWindow::MainWindow(QWidget* parent) :
   TheDrawBars->setParent(this);
   TheDrawBars->show();
   srand (time(NULL));
+  connect(ui->pushButton_2,SIGNAL(released()),this,SLOT(insertion_released()));
+  connect(ui->pushButton,SIGNAL(released()),this,SLOT(bubble_released()));
+  connect(ui->pushButton_3,SIGNAL(released()),this,SLOT(selection_released()));
+//  connect(ui->spinBox,SIGNAL(change()),this,SLOT(setDelay()));
 }
 
 MainWindow::~MainWindow() {
   delete ui;
 }
 
-void delay() {
-  QTime dieTime = QTime::currentTime().addMSecs(50);
+
+void delay(int x) {
+  QTime dieTime = QTime::currentTime().addMSecs(x);
   while (QTime::currentTime() < dieTime)
     QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
+
+//**********SORTS**********
 void DrawBars::bubbleSort() {
   bool swapped = true;
   int j = 0;
@@ -36,21 +43,61 @@ void DrawBars::bubbleSort() {
     j++;
     for (unsigned int i = 0; i < list.size() - j; i++) {
       if (list[i] > list[i + 1]) {
-        tmp.Value = list[i].Value;
-        list[i].Value = list[i + 1].Value;
-        list[i + 1].Value = tmp.Value;
-        list[i].Pos.ry() += 5;
-        list[i + 1].Pos.ry() -= 5;
+        swap(i,i+1,50);
         swapped = true;
-        update();
-        delay();
       }
     }
   }
 }
 
+void DrawBars::InsertionSort() {
+    int i, j;
+        for (i = 1; i < int(list.size()); i++) {
+            j = i;
+            while (list[j] < list[j - 1]) {
+                swap(j, j-1,50);
+                j -= 1;
+            }
+        }
+}
 
-void MainWindow::on_pushButton_released() {
+void DrawBars::SelectionSort(){
+    int base = 0;
+    auto min = list[0];
+    int mini = 0;
+    while (base<=int(list.size())-1){
+    for(int i = base; i < int(list.size());i++){
+        if(min>list[i]){
+            min = list[i];
+            mini=i;
+        }
+}
+    swap(base,mini,1000);
+    base++;
+    mini = base;
+    min = list[mini];
+}
+}
+
+
+//**********SWAP**********
+void DrawBars::swap(int x, int y, int d)
+{
+    MyValue tmp;
+    tmp.Value = list[x].Value;
+    list[x].Value = list[y].Value;
+    list[y].Value = tmp.Value;
+    update();
+    delay(d);
+}
+void MainWindow::setDelay(){
+// TheDrawBars->delayTime = ui->slider->value();
+}
+
+
+//**********SLOTS for BUTTONS**********
+void MainWindow::bubble_released() {
+
   TheDrawBars->list.clear();
   const int DefSize = 50;
   const int DefNum = 50;
@@ -63,8 +110,44 @@ void MainWindow::on_pushButton_released() {
     TheDrawBars->list.push_back(tmp);
   }
 
-  TheDrawBars->bubbleSort();;
+  TheDrawBars->bubbleSort();
+//  TheDrawBars->InsertionSort();
 }
+
+void MainWindow::insertion_released() {
+  TheDrawBars->list.clear();
+  const int DefSize = 50;
+  const int DefNum = 50;
+  MyValue tmp;
+  // create value list
+  for (int var = 0; var < DefNum; ++var) {
+    tmp.Pos = QPoint(var * (700/DefNum), DefSize);
+    tmp.Value = 5+(rand() % 100);
+    tmp.Color = Qt::black;
+    TheDrawBars->list.push_back(tmp);
+  }
+
+//  TheDrawBars->bubbleSort();
+  TheDrawBars->InsertionSort();
+}
+
+void MainWindow::selection_released() {
+  TheDrawBars->list.clear();
+  const int DefSize = 50;
+  const int DefNum = 50;
+  MyValue tmp;
+  // create value list
+  for (int var = 0; var < DefNum; ++var) {
+    tmp.Pos = QPoint(var * (700/DefNum), DefSize);
+    tmp.Value = 5+(rand() % 100);
+    tmp.Color = Qt::black;
+    TheDrawBars->list.push_back(tmp);
+  }
+
+  TheDrawBars->SelectionSort();
+}
+
+
 
 
 DrawBars::DrawBars() {}
