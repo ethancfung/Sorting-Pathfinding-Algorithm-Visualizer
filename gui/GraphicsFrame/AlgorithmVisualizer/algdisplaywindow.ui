@@ -15,6 +15,95 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Info on algorithms/sorts :</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>- Selection sort: Finds the smallest element in the array and swaps it to the sorted section. </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>- Insertion sort: Moves through adjacent elements in the array and insert element to the correct position if the element is out of place. </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>- Bubble sort: Goes through list and swaps the highest adjacent elements. </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>- Quick sort: It picks an element as pivot and partitions the given array around the picked pivot. </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>- Radix sort: An integer sorting algorithm that sorts data with integer keys by grouping the keys by individual digits that share the same significant position and value. </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>- Merge sort: It divides the input array into two halves, calls itself for the two halves, and then merges the two sorted halves.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>- Heap sort: Finds the maximum element and place the maximum element at the end. It repeats the same process for the remaining elements.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>- Cocktail sort: similar to bubble sort but traverse and swaps in both directions alternatively instead of just one way</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>- A* algorithm: A best-first search, meaning that it is formulated in terms of weighted graphs: starting from a specific starting node of a graph, it aims to find a path to the given goal node having the smallest cost</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>- Dijkstra's algorithm:  Finds the shortest path from a starting node to a target node in a weighted graph by creating a tree of shortest paths from the starting vertex, the source, to all other points in the graph.</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="pushButton">
      <property name="text">
       <string>close</string>
