@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "algdisplaywindow.h"
+#include "dijkstrawindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

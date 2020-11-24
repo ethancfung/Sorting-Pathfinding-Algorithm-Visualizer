@@ -16,7 +16,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    AlgDisplayWindow display;
+    DijkstraWindow display;
     display.setModal(true);
     display.exec();
 }
