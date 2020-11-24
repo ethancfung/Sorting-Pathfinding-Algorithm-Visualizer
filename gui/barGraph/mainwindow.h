@@ -29,6 +29,9 @@ class DrawBars : public QWidget {
   void SelectionSort();
   void swap(int x, int y, int d);
   int delayTime;
+  int b1;
+  int b2;
+
  protected:
   void paintEvent(QPaintEvent*);
 };
@@ -41,7 +44,8 @@ class MainWindow : public QMainWindow {
  public:
   explicit MainWindow(QWidget* parent = 0);
   ~MainWindow();
-
+    const int DefSize = 50;
+    const int DefNum = 50;
  private slots:
   void bubble_released();
   void insertion_released();

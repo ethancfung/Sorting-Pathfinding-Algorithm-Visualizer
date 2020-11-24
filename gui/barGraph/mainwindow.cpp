@@ -43,7 +43,7 @@ void DrawBars::bubbleSort() {
     j++;
     for (unsigned int i = 0; i < list.size() - j; i++) {
       if (list[i] > list[i + 1]) {
-        swap(i,i+1,50);
+        swap(i,i+1,1000);
         swapped = true;
       }
     }
@@ -83,12 +83,17 @@ void DrawBars::SelectionSort(){
 //**********SWAP**********
 void DrawBars::swap(int x, int y, int d)
 {
+    b1=x;
+    b2=y;
+    update();
+    delay(d/2);
     MyValue tmp;
     tmp.Value = list[x].Value;
     list[x].Value = list[y].Value;
     list[y].Value = tmp.Value;
     update();
-    delay(d);
+    delay(d/2);
+
 }
 void MainWindow::setDelay(){
 // TheDrawBars->delayTime = ui->slider->value();
@@ -99,8 +104,6 @@ void MainWindow::setDelay(){
 void MainWindow::bubble_released() {
 
   TheDrawBars->list.clear();
-  const int DefSize = 50;
-  const int DefNum = 50;
   MyValue tmp;
   // create value list
   for (int var = 0; var < DefNum; ++var) {
@@ -116,8 +119,6 @@ void MainWindow::bubble_released() {
 
 void MainWindow::insertion_released() {
   TheDrawBars->list.clear();
-  const int DefSize = 50;
-  const int DefNum = 50;
   MyValue tmp;
   // create value list
   for (int var = 0; var < DefNum; ++var) {
@@ -133,8 +134,6 @@ void MainWindow::insertion_released() {
 
 void MainWindow::selection_released() {
   TheDrawBars->list.clear();
-  const int DefSize = 50;
-  const int DefNum = 50;
   MyValue tmp;
   // create value list
   for (int var = 0; var < DefNum; ++var) {
@@ -157,14 +156,14 @@ void DrawBars::paintEvent(QPaintEvent*) {
   QPainter painter(this);
   painter.setRenderHint(QPainter::Antialiasing);
   painter.drawRect(rect());
-  for (unsigned int c = 0; c < list.size(); ++c) {
+  for (int c = 0; c < int(list.size()); ++c) {
     painter.setPen(list[c].Color);
     QRect r;
     r.setRect(list[c].Pos.rx(), 600, (700/50),-list[c].Value*5.5);
-    painter.fillRect(r, QBrush(Qt::blue, Qt::SolidPattern));
+    painter.fillRect(r, QBrush(c==b1 or c ==b2?Qt::green:Qt::blue, Qt::SolidPattern));
     painter.drawRect(r);
     QFont font = painter.font() ;
-    font.setPointSize(10);
+    font.setPointSize(8);
     painter.setFont(font);
     painter.drawText(r, Qt::AlignCenter, QString::number(list[c].Value));
 
