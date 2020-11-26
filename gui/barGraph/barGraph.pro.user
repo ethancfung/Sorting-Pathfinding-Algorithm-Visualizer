@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.13.2, 2020-11-21T16:14:16. -->
+<!-- Written by QtCreator 4.13.2, 2020-11-24T18:16:37. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -325,8 +325,9 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/44jas/OneDrive/Desktop/2020-2021/CMPE320/barGraph/barGraph.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/44jas/OneDrive/Desktop/2020-2021/CMPE320/barGraph/barGraph.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">barGraph2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/44jas/OneDrive/Documents/GitHub/WHGL2/pizza/gui/barGraph/barGraph.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/44jas/OneDrive/Documents/GitHub/WHGL2/pizza/gui/barGraph/barGraph.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
