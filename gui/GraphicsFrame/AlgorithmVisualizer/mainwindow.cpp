@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <QMessageBox>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -15,6 +15,13 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::on_pushButton_clicked()
+{
+    DijkstraWindow display;
+    display.setModal(true);
+    display.exec();
+}
+
+void MainWindow::on_pushButton_2_clicked()
 {
     AlgDisplayWindow display;
     display.setModal(true);

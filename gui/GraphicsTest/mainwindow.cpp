@@ -8,7 +8,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect(ui->nextButton, SIGNAL(released()), this, SLOT(nextPressed()));
 
-    graph = new Graph(8);
+
+    graph = new Graph(8, 0.3f);
     graph->draw(scene);
 }
 

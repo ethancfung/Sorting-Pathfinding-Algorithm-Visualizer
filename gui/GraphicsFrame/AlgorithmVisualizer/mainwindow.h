@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "algdisplaywindow.h"
+#include "dijkstrawindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,8 +20,11 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     AlgDisplayWindow *algWindow;
+
 };
 #endif // MAINWINDOW_H
