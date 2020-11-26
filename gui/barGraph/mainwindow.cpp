@@ -15,13 +15,16 @@ MainWindow::MainWindow(QWidget* parent) :
   TheDrawBars->setParent(this);
   TheDrawBars->show();
   srand (time(NULL));
-  connect(ui->pushButton_2,SIGNAL(released()),this,SLOT(insertion_released()));
-  connect(ui->pushButton,SIGNAL(released()),this,SLOT(bubble_released()));
-  connect(ui->pushButton_3,SIGNAL(released()),this,SLOT(selection_released()));
-  connect(ui->pushButton_4,SIGNAL(released()),this,SLOT(setDelay()));
-  connect(ui->pushButton_5,SIGNAL(released()),this,SLOT(setamount()));
+  connect(ui->insertion,SIGNAL(released()),this,SLOT(insertion_released()));
+  connect(ui->bubble,SIGNAL(released()),this,SLOT(bubble_released()));
+  connect(ui->selection,SIGNAL(released()),this,SLOT(selection_released()));
+  connect(ui->radix,SIGNAL(released()),this,SLOT(radix_released()));
+  connect(ui->quick,SIGNAL(released()),this,SLOT(quick_released()));
+  connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
+  connect(ui->setAmount,SIGNAL(released()),this,SLOT(setamount()));
   connect(ui->spinBox,SIGNAL(valueChanged()),this,SLOT(setDelay()));
   TheDrawBars->delayTime = 10;
+  TheDrawBars->amount = DefNum;
 }
 
 MainWindow::~MainWindow() {
@@ -37,7 +40,7 @@ void delay(int x) {
 
 
 //**********SORTS**********
-void DrawBars::bubbleSort() {
+void DrawBars::BubbleSort() {
   bool swapped = true;
   int j = 0;
   MyValue tmp;
@@ -46,7 +49,7 @@ void DrawBars::bubbleSort() {
     j++;
     for (unsigned int i = 0; i < list.size() - j; i++) {
       if (list[i] > list[i + 1]) {
-        swap(i,i+1,1000);
+        swap(i,i+1);
         swapped = true;
       }
     }
@@ -58,7 +61,7 @@ void DrawBars::InsertionSort() {
         for (i = 1; i < int(list.size()); i++) {
             j = i;
             while (list[j] < list[j - 1]) {
-                swap(j, j-1,50);
+                swap(j, j-1);
                 j -= 1;
             }
         }
@@ -75,16 +78,16 @@ void DrawBars::SelectionSort(){
             mini=i;
         }
 }
-    swap(base,mini,1000);
+    swap(base,mini);
     base++;
     mini = base;
     min = list[mini];
     }
 }
 
-void DrawBars::RadixSort()
+void DrawBars::RadixSort(int sizeA)
 {//once again passed by reference is clutch
-        int maxVal = findMaxVal(50);
+        int maxVal = findMaxVal(sizeA);
 
         //sort vArray maxVal number of times based on the size
         for (int exponentialVal = 1; maxVal / exponentialVal > 0; exponentialVal *= 10) { //keep multiplying by a factor of 10 until we reach the length of the max value (ex: max = 1000, i = 1, so is divisible and not 0, 10 is still divisible, and 100 as well, finally when we reach 1000, the val = 0 and as such we only do three iterations/loops
@@ -92,18 +95,18 @@ void DrawBars::RadixSort()
         }
 }
 
-void DrawBars::quicksort( int l, int h) {
+void DrawBars::QuickSort( int l, int h) {
     if (l < h) {//confirms there is at least two elements
         int pivot = partition( l, h);
-        quicksort( l, pivot-1);
-        quicksort( pivot+1, h);
+        QuickSort( l, pivot-1);
+        QuickSort( pivot+1, h);
     }
 }
 
 
 
 //**********SWAP**********
-void DrawBars::swap(int x, int y, int d)
+void DrawBars::swap(int x, int y)
 {
     b1=x;
     b2=y;
@@ -118,6 +121,136 @@ void DrawBars::swap(int x, int y, int d)
 
 }
 
+
+
+
+void MainWindow::setDelay(){
+ TheDrawBars->delayTime = ui->spinBox->value();
+ //qInfo(QString::number(TheDrawBars->delayTime));
+}
+
+void MainWindow::setamount()
+{
+    DefSize = ui->spinBox_2->value();
+    DefNum = ui->spinBox_2->value();
+    TheDrawBars->amount = DefNum;
+}
+
+//**********SLOTS for BUTTONS**********
+void MainWindow::bubble_released() {
+  TheDrawBars->isradix = false;
+  TheDrawBars->list.clear();
+  MyValue tmp;
+  // create value list
+  for (int var = 0; var < DefNum; ++var) {
+    tmp.Pos = QPoint(var * (900/DefNum), DefSize);
+    tmp.Value = 5+(rand() % 550);
+    tmp.Color = Qt::black;
+    TheDrawBars->list.push_back(tmp);
+  }
+
+  TheDrawBars->BubbleSort();
+}
+
+void MainWindow::insertion_released() {
+  TheDrawBars->isradix = false;
+  TheDrawBars->list.clear();
+  MyValue tmp;
+  // create value list
+  for (int var = 0; var < DefNum; ++var) {
+    tmp.Pos = QPoint(var * (900/DefNum), DefSize);
+    tmp.Value = 5+(rand() % 550);
+    tmp.Color = Qt::black;
+    TheDrawBars->list.push_back(tmp);
+  }
+
+//  TheDrawBars->bubbleSort();
+  TheDrawBars->InsertionSort();
+}
+
+void MainWindow::selection_released() {
+  TheDrawBars->isradix = false;
+  TheDrawBars->list.clear();
+  MyValue tmp;
+  // create value list
+  for (int var = 0; var < DefNum; ++var) {
+    tmp.Pos = QPoint(var * (900/DefNum), DefSize);
+    tmp.Value = 5+(rand() % 550);
+    tmp.Color = Qt::black;
+    TheDrawBars->list.push_back(tmp);
+  }
+
+  TheDrawBars->SelectionSort();
+}
+void MainWindow::radix_released() {
+    TheDrawBars->isradix = true;
+  TheDrawBars->list.clear();
+  MyValue tmp;
+  // create value list
+  for (int var = 0; var < DefNum; ++var) {
+    tmp.Pos = QPoint(var * (900/DefNum), DefSize);
+    tmp.Value = 5+(rand() % 10000);
+    tmp.Color = Qt::black;
+    TheDrawBars->list.push_back(tmp);
+  }
+
+  TheDrawBars->RadixSort(DefSize);
+}
+
+void MainWindow::quick_released() {
+TheDrawBars->isradix = false;
+  TheDrawBars->list.clear();
+  MyValue tmp;
+  // create value list
+  float x = 0;
+  for (int var = 0; var < DefNum; ++var) {
+    tmp.Pos = QPoint(x, DefSize);
+    x+=(900/DefNum);
+    tmp.Value = 5+(rand() % 550);
+    tmp.Color = Qt::black;
+    TheDrawBars->list.push_back(tmp);
+  }
+
+  TheDrawBars->QuickSort(0,DefSize);
+}
+
+
+
+DrawBars::DrawBars() {}
+
+
+void DrawBars::paintEvent(QPaintEvent*) {
+  QPainter painter(this);
+  painter.setRenderHint(QPainter::Antialiasing);
+  painter.drawRect(rect());
+  for (int c = 0; c < int(list.size()); ++c) {
+    painter.setPen(list[c].Color);
+    QRect r;
+    r.setRect(list[c].Pos.rx(), 600, (900/amount),isradix?-list[c].Value/17:-list[c].Value);
+    painter.fillRect(r, QBrush(c==b1 or c ==b2?Qt::green:Qt::blue, Qt::SolidPattern));
+    painter.drawRect(r);
+    QFont font = painter.font() ;
+    font.setPointSize(6);
+    painter.setFont(font);
+if(amount <=50)
+    painter.drawText(list[c].Pos.rx(), 580+(isradix?-list[c].Value/17:-list[c].Value), QString::number(list[c].Value));
+
+  }
+
+}
+//**********Helper Functions**********
+
+
+
+
+//**********Helper Functions**********
+
+QString DrawBars::vertString(QString x){
+    QString temp;
+    for (int i = 0; i<x.length();i++);
+    temp = x[0] + "\n";
+    return temp;
+}
 int DrawBars::findMaxVal( int n)
 {
     int max = list[0].Value;
@@ -136,10 +269,10 @@ int DrawBars::partition( int l, int h)
     for (int j = l; j <= h - 1; j++) {
         if (list[j].Value < pivot) {
             i++;
-            swap(i, j,500); //note that i continues along until we find a value that is larger than the pivot. Until then, the swaps are meaningless
+            swap(i, j); //note that i continues along until we find a value that is larger than the pivot. Until then, the swaps are meaningless
         }
     }
-    swap(h, i+1,500);
+    swap(h, i+1);
     return (i+1);//change the index value of i to the pivot point once it is properly arranged in the array
 }
 
@@ -184,87 +317,4 @@ void DrawBars::sortByExp(int exponentValue)
         update();
         delay(delayTime/2);
     }
-}
-
-void MainWindow::setDelay(){
- TheDrawBars->delayTime = ui->spinBox->value();
- //qInfo(QString::number(TheDrawBars->delayTime));
-}
-
-void MainWindow::setamount()
-{
-    DefSize = ui->spinBox_2->value();
-    DefNum = ui->spinBox_2->value();
-}
-
-
-//**********SLOTS for BUTTONS**********
-void MainWindow::bubble_released() {
-
-  TheDrawBars->list.clear();
-  MyValue tmp;
-  // create value list
-  for (int var = 0; var < DefNum; ++var) {
-    tmp.Pos = QPoint(var * (700/DefNum), DefSize);
-    tmp.Value = 5+(rand() % 100);
-    tmp.Color = Qt::black;
-    TheDrawBars->list.push_back(tmp);
-  }
-
-  TheDrawBars->bubbleSort();
-//  TheDrawBars->InsertionSort();
-}
-
-void MainWindow::insertion_released() {
-  TheDrawBars->list.clear();
-  MyValue tmp;
-  // create value list
-  for (int var = 0; var < DefNum; ++var) {
-    tmp.Pos = QPoint(var * (700/DefNum), DefSize);
-    tmp.Value = 5+(rand() % 100);
-    tmp.Color = Qt::black;
-    TheDrawBars->list.push_back(tmp);
-  }
-
-//  TheDrawBars->bubbleSort();
-  TheDrawBars->InsertionSort();
-}
-
-void MainWindow::selection_released() {
-  TheDrawBars->list.clear();
-  MyValue tmp;
-  // create value list
-  for (int var = 0; var < DefNum; ++var) {
-    tmp.Pos = QPoint(var * (700/DefNum), DefSize);
-    tmp.Value = 5+(rand() % 100);
-    tmp.Color = Qt::black;
-    TheDrawBars->list.push_back(tmp);
-  }
-
-  TheDrawBars->RadixSort();
-}
-
-
-
-
-DrawBars::DrawBars() {}
-
-
-void DrawBars::paintEvent(QPaintEvent*) {
-  QPainter painter(this);
-  painter.setRenderHint(QPainter::Antialiasing);
-  painter.drawRect(rect());
-  for (int c = 0; c < int(list.size()); ++c) {
-    painter.setPen(list[c].Color);
-    QRect r;
-    r.setRect(list[c].Pos.rx(), 600, (700/50),-list[c].Value*5.5);
-    painter.fillRect(r, QBrush(c==b1 or c ==b2?Qt::green:Qt::blue, Qt::SolidPattern));
-    painter.drawRect(r);
-    QFont font = painter.font() ;
-    font.setPointSize(8);
-    painter.setFont(font);
-    painter.drawText(r, Qt::AlignCenter, QString::number(list[c].Value));
-
-  }
-
 }

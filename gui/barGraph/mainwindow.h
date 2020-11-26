@@ -24,18 +24,21 @@ class DrawBars : public QWidget {
  public:
   std::vector<MyValue> list;
   DrawBars();
-  void  bubbleSort();
+  void  BubbleSort();
   void InsertionSort();
   void SelectionSort();
-  void RadixSort();
-  void swap(int x, int y, int d);
+  void QuickSort( int l, int h);
+  void RadixSort(int sizeA);
+  void swap(int x, int y);
   int findMaxVal( int n);
   int partition( int l, int h);
-  void quicksort( int l, int h);
   int delayTime;
   int b1;
   int b2;
+  int amount;
+  bool isradix;
   void sortByExp(int exponentValue);
+  QString vertString(QString x);
  protected:
   void paintEvent(QPaintEvent*);
 };
@@ -48,12 +51,14 @@ class MainWindow : public QMainWindow {
  public:
   explicit MainWindow(QWidget* parent = 0);
   ~MainWindow();
-     int DefSize = 50;
+     float DefSize = 50;
      int DefNum = 50;
  private slots:
   void bubble_released();
   void insertion_released();
   void selection_released();
+  void radix_released();
+  void quick_released();
   void setDelay();
   void setamount();
  private:
