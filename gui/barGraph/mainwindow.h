@@ -46,7 +46,8 @@ class DrawBars : public QWidget {
   int getNextGap(int gap);
   void sortByExp(int exponentValue);
   QString vertString(QString x);
- protected:
+  void GnomeSort( int n);
+protected:
   void paintEvent(QPaintEvent*);
 };
 
@@ -71,6 +72,7 @@ private slots:
   void setDelay();
   void setup();
   void pancake_released();
+  void gnome_released();
 private:
   Ui::MainWindow* ui;
   DrawBars* TheDrawBars;

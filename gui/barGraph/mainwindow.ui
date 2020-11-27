@@ -139,6 +139,18 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="gnome">
+       <property name="font">
+        <font>
+         <pointsize>7</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Gnome</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QSpinBox" name="spinBox">
        <property name="font">
         <font>

@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget* parent) :
   connect(ui->comb,SIGNAL(released()),this,SLOT(comb_released()));
   connect(ui->brick,SIGNAL(released()),this,SLOT(brick_released()));
   connect(ui->pancake,SIGNAL(released()),this,SLOT(pancake_released()));
+  connect(ui->gnome,SIGNAL(released()),this,SLOT(gnome_released()));
   connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
   connect(ui->spinBox,SIGNAL(valueChanged()),this,SLOT(setDelay()));
   TheDrawBars->delayTime = 10;
@@ -184,7 +185,22 @@ void DrawBars::BrickSort(){
       }
     }
 }
+void DrawBars::GnomeSort( int n)
+{
+    int i = 0;
 
+    while (i < n) {
+        if (i == 0)
+            i++;
+        if (list[i].Value >= list[i - 1].Value)
+            i++;
+        else {
+            swap(i, i - 1);
+            i--;
+        }
+    }
+    return;
+}
 
 //**********SWAP**********
 void DrawBars::swap(int x, int y)
@@ -263,7 +279,10 @@ void MainWindow::radix_released() {
    setup();
   TheDrawBars->RadixSort(DefSize);
 }
-
+void MainWindow::gnome_released() {
+   setup();
+  TheDrawBars->GnomeSort(DefSize);
+}
 void MainWindow::quick_released() {
 setup();
   TheDrawBars->QuickSort(0,int(DefSize));
