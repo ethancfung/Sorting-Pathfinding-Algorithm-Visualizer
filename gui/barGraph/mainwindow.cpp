@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget* parent) :
   connect(ui->cocktail,SIGNAL(released()),this,SLOT(cocktail_released()));
   connect(ui->comb,SIGNAL(released()),this,SLOT(comb_released()));
   connect(ui->brick,SIGNAL(released()),this,SLOT(brick_released()));
+  connect(ui->pancake,SIGNAL(released()),this,SLOT(pancake_released()));
   connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
   connect(ui->spinBox,SIGNAL(valueChanged()),this,SLOT(setDelay()));
   TheDrawBars->delayTime = 10;
@@ -125,23 +126,11 @@ void DrawBars::CombSort(int n)
 {
     // Initialize gap
         int gap = n;
-
-        // Initialize swapped as true to make sure that
-        // loop runs
         bool swapped = true;
-
-        // Keep running while gap is more than 1 and last
-        // iteration caused a swap
         while (gap != 1 || swapped == true)
         {
-            // Find next gap
             gap = getNextGap(gap);
-
-            // Initialize swapped as false so that we can
-            // check if swap happened or not
             swapped = false;
-
-            // Compare all elements with current gap
             for (int i=0; i<n-gap; i++)
             {
                 if (list[i].Value > list[i+gap].Value)
@@ -152,6 +141,19 @@ void DrawBars::CombSort(int n)
             }
         }
 }
+
+void DrawBars::PancakeSort(int n)
+{
+    for (int i = n; i > 1;--i){
+            int mi = findMaxIndex(i);
+            if (mi != i - 1) {
+                flip( mi);
+                flip( i - 1);
+            }
+    }
+}
+
+
 
 void DrawBars::QuickSort( int l, int h) {
     if (l < h) {//confirms there is at least two elements
@@ -200,7 +202,15 @@ void DrawBars::swap(int x, int y)
 
 }
 
-
+void DrawBars::flip(int i)
+{
+    int  start = 0;
+        while (start < i) {
+            swap(start,i);
+            start++;
+            i--;
+        }
+}
 
 
 
@@ -231,6 +241,10 @@ float x = 0;
 void MainWindow::bubble_released() {
   setup();
   TheDrawBars->BubbleSort();
+}
+void MainWindow::pancake_released() {
+  setup();
+  TheDrawBars->PancakeSort(DefSize);
 }
 
 void MainWindow::insertion_released() {
@@ -303,6 +317,16 @@ int DrawBars::findMaxVal( int n)
      for (int i = 1; i < n; i++)
        if (list[i].Value > max)
          max = list[i].Value;
+     return max;
+}
+
+int DrawBars::findMaxIndex(int n)
+{
+    int max = 0;
+     for (int i = 1; i < n; i++)
+       if (list[i].Value > list[max].Value)
+         max = i;
+
      return max;
 }
 

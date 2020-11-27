@@ -32,8 +32,11 @@ class DrawBars : public QWidget {
   void QuickSort( int l, int h);
   void RadixSort(int sizeA);
   void CombSort(int n);
+  void PancakeSort(int n);
+  void flip(int i);
   void swap(int x, int y);
   int findMaxVal( int n);
+  int findMaxIndex( int n);
   int partition( int l, int h);
   int delayTime;
   int b1;
@@ -55,8 +58,8 @@ class MainWindow : public QMainWindow {
  public:
   explicit MainWindow(QWidget* parent = 0);
   ~MainWindow();
-     float DefSize = 50;
- private slots:
+    float DefSize = 50;
+private slots:
   void bubble_released();
   void insertion_released();
   void selection_released();
@@ -66,8 +69,9 @@ class MainWindow : public QMainWindow {
   void cocktail_released();
   void comb_released();
   void setDelay();
-   void setup();
- private:
+  void setup();
+  void pancake_released();
+private:
   Ui::MainWindow* ui;
   DrawBars* TheDrawBars;
 };
