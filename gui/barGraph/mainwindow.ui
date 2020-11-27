@@ -151,6 +151,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="stooge">
+       <property name="text">
+        <string>Stooge</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QSpinBox" name="spinBox">
        <property name="font">
         <font>
@@ -220,6 +227,13 @@
        </property>
        <property name="value">
         <number>50</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="complete">
+       <property name="text">
+        <string>Complete</string>
        </property>
       </widget>
      </item>

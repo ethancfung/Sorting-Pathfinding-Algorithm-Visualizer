@@ -25,8 +25,10 @@ MainWindow::MainWindow(QWidget* parent) :
   connect(ui->brick,SIGNAL(released()),this,SLOT(brick_released()));
   connect(ui->pancake,SIGNAL(released()),this,SLOT(pancake_released()));
   connect(ui->gnome,SIGNAL(released()),this,SLOT(gnome_released()));
+  connect(ui->stooge,SIGNAL(released()),this,SLOT(stooge_released()));
   connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
   connect(ui->spinBox,SIGNAL(valueChanged()),this,SLOT(setDelay()));
+  connect(ui->complete,SIGNAL(released()),this,SLOT(complete_released()));
   TheDrawBars->delayTime = 10;
   TheDrawBars->amount = DefSize;
 }
@@ -199,8 +201,28 @@ void DrawBars::GnomeSort( int n)
             i--;
         }
     }
-    return;
 }
+void DrawBars::StoogeSort( int l, int h)
+{
+    if (l >= h)
+        return;
+
+    // If first element is smaller than last,
+    // swap them
+    if (list[l].Value > list[h].Value)
+        swap(l, h);
+
+    // If there are more than 2 elements in
+    // the array
+    if (h - l + 1 > 2) {
+        int t = (h - l + 1) / 3;
+        StoogeSort( l, h - t);
+        StoogeSort( l + t, h);
+        StoogeSort( l, h - t);
+    }
+}
+
+
 
 //**********SWAP**********
 void DrawBars::swap(int x, int y)
@@ -208,13 +230,17 @@ void DrawBars::swap(int x, int y)
     b1=x;
     b2=y;
     update();
-    delay(delayTime/2);
+//    if(!complete)
+        delay(delayTime<2 && delayTime>-1?2:delayTime);
+    //delay(delayTime);
     MyValue tmp;
     tmp.Value = list[x].Value;
     list[x].Value = list[y].Value;
     list[y].Value = tmp.Value;
     update();
-    delay(delayTime/2);
+//    if(!complete)
+        delay(delayTime<2 && delayTime>-1?2:delayTime);
+    //delay(delayTime);
 
 }
 
@@ -239,8 +265,10 @@ void MainWindow::setDelay(){
 void MainWindow::setup()
 {
     DefSize = ui->spinBox_2->value();
+    TheDrawBars->delayTime = ui->spinBox->value();
     TheDrawBars->amount = DefSize;
     TheDrawBars->isradix = false;
+    TheDrawBars->complete = false;
     TheDrawBars->list.clear();
     MyValue tmp;
     // create value list
@@ -276,7 +304,22 @@ void MainWindow::selection_released() {
   TheDrawBars->SelectionSort();
 }
 void MainWindow::radix_released() {
-   setup();
+    DefSize = ui->spinBox_2->value();
+    TheDrawBars->amount = DefSize;
+    TheDrawBars->isradix = false;
+    TheDrawBars->complete = false;
+    TheDrawBars->list.clear();
+    MyValue tmp;
+    // create value list
+float x = 0;
+    for (int var = 0; var < DefSize; ++var) {
+      tmp.Pos = QPoint(x, DefSize);
+      x+=( (900/DefSize));
+      tmp.Value = 5+(rand() % 10000);
+      tmp.Color = Qt::black;
+      TheDrawBars->list.push_back(tmp);
+    }
+   TheDrawBars->isradix = true;
   TheDrawBars->RadixSort(DefSize);
 }
 void MainWindow::gnome_released() {
@@ -299,6 +342,13 @@ void MainWindow::comb_released()
  setup();
       TheDrawBars->CombSort(DefSize);
 }
+void MainWindow::stooge_released()
+{
+ setup();
+      TheDrawBars->StoogeSort(0,DefSize);
+}
+
+
 
 
 DrawBars::DrawBars() {}
@@ -409,10 +459,15 @@ void DrawBars::sortByExp(int exponentValue)
     for (int i = 0; i < sizeOfVector; i++) {
         b1=i;
         update();
-        delay(delayTime/2);
+        delay(delayTime<2 && delayTime>-1?2:delayTime);
         MyValue tmp;
         list[i].Value = outputVector.at(i);
         update();
-        delay(delayTime/2);
+        delay(delayTime<2 && delayTime>-1?2:delayTime);
     }
+}
+
+void MainWindow::complete_released()
+{
+ TheDrawBars->delayTime=-1;
 }

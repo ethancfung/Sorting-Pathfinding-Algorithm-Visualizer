@@ -43,10 +43,12 @@ class DrawBars : public QWidget {
   int b2;
   int amount;
   bool isradix;
+  bool complete;
   int getNextGap(int gap);
   void sortByExp(int exponentValue);
   QString vertString(QString x);
   void GnomeSort( int n);
+  void StoogeSort(int l, int h);
 protected:
   void paintEvent(QPaintEvent*);
 };
@@ -73,6 +75,8 @@ private slots:
   void setup();
   void pancake_released();
   void gnome_released();
+  void stooge_released();
+  void complete_released();
 private:
   Ui::MainWindow* ui;
   DrawBars* TheDrawBars;
