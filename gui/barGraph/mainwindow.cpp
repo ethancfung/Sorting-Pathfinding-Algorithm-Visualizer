@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget* parent) :
   connect(ui->selection,SIGNAL(released()),this,SLOT(selection_released()));
   connect(ui->radix,SIGNAL(released()),this,SLOT(radix_released()));
   connect(ui->quick,SIGNAL(released()),this,SLOT(quick_released()));
+  connect(ui->cocktail,SIGNAL(released()),this,SLOT(cocktail_released()));
+  connect(ui->comb,SIGNAL(released()),this,SLOT(comb_released()));
   connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
   connect(ui->setAmount,SIGNAL(released()),this,SLOT(setamount()));
   connect(ui->spinBox,SIGNAL(valueChanged()),this,SLOT(setDelay()));
@@ -57,14 +59,38 @@ void DrawBars::BubbleSort() {
 }
 
 void DrawBars::InsertionSort() {
-    int i, j;
-        for (i = 1; i < int(list.size()); i++) {
-            j = i;
+        for (int j = 1; j < int(list.size()); j++) {
+
             while (list[j] < list[j - 1]) {
                 swap(j, j-1);
                 j -= 1;
             }
         }
+}
+
+void DrawBars::CocktailSort()
+{
+    bool swapped = true;
+    int bottom = 0;
+    int top = list.size();
+    MyValue tmp;
+    while (swapped) {
+      swapped = false;
+      top--;
+      for ( int i = 0; i < top; i++) {
+        if (list[i] > list[i + 1]) {
+          swap(i,i+1);
+          swapped = true;
+        }
+      }
+      bottom++;
+      for ( int i = top; i > bottom; i--) {
+        if (list[i] < list[i - 1]) {
+          swap(i,i-1);
+          swapped = true;
+        }
+      }
+    }
 }
 
 void DrawBars::SelectionSort(){
@@ -92,6 +118,38 @@ void DrawBars::RadixSort(int sizeA)
         //sort vArray maxVal number of times based on the size
         for (int exponentialVal = 1; maxVal / exponentialVal > 0; exponentialVal *= 10) { //keep multiplying by a factor of 10 until we reach the length of the max value (ex: max = 1000, i = 1, so is divisible and not 0, 10 is still divisible, and 100 as well, finally when we reach 1000, the val = 0 and as such we only do three iterations/loops
             sortByExp( exponentialVal); //will do at most three iterations, possibly 4 given a four digit limit for random numbers
+        }
+}
+
+void DrawBars::CombSort(int n)
+{
+    // Initialize gap
+        int gap = n;
+
+        // Initialize swapped as true to make sure that
+        // loop runs
+        bool swapped = true;
+
+        // Keep running while gap is more than 1 and last
+        // iteration caused a swap
+        while (gap != 1 || swapped == true)
+        {
+            // Find next gap
+            gap = getNextGap(gap);
+
+            // Initialize swapped as false so that we can
+            // check if swap happened or not
+            swapped = false;
+
+            // Compare all elements with current gap
+            for (int i=0; i<n-gap; i++)
+            {
+                if (list[i].Value > list[i+gap].Value)
+                {
+                    swap(i, i+gap);
+                    swapped = true;
+                }
+            }
         }
 }
 
@@ -149,7 +207,7 @@ void MainWindow::bubble_released() {
     TheDrawBars->list.push_back(tmp);
   }
 
-  TheDrawBars->BubbleSort();
+  TheDrawBars->CocktailSort();
 }
 
 void MainWindow::insertion_released() {
@@ -214,6 +272,41 @@ TheDrawBars->isradix = false;
   TheDrawBars->QuickSort(0,DefSize);
 }
 
+void MainWindow::cocktail_released()
+{
+    TheDrawBars->isradix = false;
+      TheDrawBars->list.clear();
+      MyValue tmp;
+      // create value list
+      float x = 0;
+      for (int var = 0; var < DefNum; ++var) {
+        tmp.Pos = QPoint(x, DefSize);
+        x+=(900/DefNum);
+        tmp.Value = 5+(rand() % 550);
+        tmp.Color = Qt::black;
+        TheDrawBars->list.push_back(tmp);
+      }
+
+      TheDrawBars->CocktailSort();
+}
+
+void MainWindow::comb_released()
+{
+    TheDrawBars->isradix = false;
+      TheDrawBars->list.clear();
+      MyValue tmp;
+      // create value list
+      float x = 0;
+      for (int var = 0; var < DefNum; ++var) {
+        tmp.Pos = QPoint(x, DefSize);
+        x+=(900/DefNum);
+        tmp.Value = 5+(rand() % 550);
+        tmp.Color = Qt::black;
+        TheDrawBars->list.push_back(tmp);
+      }
+
+      TheDrawBars->CombSort(DefSize);
+}
 
 
 DrawBars::DrawBars() {}
@@ -274,6 +367,15 @@ int DrawBars::partition( int l, int h)
     }
     swap(h, i+1);
     return (i+1);//change the index value of i to the pivot point once it is properly arranged in the array
+}
+
+int DrawBars::getNextGap(int gap){
+        // Shrink gap by Shrink factor
+        gap = (gap*10)/13;
+        if (gap < 1)
+            return 1;
+        return gap;
+
 }
 
 

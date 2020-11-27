@@ -91,6 +91,30 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="cocktail">
+       <property name="font">
+        <font>
+         <pointsize>7</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Cocktail</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="comb">
+       <property name="font">
+        <font>
+         <pointsize>7</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Comb</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QSpinBox" name="spinBox">
        <property name="font">
         <font>
@@ -107,7 +131,7 @@
         <number>10000</number>
        </property>
        <property name="value">
-        <number>0</number>
+        <number>10</number>
        </property>
       </widget>
      </item>
@@ -137,10 +161,10 @@
         <number>2</number>
        </property>
        <property name="maximum">
-        <number>300</number>
+        <number>900</number>
        </property>
        <property name="value">
-        <number>2</number>
+        <number>50</number>
        </property>
       </widget>
      </item>

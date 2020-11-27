@@ -26,9 +26,11 @@ class DrawBars : public QWidget {
   DrawBars();
   void  BubbleSort();
   void InsertionSort();
+  void CocktailSort();
   void SelectionSort();
   void QuickSort( int l, int h);
   void RadixSort(int sizeA);
+  void CombSort(int n);
   void swap(int x, int y);
   int findMaxVal( int n);
   int partition( int l, int h);
@@ -37,6 +39,7 @@ class DrawBars : public QWidget {
   int b2;
   int amount;
   bool isradix;
+  int getNextGap(int gap);
   void sortByExp(int exponentValue);
   QString vertString(QString x);
  protected:
@@ -59,6 +62,8 @@ class MainWindow : public QMainWindow {
   void selection_released();
   void radix_released();
   void quick_released();
+  void cocktail_released();
+  void comb_released();
   void setDelay();
   void setamount();
  private:
