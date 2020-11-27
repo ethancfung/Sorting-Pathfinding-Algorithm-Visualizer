@@ -48,6 +48,8 @@ class DrawBars : public QWidget {
   QString vertString(QString x);
   void GnomeSort( int n);
   void StoogeSort(int l, int h);
+  void merge(int left, int middle, int right);
+  void MergeSort(int leftIndex, int rightIndex);
 protected:
   void paintEvent(QPaintEvent*);
 };
@@ -76,6 +78,7 @@ private slots:
   void gnome_released();
   void stooge_released();
   void complete_released();
+  void merge_released();
 private:
   Ui::MainWindow* ui;
   DrawBars* TheDrawBars;

@@ -164,6 +164,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="merge">
+       <property name="text">
+        <string>Merge</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QSpinBox" name="spinBox">
        <property name="font">
         <font>

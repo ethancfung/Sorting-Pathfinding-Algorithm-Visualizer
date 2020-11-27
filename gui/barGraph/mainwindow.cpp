@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget* parent) :
   connect(ui->pancake,SIGNAL(released()),this,SLOT(pancake_released()));
   connect(ui->gnome,SIGNAL(released()),this,SLOT(gnome_released()));
   connect(ui->stooge,SIGNAL(released()),this,SLOT(stooge_released()));
+  connect(ui->merge,SIGNAL(released()),this,SLOT(merge_released()));
   connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
   connect(ui->spinBox,SIGNAL(valueChanged()),this,SLOT(setDelay()));
   connect(ui->complete,SIGNAL(released()),this,SLOT(complete_released()));
@@ -224,6 +225,19 @@ void DrawBars::StoogeSort( int l, int h)
 
 
 
+void DrawBars::MergeSort( int leftIndex, int rightIndex) {
+
+    if (leftIndex>=rightIndex)	//for recursion
+        return;
+
+    int middle = (leftIndex + rightIndex - 1)/2;
+
+    MergeSort(leftIndex,middle);
+    MergeSort(middle+1,rightIndex);
+    merge(leftIndex,middle,rightIndex);
+}
+
+
 //**********SWAP**********
 void DrawBars::swap(int x, int y)
 {
@@ -347,6 +361,11 @@ void MainWindow::stooge_released()
       TheDrawBars->StoogeSort(0,DefSize);
 }
 
+void MainWindow::merge_released()
+{
+ setup();
+      TheDrawBars->MergeSort(0,DefSize);
+}
 
 
 
@@ -459,10 +478,87 @@ void DrawBars::sortByExp(int exponentValue)
         b1=i;
         update();
         delay(delayTime<2 && delayTime>-1?2:delayTime);
-        MyValue tmp;
         list[i].Value = outputVector.at(i);
         update();
         delay(delayTime<2 && delayTime>-1?2:delayTime);
+    }
+}
+
+void DrawBars::merge( int left, int middle, int right) {
+    int n1 = middle - left + 1;
+    int n2 = right - middle;
+
+    //initalize temporary arrays
+    int LEFT[n1];
+    int RIGHT[n2];
+
+    //copy data
+    for (int i = 0; i < n1; i++){
+
+    b1=i;
+    update();
+    delay(delayTime<2 && delayTime>-1?2:delayTime);
+    LEFT[i] = list[left + i].Value;
+    update();
+    delay(delayTime<2 && delayTime>-1?2:delayTime);
+}
+    for (int j = 0; j < n2; j++){
+    b1=j;
+    update();
+    delay(delayTime<2 && delayTime>-1?2:delayTime);
+    RIGHT[j] = list[middle + 1 + j].Value;
+    update();
+    delay(delayTime<2 && delayTime>-1?2:delayTime);
+}
+    //inital indexes of subarrays
+    int i = 0;		//first
+    int j = 0;		//second
+    int k = left;	//merged
+
+    //merge temp arrays back into main array
+    while (i < n1 && j < n2) {
+        if (LEFT[i] <= RIGHT[j]) {
+
+            b1=k;
+            update();
+            delay(delayTime<2 && delayTime>-1?2:delayTime);
+            list[k].Value = LEFT[i];
+            update();
+            delay(delayTime<2 && delayTime>-1?2:delayTime);
+            i++;
+        } else {
+
+            b1=k;
+            update();
+            delay(delayTime<2 && delayTime>-1?2:delayTime);
+            list[k].Value = RIGHT[j];
+            update();
+            delay(delayTime<2 && delayTime>-1?2:delayTime);
+            j++;
+        }
+        k++;
+    }
+
+    //copy remaining elements of the LEFT and RIGHT temp arrays
+    while (i < n1) {	//LEFT
+        b1=k;
+        update();
+        delay(delayTime<2 && delayTime>-1?2:delayTime);
+        list[k].Value = LEFT[i];
+        update();
+        delay(delayTime<2 && delayTime>-1?2:delayTime);
+        i++;
+        k++;
+    }
+    while (j < n2) {	//RIGHT
+        b1=k;
+        update();
+        delay(delayTime<2 && delayTime>-1?2:delayTime);
+        list[k].Value = RIGHT[j];
+        update();
+        delay(delayTime<2 && delayTime>-1?2:delayTime);
+        j++;
+        k++;
     }
 }
 
