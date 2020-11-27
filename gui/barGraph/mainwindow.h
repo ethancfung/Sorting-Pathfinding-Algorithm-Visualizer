@@ -28,6 +28,7 @@ class DrawBars : public QWidget {
   void InsertionSort();
   void CocktailSort();
   void SelectionSort();
+  void BrickSort();
   void QuickSort( int l, int h);
   void RadixSort(int sizeA);
   void CombSort(int n);
@@ -55,17 +56,17 @@ class MainWindow : public QMainWindow {
   explicit MainWindow(QWidget* parent = 0);
   ~MainWindow();
      float DefSize = 50;
-     int DefNum = 50;
  private slots:
   void bubble_released();
   void insertion_released();
   void selection_released();
+  void brick_released();
   void radix_released();
   void quick_released();
   void cocktail_released();
   void comb_released();
   void setDelay();
-  void setamount();
+   void setup();
  private:
   Ui::MainWindow* ui;
   DrawBars* TheDrawBars;
