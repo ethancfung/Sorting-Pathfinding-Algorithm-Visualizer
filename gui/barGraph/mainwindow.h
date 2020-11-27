@@ -43,7 +43,6 @@ class DrawBars : public QWidget {
   int b2;
   int amount;
   bool isradix;
-  bool complete;
   int getNextGap(int gap);
   void sortByExp(int exponentValue);
   QString vertString(QString x);

@@ -268,7 +268,6 @@ void MainWindow::setup()
     TheDrawBars->delayTime = ui->spinBox->value();
     TheDrawBars->amount = DefSize;
     TheDrawBars->isradix = false;
-    TheDrawBars->complete = false;
     TheDrawBars->list.clear();
     MyValue tmp;
     // create value list
@@ -276,7 +275,7 @@ float x = 0;
     for (int var = 0; var < DefSize; ++var) {
       tmp.Pos = QPoint(x, DefSize);
       x+=( (900/DefSize));
-      tmp.Value = 5+(rand() % 550);
+      tmp.Value = 5+(rand() % 775);
       tmp.Color = Qt::black;
       TheDrawBars->list.push_back(tmp);
     }
@@ -307,7 +306,7 @@ void MainWindow::radix_released() {
     DefSize = ui->spinBox_2->value();
     TheDrawBars->amount = DefSize;
     TheDrawBars->isradix = false;
-    TheDrawBars->complete = false;
+    TheDrawBars->delayTime = ui->spinBox->value();
     TheDrawBars->list.clear();
     MyValue tmp;
     // create value list
@@ -361,14 +360,14 @@ void DrawBars::paintEvent(QPaintEvent*) {
   for (int c = 0; c < int(list.size()); ++c) {
     painter.setPen(list[c].Color);
     QRect r;
-    r.setRect(list[c].Pos.rx(), 600, ((900)/amount),isradix?-list[c].Value/17:-list[c].Value);
+    r.setRect(list[c].Pos.rx(), 800, ((900)/amount),isradix?-list[c].Value/13:-list[c].Value);
     painter.fillRect(r, QBrush(c==b1 or c ==b2?Qt::green:Qt::blue, Qt::SolidPattern));
     painter.drawRect(r);
     QFont font = painter.font() ;
-    font.setPointSize(6);
+    font.setPointSize(7);
     painter.setFont(font);
 if(amount <=50)
-    painter.drawText(list[c].Pos.rx(), 580+(isradix?-list[c].Value/17:-list[c].Value), QString::number(list[c].Value));
+    painter.drawText(list[c].Pos.rx()+1, 790+(isradix?-list[c].Value/17:-list[c].Value), QString::number(list[c].Value));
 
   }
 
