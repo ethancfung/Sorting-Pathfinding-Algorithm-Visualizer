@@ -96,7 +96,7 @@
         </widget>
        </item>
        <item row="7" column="1">
-        <widget class="QRadioButton" name="radioButton_6">
+        <widget class="QRadioButton" name="bogo_radioButton">
          <property name="text">
           <string>Bogo</string>
          </property>
@@ -153,14 +153,14 @@
         </spacer>
        </item>
        <item row="2" column="1">
-        <widget class="QRadioButton" name="radioButton_3">
+        <widget class="QRadioButton" name="shellSort_radioButton">
          <property name="text">
           <string>Shell Sort</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QRadioButton" name="radioButton">
+        <widget class="QRadioButton" name="quickSort_radioButton">
          <property name="text">
           <string>Quick Sort</string>
          </property>
@@ -170,7 +170,7 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QRadioButton" name="radioButton_4">
+        <widget class="QRadioButton" name="mergeSort_Button">
          <property name="text">
           <string>Merge Sort</string>
          </property>
@@ -190,37 +190,30 @@
         </spacer>
        </item>
        <item row="1" column="3">
-        <widget class="QRadioButton" name="radioButton_2">
+        <widget class="QRadioButton" name="dijkstra_radioButton">
          <property name="text">
           <string>Dijkstra's</string>
          </property>
         </widget>
        </item>
        <item row="2" column="3">
-        <widget class="QRadioButton" name="radioButton_7">
+        <widget class="QRadioButton" name="breadthFirst_radioButton">
          <property name="text">
           <string>Breadth First</string>
          </property>
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QRadioButton" name="radioButton_5">
+        <widget class="QRadioButton" name="bubbleSort_radioButton">
          <property name="text">
           <string>Bubble Sort</string>
          </property>
         </widget>
        </item>
        <item row="3" column="3">
-        <widget class="QRadioButton" name="radioButton_8">
+        <widget class="QRadioButton" name="depthFirst_radioButton">
          <property name="text">
           <string>Depth First</string>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="3">
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="text">
-          <string>Algorithm Info</string>
          </property>
         </widget>
        </item>
@@ -228,7 +221,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="algInfoButton">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(169, 170, 170)</string>
+      </property>
+      <property name="text">
+       <string>Algorithm Info</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="visualizeButton">
       <property name="styleSheet">
        <string notr="true">background-color: rgb(103, 194, 149);</string>
       </property>
@@ -237,10 +240,37 @@
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="QPushButton" name="closeButton">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(194, 112, 104);</string>
+      </property>
+      <property name="text">
+       <string>Close</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>closeButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>217</x>
+     <y>305</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>259</x>
+     <y>312</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

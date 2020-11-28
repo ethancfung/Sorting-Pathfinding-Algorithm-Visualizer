@@ -14,14 +14,16 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_visualizeButton_clicked()
 {
-    DijkstraWindow display;
-    display.setModal(true);
-    display.exec();
+    if (ui->dijkstra_radioButton->isChecked()) {
+        DijkstraWindow display;
+        display.setModal(true);
+        display.exec();
+    }
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_algInfoButton_clicked()
 {
     AlgDisplayWindow display;
     display.setModal(true);
