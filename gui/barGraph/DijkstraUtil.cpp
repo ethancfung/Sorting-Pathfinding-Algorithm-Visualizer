@@ -18,8 +18,9 @@ Graph::Graph(int num, float connectivity) {
         bool flag = true;
         while (flag) {
             flag = false;
-            n.x = (float)rand() / (float)(RAND_MAX) * NODESCATTER;
-            n.y = (float)rand() / (float)(RAND_MAX) * NODESCATTER;
+            n.x = (float)rand() / (float)(RAND_MAX) * NODESCATTER+150;
+            n.y = (float)rand() / (float)(RAND_MAX) * NODESCATTER+150;
+
             for (int j = 0; j < i; ++j) { // enforce minimum dist between nodes
                 if (sqrt(pow(n.x - nodes[j].x, 2) + pow(n.y - nodes[j].y, 2)) < NODEMINDIST) {
                     flag = true;
