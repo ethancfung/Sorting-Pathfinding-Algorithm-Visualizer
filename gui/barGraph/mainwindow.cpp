@@ -380,16 +380,20 @@ void MainWindow::merge_released()
 }
 void MainWindow::dijkstra_released(){
     TheDrawBars->pathfinding = true;
-   //scene = new QGraphicsScene(TheDrawBars);
+   //
     ui->complete->setText("next");
-    //ui->graphicsView->setScene(scene);
+//    ui->graphicsView->setScene(scene);
 
     update();
 }
 
 
 
-DrawBars::DrawBars() {}
+DrawBars::DrawBars() {
+    scene = new QGraphicsScene(this);
+    graph = new Graph(8, 0.3f);
+    graph->draw(scene);
+}
 
 
 void DrawBars::paintEvent(QPaintEvent*) {
@@ -410,7 +414,7 @@ if(amount <=50)
     painter.drawText(list[c].Pos.rx()+1, 790+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
   }
     }else{
-        graph = new Graph(8, 0.3f);
+
         graph->draw(scene);
     }
 
@@ -585,7 +589,7 @@ void DrawBars::merge( int left, int middle, int right) {
 void MainWindow::complete_released()
 {
     if(ui->complete->text() == "complete"){
- TheDrawBars->delayTime=-1;
+        TheDrawBars->delayTime=-1;
     }else{
         TheDrawBars->graph->update();
         TheDrawBars->graph->draw(TheDrawBars->scene);
