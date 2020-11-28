@@ -46,6 +46,7 @@ class DrawBars : public QWidget {
   int b2;
   int amount;
   bool isradix;
+  bool pathfinding;
   int getNextGap(int gap);
   void sortByExp(int exponentValue);
   QString vertString(QString x);
@@ -55,6 +56,8 @@ class DrawBars : public QWidget {
   void MergeSort(int leftIndex, int rightIndex);
 protected:
   void paintEvent(QPaintEvent*);
+
+
 };
 
 
@@ -86,8 +89,8 @@ private slots:
 private:
   Ui::MainWindow* ui;
   DrawBars* TheDrawBars;
-  QGraphicsScene *scene;
-  Graph *graph;
+        Graph *graph;
+    QGraphicsScene *scene;
 };
 
 

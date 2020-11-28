@@ -9,28 +9,32 @@ MainWindow::MainWindow(QWidget* parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  TheDrawBars = new DrawBars;
-  TheDrawBars->resize(width() - 100, height());
-  TheDrawBars->setParent(this);
-  TheDrawBars->show();
-  srand (time(NULL));
-  connect(ui->insertion,SIGNAL(released()),this,SLOT(insertion_released()));
-  connect(ui->bubble,SIGNAL(released()),this,SLOT(bubble_released()));
-  connect(ui->selection,SIGNAL(released()),this,SLOT(selection_released()));
-  connect(ui->radix,SIGNAL(released()),this,SLOT(radix_released()));
-  connect(ui->quick,SIGNAL(released()),this,SLOT(quick_released()));
-  connect(ui->cocktail,SIGNAL(released()),this,SLOT(cocktail_released()));
-  connect(ui->comb,SIGNAL(released()),this,SLOT(comb_released()));
-  connect(ui->brick,SIGNAL(released()),this,SLOT(brick_released()));
-  connect(ui->pancake,SIGNAL(released()),this,SLOT(pancake_released()));
-  connect(ui->gnome,SIGNAL(released()),this,SLOT(gnome_released()));
-  connect(ui->stooge,SIGNAL(released()),this,SLOT(stooge_released()));
-  connect(ui->merge,SIGNAL(released()),this,SLOT(merge_released()));
-  connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
-  connect(ui->complete,SIGNAL(released()),this,SLOT(complete_released()));
-  connect(ui->dijkstra,SIGNAL(released()),this,SLOT(dijkstra_released()));
-  TheDrawBars->delayTime = 10;
-  TheDrawBars->amount = DefSize;
+  scene = new QGraphicsScene(this);
+//  TheDrawBars = new DrawBars;
+//  TheDrawBars->resize(width() - 100, height());
+//  TheDrawBars->setParent(this);
+//  TheDrawBars->show();
+//  srand (time(NULL));
+//  connect(ui->insertion,SIGNAL(released()),this,SLOT(insertion_released()));
+//  connect(ui->bubble,SIGNAL(released()),this,SLOT(bubble_released()));
+//  connect(ui->selection,SIGNAL(released()),this,SLOT(selection_released()));
+//  connect(ui->radix,SIGNAL(released()),this,SLOT(radix_released()));
+//  connect(ui->quick,SIGNAL(released()),this,SLOT(quick_released()));
+//  connect(ui->cocktail,SIGNAL(released()),this,SLOT(cocktail_released()));
+//  connect(ui->comb,SIGNAL(released()),this,SLOT(comb_released()));
+//  connect(ui->brick,SIGNAL(released()),this,SLOT(brick_released()));
+//  connect(ui->pancake,SIGNAL(released()),this,SLOT(pancake_released()));
+//  connect(ui->gnome,SIGNAL(released()),this,SLOT(gnome_released()));
+//  connect(ui->stooge,SIGNAL(released()),this,SLOT(stooge_released()));
+//  connect(ui->merge,SIGNAL(released()),this,SLOT(merge_released()));
+//  connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
+//  connect(ui->complete,SIGNAL(released()),this,SLOT(complete_released()));
+//  connect(ui->dijkstra,SIGNAL(released()),this,SLOT(dijkstra_released()));
+//  TheDrawBars->delayTime = 10;
+//  TheDrawBars->amount = DefSize;
+  ui->graphicsView->setScene(scene);
+  graph = new Graph(8, 0.3f);
+  graph->draw(scene);
 }
 
 MainWindow::~MainWindow() {
@@ -277,6 +281,7 @@ void MainWindow::setDelay(){
 
 void MainWindow::setup()
 {
+    TheDrawBars->pathfinding = false;
     ui->complete->setText("complete");
     DefSize = ui->spinBox_2->value();
     TheDrawBars->delayTime = ui->spinBox->value();
@@ -374,11 +379,12 @@ void MainWindow::merge_released()
       TheDrawBars->MergeSort(0,DefSize);
 }
 void MainWindow::dijkstra_released(){
-    scene = new QGraphicsScene(TheDrawBars);
+    TheDrawBars->pathfinding = true;
+   //scene = new QGraphicsScene(TheDrawBars);
     ui->complete->setText("next");
     //ui->graphicsView->setScene(scene);
-    graph = new Graph(8, 0.3f);
-    graph->draw(scene);
+
+    update();
 }
 
 
@@ -387,6 +393,7 @@ DrawBars::DrawBars() {}
 
 
 void DrawBars::paintEvent(QPaintEvent*) {
+    if(!pathfinding){
   QPainter painter(this);
   painter.setRenderHint(QPainter::Antialiasing);
   painter.drawRect(rect());
@@ -401,8 +408,11 @@ void DrawBars::paintEvent(QPaintEvent*) {
     painter.setFont(font);
 if(amount <=50)
     painter.drawText(list[c].Pos.rx()+1, 790+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
-
   }
+    }else{
+        graph = new Graph(8, 0.3f);
+        graph->draw(scene);
+    }
 
 }
 //**********Helper Functions**********
