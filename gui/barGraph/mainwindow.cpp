@@ -9,32 +9,32 @@ MainWindow::MainWindow(QWidget* parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  scene = new QGraphicsScene(this);
-//  TheDrawBars = new DrawBars;
-//  TheDrawBars->resize(width() - 100, height());
-//  TheDrawBars->setParent(this);
-//  TheDrawBars->show();
-//  srand (time(NULL));
-//  connect(ui->insertion,SIGNAL(released()),this,SLOT(insertion_released()));
-//  connect(ui->bubble,SIGNAL(released()),this,SLOT(bubble_released()));
-//  connect(ui->selection,SIGNAL(released()),this,SLOT(selection_released()));
-//  connect(ui->radix,SIGNAL(released()),this,SLOT(radix_released()));
-//  connect(ui->quick,SIGNAL(released()),this,SLOT(quick_released()));
-//  connect(ui->cocktail,SIGNAL(released()),this,SLOT(cocktail_released()));
-//  connect(ui->comb,SIGNAL(released()),this,SLOT(comb_released()));
-//  connect(ui->brick,SIGNAL(released()),this,SLOT(brick_released()));
-//  connect(ui->pancake,SIGNAL(released()),this,SLOT(pancake_released()));
-//  connect(ui->gnome,SIGNAL(released()),this,SLOT(gnome_released()));
-//  connect(ui->stooge,SIGNAL(released()),this,SLOT(stooge_released()));
-//  connect(ui->merge,SIGNAL(released()),this,SLOT(merge_released()));
-//  connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
-//  connect(ui->complete,SIGNAL(released()),this,SLOT(complete_released()));
-//  connect(ui->dijkstra,SIGNAL(released()),this,SLOT(dijkstra_released()));
-//  TheDrawBars->delayTime = 10;
-//  TheDrawBars->amount = DefSize;
-  ui->graphicsView->setScene(scene);
-  graph = new Graph(8, 0.3f);
-  graph->draw(scene);
+  //scene = new QGraphicsScene(this);
+  TheDrawBars = new DrawBars;
+  TheDrawBars->resize(width() - 100, height());
+  TheDrawBars->setParent(this);
+  TheDrawBars->show();
+  srand (time(NULL));
+  connect(ui->insertion,SIGNAL(released()),this,SLOT(insertion_released()));
+  connect(ui->bubble,SIGNAL(released()),this,SLOT(bubble_released()));
+  connect(ui->selection,SIGNAL(released()),this,SLOT(selection_released()));
+  connect(ui->radix,SIGNAL(released()),this,SLOT(radix_released()));
+  connect(ui->quick,SIGNAL(released()),this,SLOT(quick_released()));
+  connect(ui->cocktail,SIGNAL(released()),this,SLOT(cocktail_released()));
+  connect(ui->comb,SIGNAL(released()),this,SLOT(comb_released()));
+  connect(ui->brick,SIGNAL(released()),this,SLOT(brick_released()));
+  connect(ui->pancake,SIGNAL(released()),this,SLOT(pancake_released()));
+  connect(ui->gnome,SIGNAL(released()),this,SLOT(gnome_released()));
+  connect(ui->stooge,SIGNAL(released()),this,SLOT(stooge_released()));
+  connect(ui->merge,SIGNAL(released()),this,SLOT(merge_released()));
+  connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
+  connect(ui->complete,SIGNAL(released()),this,SLOT(complete_released()));
+  connect(ui->dijkstra,SIGNAL(released()),this,SLOT(dijkstra_released()));
+  TheDrawBars->delayTime = 10;
+  TheDrawBars->amount = DefSize;
+  //ui->graphicsView->setScene(scene);
+  //graph = new Graph(8, 0.3f);
+  //graph->draw(scene);
 }
 
 MainWindow::~MainWindow() {
@@ -587,8 +587,8 @@ void MainWindow::complete_released()
     if(ui->complete->text() == "complete"){
  TheDrawBars->delayTime=-1;
     }else{
-        graph->update();
-        graph->draw(scene);
+        TheDrawBars->graph->update();
+        TheDrawBars->graph->draw(TheDrawBars->scene);
     }
 }
 

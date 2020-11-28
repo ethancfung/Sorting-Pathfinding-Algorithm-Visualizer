@@ -54,6 +54,8 @@ class DrawBars : public QWidget {
   void StoogeSort(int l, int h);
   void merge(int left, int middle, int right);
   void MergeSort(int leftIndex, int rightIndex);
+  Graph *graph;
+  QGraphicsScene *scene;
 protected:
   void paintEvent(QPaintEvent*);
 
@@ -89,8 +91,6 @@ private slots:
 private:
   Ui::MainWindow* ui;
   DrawBars* TheDrawBars;
-        Graph *graph;
-    QGraphicsScene *scene;
 };
 
 

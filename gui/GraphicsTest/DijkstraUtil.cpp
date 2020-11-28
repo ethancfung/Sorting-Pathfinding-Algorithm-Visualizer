@@ -7,12 +7,6 @@
 //#include <iostream>
 
 Graph::Graph(int num, float connectivity) {
-    static int seeded = 0;
-    if (seeded == 0) {
-        seeded = 1;
-        srand((unsigned int)time(NULL));
-    }
-
     for (int i = 0; i < num; ++i) {
         Node n = Node();
         bool flag = true;
