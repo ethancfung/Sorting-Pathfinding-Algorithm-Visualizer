@@ -24,12 +24,33 @@ class DrawBars : public QWidget {
  public:
   std::vector<MyValue> list;
   DrawBars();
-  void  bubbleSort();
+  void  BubbleSort();
   void InsertionSort();
+  void CocktailSort();
   void SelectionSort();
-  void swap(int x, int y, int d);
+  void BrickSort();
+  void QuickSort( int l, int h);
+  void RadixSort(int sizeA);
+  void CombSort(int n);
+  void PancakeSort(int n);
+  void flip(int i);
+  void swap(int x, int y);
+  int findMaxVal( int n);
+  int findMaxIndex( int n);
+  int partition( int l, int h);
   int delayTime;
- protected:
+  int b1;
+  int b2;
+  int amount;
+  bool isradix;
+  int getNextGap(int gap);
+  void sortByExp(int exponentValue);
+  QString vertString(QString x);
+  void GnomeSort( int n);
+  void StoogeSort(int l, int h);
+  void merge(int left, int middle, int right);
+  void MergeSort(int leftIndex, int rightIndex);
+protected:
   void paintEvent(QPaintEvent*);
 };
 
@@ -41,13 +62,24 @@ class MainWindow : public QMainWindow {
  public:
   explicit MainWindow(QWidget* parent = 0);
   ~MainWindow();
-
- private slots:
+    float DefSize = 50;
+private slots:
   void bubble_released();
   void insertion_released();
   void selection_released();
+  void brick_released();
+  void radix_released();
+  void quick_released();
+  void cocktail_released();
+  void comb_released();
   void setDelay();
- private:
+  void setup();
+  void pancake_released();
+  void gnome_released();
+  void stooge_released();
+  void complete_released();
+  void merge_released();
+private:
   Ui::MainWindow* ui;
   DrawBars* TheDrawBars;
 };
