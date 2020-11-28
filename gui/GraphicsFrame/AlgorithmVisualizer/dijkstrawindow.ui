@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(29, 54, 71);</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QMenuBar" name="menubar"/>
@@ -26,10 +29,17 @@
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QGraphicsView" name="graphicsView"/>
+      <widget class="QGraphicsView" name="graphicsView">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+      </widget>
      </item>
      <item row="2" column="0">
       <widget class="QPushButton" name="nextButton">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(103, 194, 149);</string>
+       </property>
        <property name="text">
         <string>Next</string>
        </property>
@@ -37,6 +47,9 @@
      </item>
      <item row="3" column="0">
       <widget class="QPushButton" name="pushButton">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(194, 112, 104);</string>
+       </property>
        <property name="text">
         <string>Close</string>
        </property>
