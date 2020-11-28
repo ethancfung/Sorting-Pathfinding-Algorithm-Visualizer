@@ -1,8 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QGraphicsScene>
 #include <QMainWindow>
-
+#include <QGraphicsView>
+#include <QGraphicsItem>
+#include "DijkstraUtil.h"
 namespace Ui {
 class MainWindow;
 }
@@ -79,9 +82,12 @@ private slots:
   void stooge_released();
   void complete_released();
   void merge_released();
+  void dijkstra_released();
 private:
   Ui::MainWindow* ui;
   DrawBars* TheDrawBars;
+  QGraphicsScene *scene;
+  Graph *graph;
 };
 
 

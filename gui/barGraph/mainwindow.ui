@@ -250,6 +250,32 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>PathFinding</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="dijkstra">
+       <property name="text">
+        <string>Dijkstra's</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>

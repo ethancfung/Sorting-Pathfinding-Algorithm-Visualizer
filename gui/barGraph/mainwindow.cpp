@@ -9,7 +9,6 @@ MainWindow::MainWindow(QWidget* parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow) {
   ui->setupUi(this);
-
   TheDrawBars = new DrawBars;
   TheDrawBars->resize(width() - 100, height());
   TheDrawBars->setParent(this);
@@ -28,8 +27,8 @@ MainWindow::MainWindow(QWidget* parent) :
   connect(ui->stooge,SIGNAL(released()),this,SLOT(stooge_released()));
   connect(ui->merge,SIGNAL(released()),this,SLOT(merge_released()));
   connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
-  connect(ui->spinBox,SIGNAL(valueChanged()),this,SLOT(setDelay()));
   connect(ui->complete,SIGNAL(released()),this,SLOT(complete_released()));
+  connect(ui->dijkstra,SIGNAL(released()),this,SLOT(dijkstra_released()));
   TheDrawBars->delayTime = 10;
   TheDrawBars->amount = DefSize;
 }
@@ -278,6 +277,7 @@ void MainWindow::setDelay(){
 
 void MainWindow::setup()
 {
+    ui->complete->setText("complete");
     DefSize = ui->spinBox_2->value();
     TheDrawBars->delayTime = ui->spinBox->value();
     TheDrawBars->amount = DefSize;
@@ -295,24 +295,29 @@ float x = 0;
     }
 }
 //**********SLOTS for BUTTONS**********
-void MainWindow::bubble_released() {
+void MainWindow::bubble_released()
+{
   setup();
   TheDrawBars->BubbleSort();
 }
-void MainWindow::pancake_released() {
+void MainWindow::pancake_released()
+{
   setup();
   TheDrawBars->PancakeSort(DefSize);
 }
 
-void MainWindow::insertion_released() {
+void MainWindow::insertion_released()
+{
 setup();
   TheDrawBars->InsertionSort();
 }
-void MainWindow::brick_released() {
+void MainWindow::brick_released()
+{
  setup();
   TheDrawBars->BrickSort();
 }
-void MainWindow::selection_released() {
+void MainWindow::selection_released()
+{
  setup();
   TheDrawBars->SelectionSort();
 }
@@ -335,12 +340,14 @@ float x = 0;
    TheDrawBars->isradix = true;
   TheDrawBars->RadixSort(DefSize);
 }
-void MainWindow::gnome_released() {
+void MainWindow::gnome_released()
+{
    setup();
   TheDrawBars->GnomeSort(DefSize);
 }
-void MainWindow::quick_released() {
-setup();
+void MainWindow::quick_released()
+{
+   setup();
   TheDrawBars->QuickSort(0,int(DefSize));
 }
 
@@ -352,19 +359,26 @@ void MainWindow::cocktail_released()
 
 void MainWindow::comb_released()
 {
- setup();
+  setup();
       TheDrawBars->CombSort(DefSize);
 }
 void MainWindow::stooge_released()
 {
- setup();
+  setup();
       TheDrawBars->StoogeSort(0,DefSize);
 }
 
 void MainWindow::merge_released()
 {
- setup();
+  setup();
       TheDrawBars->MergeSort(0,DefSize);
+}
+void MainWindow::dijkstra_released(){
+    scene = new QGraphicsScene(TheDrawBars);
+    ui->complete->setText("next");
+    //ui->graphicsView->setScene(scene);
+    graph = new Graph(8, 0.3f);
+    graph->draw(scene);
 }
 
 
@@ -386,7 +400,7 @@ void DrawBars::paintEvent(QPaintEvent*) {
     font.setPointSize(7);
     painter.setFont(font);
 if(amount <=50)
-    painter.drawText(list[c].Pos.rx()+1, 790+(isradix?-list[c].Value/17:-list[c].Value), QString::number(list[c].Value));
+    painter.drawText(list[c].Pos.rx()+1, 790+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
 
   }
 
@@ -494,7 +508,6 @@ void DrawBars::merge( int left, int middle, int right) {
 
     //copy data
     for (int i = 0; i < n1; i++){
-
     b1=i;
     update();
     delay(delayTime<2 && delayTime>-1?2:delayTime);
@@ -518,7 +531,6 @@ void DrawBars::merge( int left, int middle, int right) {
     //merge temp arrays back into main array
     while (i < n1 && j < n2) {
         if (LEFT[i] <= RIGHT[j]) {
-
             b1=k;
             update();
             delay(delayTime<2 && delayTime>-1?2:delayTime);
@@ -527,7 +539,6 @@ void DrawBars::merge( int left, int middle, int right) {
             delay(delayTime<2 && delayTime>-1?2:delayTime);
             i++;
         } else {
-
             b1=k;
             update();
             delay(delayTime<2 && delayTime>-1?2:delayTime);
@@ -538,7 +549,6 @@ void DrawBars::merge( int left, int middle, int right) {
         }
         k++;
     }
-
     //copy remaining elements of the LEFT and RIGHT temp arrays
     while (i < n1) {	//LEFT
         b1=k;
@@ -564,5 +574,11 @@ void DrawBars::merge( int left, int middle, int right) {
 
 void MainWindow::complete_released()
 {
+    if(ui->complete->text() == "complete"){
  TheDrawBars->delayTime=-1;
+    }else{
+        graph->update();
+        graph->draw(scene);
+    }
 }
+
