@@ -12,10 +12,12 @@ MainWindow::MainWindow(QWidget* parent) :
     ui->setupUi(this);
     //scene = new QGraphicsScene(this);
     TheDrawBars = new DrawBars;
-    TheDrawBars->resize(width() - 100, height());
+    TheDrawBars->size = qApp->screens()[0]->availableSize();
+    TheDrawBars->resize(TheDrawBars->size.width()/2 - 100, TheDrawBars->size.height());
     TheDrawBars->setParent(this);
     TheDrawBars->show();
     srand (time(NULL));
+
     connect(ui->insertion,SIGNAL(released()),this,SLOT(insertion_released()));
     connect(ui->bubble,SIGNAL(released()),this,SLOT(bubble_released()));
     connect(ui->selection,SIGNAL(released()),this,SLOT(selection_released()));
@@ -33,28 +35,52 @@ MainWindow::MainWindow(QWidget* parent) :
     connect(ui->dijkstra,SIGNAL(released()),this,SLOT(dijkstra_released()));
     TheDrawBars->delayTime = 10;
     TheDrawBars->amount = DefSize;
-    TheDrawBars->size = qApp->screens()[0]->availableSize();
-    if(TheDrawBars->size.height()>2000){
-      QFont font = ui->complete->font();
-      font.setPointSize(3);
-      ui->insertion->setFont(font);
-      ui->bubble->setFont(font);
-      ui->selection->setFont(font);
-      ui->radix->setFont(font);
-      ui->quick->setFont(font);
-      ui->cocktail->setFont(font);
-      ui->comb->setFont(font);
-      ui->brick->setFont(font);
-      ui->pancake->setFont(font);
-      ui->gnome->setFont(font);
-      ui->stooge->setFont(font);
-      ui->merge->setFont(font);
-      ui->setDelay->setFont(font);
-      ui->complete->setFont(font);
-      ui->dijkstra->setFont(font);
+    ui->centralWidget->setMaximumSize(TheDrawBars->size.width()/2,TheDrawBars->size.height()/2);
+    ui->centralWidget->setMinimumSize(TheDrawBars->size.width()/2,TheDrawBars->size.height()/2);
+    float spacing = (TheDrawBars->size.height()/2)-(15*(ui->insertion->height()));
+    spacing = spacing/15;
+    QFont font = ui->complete->font();
+    font.setPointSize(7560/TheDrawBars->size.height());
+    ui->spinBox->setFont(font);
+    ui->spinBox_2->setFont(font);
+    ui->insertion->setFont(font);
+    ui->insertion->setMinimumSize(TheDrawBars->size.width()/24,TheDrawBars->size.height()/75);
+    ui->insertion->move(TheDrawBars->size.width()/2-55,1*(ui->insertion->height()));
+    ui->bubble->setFont(font);
+    ui->bubble->move(TheDrawBars->size.width()/2-55,ui->insertion->pos().y()+(ui->insertion->height()));
+    ui->selection->setFont(font);
+    ui->selection->move(TheDrawBars->size.width()/2-55,ui->bubble->pos().y()+(ui->insertion->height()));
+    ui->radix->setFont(font);
+    ui->radix->move(TheDrawBars->size.width()/2-55,ui->selection->pos().y()+(ui->insertion->height()));
+    ui->quick->setFont(font);
+    ui->quick->move(TheDrawBars->size.width()/2-55,ui->radix->pos().y()+(ui->insertion->height()));
+    ui->cocktail->setFont(font);
+    ui->cocktail->move(TheDrawBars->size.width()/2-55,ui->quick->pos().y()+(ui->insertion->height()));
+    ui->comb->setFont(font);
+    ui->comb->move(TheDrawBars->size.width()/2-55,ui->cocktail->pos().y()+(ui->insertion->height()));
+    ui->brick->setFont(font);
+    ui->brick->move(TheDrawBars->size.width()/2-55,ui->comb->pos().y()+(ui->insertion->height()));
+    ui->pancake->setFont(font);
+    ui->pancake->move(TheDrawBars->size.width()/2-55,ui->brick->pos().y()+(ui->insertion->height()));
+    ui->gnome->setFont(font);
+    ui->gnome->move(TheDrawBars->size.width()/2-55,ui->pancake->pos().y()+(ui->insertion->height()));
+    ui->stooge->setFont(font);
+    ui->stooge->move(TheDrawBars->size.width()/2-55,ui->gnome->pos().y()+(ui->insertion->height()));
+    ui->merge->setFont(font);
+    ui->merge->move(TheDrawBars->size.width()/2-55,ui->stooge->pos().y()+(ui->insertion->height()));
+    ui->spinBox->move(TheDrawBars->size.width()/2-55,ui->merge->pos().y()+(ui->insertion->height()));
+    ui->setDelay->setFont(font);
+    ui->setDelay->move(TheDrawBars->size.width()/2-55,ui->spinBox->pos().y()+(ui->insertion->height()));
+    ui->label->move(TheDrawBars->size.width()/2-55,ui->setDelay->pos().y()+(ui->insertion->height()));
+    ui->spinBox_2->move(TheDrawBars->size.width()/2-55,ui->label->pos().y()+(ui->insertion->height()));
+    ui->complete->setFont(font);
+    ui->complete->move(TheDrawBars->size.width()/2-55,ui->spinBox_2->pos().y()+(ui->insertion->height()));
+    ui->label_2->move(TheDrawBars->size.width()/2-55,ui->complete->pos().y()+(ui->insertion->height()));
+    ui->dijkstra->setFont(font);
+    ui->dijkstra->move(TheDrawBars->size.width()/2-55,ui->label_2->pos().y()+(ui->insertion->height()));
+    //        MainWindow::setMinimumSize((TheDrawBars->size.width()/2,TheDrawBars->size.height()/2))
 
-
-    }
+    // }
 
     //ui->graphicsView->setScene(scene);
     //graph = new Graph(8, 0.3f);
@@ -317,8 +343,8 @@ void MainWindow::setup()
     float x = 0;
     for (int var = 0; var < DefSize; ++var) {
         tmp.Pos = QPoint(x, DefSize);
-        x+=( (900/DefSize));
-        tmp.Value = 5+(rand() % 775);
+        x+=( (((TheDrawBars->size.width()/2-100))/DefSize));
+        tmp.Value = 5+(rand() % (TheDrawBars->size.height()/2-20));
         tmp.Color = Qt::black;
         TheDrawBars->list.push_back(tmp);
     }
@@ -361,7 +387,7 @@ void MainWindow::radix_released() {
     float x = 0;
     for (int var = 0; var < DefSize; ++var) {
         tmp.Pos = QPoint(x, DefSize);
-        x+=( (900/DefSize));
+        x+=( ((TheDrawBars->size.width()/2-100)/DefSize));
         tmp.Value = 5+(rand() % 10000);
         tmp.Color = Qt::black;
         TheDrawBars->list.push_back(tmp);
@@ -431,14 +457,14 @@ void DrawBars::paintEvent(QPaintEvent*) {
             for (int c = 0; c < int(list.size()); ++c) {
                 painter.setPen(list[c].Color);
                 QRect r;
-                r.setRect(list[c].Pos.rx(), 800, ((900)/amount),isradix?-list[c].Value/13:-list[c].Value);
+                r.setRect(list[c].Pos.rx(), size.height()/2, ((size.width()/2)/amount),isradix?-list[c].Value/13:-list[c].Value);
                 painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
                 painter.drawRect(r);
                 QFont font = painter.font();
                 font.setPointSize(size.height()<2000?7:3);
                 painter.setFont(font);
                 if(amount <=50)
-                    painter.drawText(list[c].Pos.rx()+1, 790+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
+                    painter.drawText(list[c].Pos.rx()+1, size.height()/2-10+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
             }//end for
         }else{
             QBrush greenBrush(Qt::green);

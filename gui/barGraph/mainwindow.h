@@ -72,6 +72,7 @@ public:
     explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
     float DefSize = 50;
+    DrawBars* TheDrawBars;
 private slots:
     void bubble_released();
     void insertion_released();
@@ -89,9 +90,10 @@ private slots:
     void complete_released();
     void merge_released();
     void dijkstra_released();
+
 private:
     Ui::MainWindow* ui;
-    DrawBars* TheDrawBars;
+
 };
 
 
