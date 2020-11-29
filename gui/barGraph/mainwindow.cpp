@@ -10,6 +10,21 @@ MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    // Combo box setup
+    ui->alg_comboBox->addItem("BubbleSort");
+    ui->alg_comboBox->addItem("PancakeSort");
+    ui->alg_comboBox->addItem("InsertionSort");
+    ui->alg_comboBox->addItem("BrickSort");
+    ui->alg_comboBox->addItem("SelectionSort");
+    ui->alg_comboBox->addItem("RadixSort");
+    ui->alg_comboBox->addItem("GnomeSort");
+    ui->alg_comboBox->addItem("QuickSort");
+    ui->alg_comboBox->addItem("CocktailSort");
+    ui->alg_comboBox->addItem("CombSort");
+    ui->alg_comboBox->addItem("StoogeSort");
+    ui->alg_comboBox->addItem("MergeSort");
+    ui->alg_comboBox->addItem("Dijkstra's");
+
     //scene = new QGraphicsScene(this);
     TheDrawBars = new DrawBars;
     TheDrawBars->size = qApp->screens()[0]->availableSize();
@@ -307,6 +322,70 @@ void MainWindow::setup()
     }
 }
 //**********SLOTS for BUTTONS**********
+void MainWindow::on_startButton_clicked()
+{
+    if(ui->alg_comboBox->currentText() == "BubbleSort"){
+        setup();
+        TheDrawBars->BubbleSort();
+    }else if(ui->alg_comboBox->currentText() == "PancakeSort"){
+        setup();
+        TheDrawBars->PancakeSort(DefSize);
+    }else if(ui->alg_comboBox->currentText() == "InsertionSort"){
+        setup();
+        TheDrawBars->InsertionSort();
+    }else if(ui->alg_comboBox->currentText() == "BrickSort"){
+        setup();
+        TheDrawBars->BrickSort();
+    }else if(ui->alg_comboBox->currentText() == "SelectionSort"){
+        setup();
+        TheDrawBars->SelectionSort();
+    }else if(ui->alg_comboBox->currentText() == "RadixSort"){
+        DefSize = ui->spinBox_2->value();
+        TheDrawBars->amount = DefSize;
+        TheDrawBars->isradix = false;
+        TheDrawBars->delayTime = ui->spinBox->value();
+        TheDrawBars->list.clear();
+        MyValue tmp;
+        // create value list
+        float x = 0;
+        for (int var = 0; var < DefSize; ++var) {
+            tmp.Pos = QPoint(x, DefSize);
+            x+=(TheDrawBars->xSize/DefSize);
+            tmp.Value = 5+(rand() % 10000);
+            tmp.Color = Qt::black;
+            TheDrawBars->list.push_back(tmp);
+        }
+        TheDrawBars->isradix = true;
+        TheDrawBars->RadixSort(DefSize);
+    }else if(ui->alg_comboBox->currentText() == "GnomeSort"){
+        setup();
+        TheDrawBars->GnomeSort(DefSize);
+    }else if(ui->alg_comboBox->currentText() == "QuickSort"){
+        setup();
+        TheDrawBars->QuickSort(0,int(DefSize));
+    }else if(ui->alg_comboBox->currentText() == "CocktailSort"){
+        setup();
+        TheDrawBars->CocktailSort();
+    }else if(ui->alg_comboBox->currentText() == "CombSort"){
+        setup();
+        TheDrawBars->CombSort(DefSize);
+    }else if(ui->alg_comboBox->currentText() == "StoogeSort"){
+        setup();
+        TheDrawBars->StoogeSort(0,DefSize);
+    }else if(ui->alg_comboBox->currentText() == "MergeSort"){
+        setup();
+        TheDrawBars->MergeSort(0,DefSize);
+    }else if(ui->alg_comboBox->currentText() == "Dijsktra's"){
+        TheDrawBars->graph = new Graph(8, 0.3f);
+        TheDrawBars->pathfinding = true;
+        //
+        ui->complete->setText("next");
+        //    ui->graphicsView->setScene(scene);
+
+        update();
+    }
+}
+
 void MainWindow::bubble_released()
 {
     setup();
@@ -797,3 +876,5 @@ void MainWindow::setupUI(){
     //graph = new Graph(8, 0.3f);
     //graph->draw(scene);
 }
+
+

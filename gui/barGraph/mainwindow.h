@@ -94,6 +94,8 @@ private slots:
     void merge_released();
     void dijkstra_released();
 
+    void on_startButton_clicked();
+
 private:
     Ui::MainWindow* ui;
 

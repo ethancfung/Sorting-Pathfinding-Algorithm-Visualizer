@@ -11,12 +11,14 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -25,26 +27,30 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QPushButton *selection;
-    QPushButton *stooge;
-    QPushButton *comb;
-    QSpinBox *spinBox_2;
-    QPushButton *quick;
-    QLabel *label;
-    QPushButton *setDelay;
-    QPushButton *gnome;
-    QPushButton *cocktail;
-    QPushButton *merge;
-    QPushButton *complete;
+    QWidget *widget;
+    QWidget *horizontalLayoutWidget;
+    QVBoxLayout *verticalLayout;
     QSpinBox *spinBox;
-    QPushButton *dijkstra;
-    QPushButton *radix;
+    QPushButton *setDelay;
+    QLabel *label;
+    QSpinBox *spinBox_2;
+    QPushButton *complete;
+    QPushButton *stooge;
+    QPushButton *merge;
     QPushButton *pancake;
-    QLabel *label_2;
+    QPushButton *radix;
     QPushButton *insertion;
+    QPushButton *gnome;
     QPushButton *brick;
     QPushButton *bubble;
-    QWidget *widget;
+    QPushButton *quick;
+    QPushButton *selection;
+    QPushButton *cocktail;
+    QPushButton *comb;
+    QLabel *label_2;
+    QPushButton *dijkstra;
+    QComboBox *alg_comboBox;
+    QPushButton *startButton;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
 
@@ -52,105 +58,202 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1000, 800);
+        MainWindow->resize(1261, 800);
         MainWindow->setMinimumSize(QSize(1000, 800));
         MainWindow->setMaximumSize(QSize(2000, 1600));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        selection = new QPushButton(centralWidget);
-        selection->setObjectName(QString::fromUtf8("selection"));
-        selection->setGeometry(QRect(940, 70, 50, 23));
+        widget = new QWidget(centralWidget);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(10, 10, 811, 591));
+        widget->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        horizontalLayoutWidget = new QWidget(centralWidget);
+        horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(860, 70, 171, 537));
+        verticalLayout = new QVBoxLayout(horizontalLayoutWidget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        spinBox = new QSpinBox(horizontalLayoutWidget);
+        spinBox->setObjectName(QString::fromUtf8("spinBox"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(spinBox->sizePolicy().hasHeightForWidth());
+        spinBox->setSizePolicy(sizePolicy);
         QFont font;
         font.setPointSize(7);
-        selection->setFont(font);
-        stooge = new QPushButton(centralWidget);
-        stooge->setObjectName(QString::fromUtf8("stooge"));
-        stooge->setGeometry(QRect(940, 380, 50, 23));
-        comb = new QPushButton(centralWidget);
-        comb->setObjectName(QString::fromUtf8("comb"));
-        comb->setGeometry(QRect(940, 216, 50, 23));
-        comb->setFont(font);
-        spinBox_2 = new QSpinBox(centralWidget);
-        spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
-        spinBox_2->setGeometry(QRect(940, 573, 50, 19));
-        spinBox_2->setFont(font);
-        spinBox_2->setAccelerated(true);
-        spinBox_2->setMinimum(2);
-        spinBox_2->setMaximum(900);
-        spinBox_2->setValue(50);
-        quick = new QPushButton(centralWidget);
-        quick->setObjectName(QString::fromUtf8("quick"));
-        quick->setGeometry(QRect(940, 130, 50, 23));
-        quick->setFont(font);
-        label = new QLabel(centralWidget);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(940, 540, 50, 15));
-        label->setMaximumSize(QSize(16777215, 15));
-        label->setLayoutDirection(Qt::LeftToRight);
-        label->setAlignment(Qt::AlignCenter);
-        setDelay = new QPushButton(centralWidget);
-        setDelay->setObjectName(QString::fromUtf8("setDelay"));
-        setDelay->setGeometry(QRect(940, 499, 50, 23));
-        setDelay->setFont(font);
-        gnome = new QPushButton(centralWidget);
-        gnome->setObjectName(QString::fromUtf8("gnome"));
-        gnome->setGeometry(QRect(940, 339, 50, 23));
-        gnome->setFont(font);
-        cocktail = new QPushButton(centralWidget);
-        cocktail->setObjectName(QString::fromUtf8("cocktail"));
-        cocktail->setGeometry(QRect(940, 175, 50, 23));
-        cocktail->setFont(font);
-        merge = new QPushButton(centralWidget);
-        merge->setObjectName(QString::fromUtf8("merge"));
-        merge->setGeometry(QRect(940, 421, 50, 23));
-        complete = new QPushButton(centralWidget);
-        complete->setObjectName(QString::fromUtf8("complete"));
-        complete->setGeometry(QRect(938, 610, 50, 23));
-        spinBox = new QSpinBox(centralWidget);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
-        spinBox->setGeometry(QRect(940, 462, 50, 19));
         spinBox->setFont(font);
         spinBox->setAccelerated(true);
         spinBox->setMinimum(0);
         spinBox->setMaximum(10000);
         spinBox->setValue(10);
-        dijkstra = new QPushButton(centralWidget);
-        dijkstra->setObjectName(QString::fromUtf8("dijkstra"));
-        dijkstra->setGeometry(QRect(940, 684, 50, 23));
-        radix = new QPushButton(centralWidget);
-        radix->setObjectName(QString::fromUtf8("radix"));
-        radix->setGeometry(QRect(940, 100, 50, 23));
-        radix->setFont(font);
-        pancake = new QPushButton(centralWidget);
+
+        verticalLayout->addWidget(spinBox);
+
+        setDelay = new QPushButton(horizontalLayoutWidget);
+        setDelay->setObjectName(QString::fromUtf8("setDelay"));
+        sizePolicy.setHeightForWidth(setDelay->sizePolicy().hasHeightForWidth());
+        setDelay->setSizePolicy(sizePolicy);
+        setDelay->setFont(font);
+
+        verticalLayout->addWidget(setDelay);
+
+        label = new QLabel(horizontalLayoutWidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
+        label->setMaximumSize(QSize(16777215, 15));
+        label->setLayoutDirection(Qt::LeftToRight);
+        label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout->addWidget(label);
+
+        spinBox_2 = new QSpinBox(horizontalLayoutWidget);
+        spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
+        sizePolicy.setHeightForWidth(spinBox_2->sizePolicy().hasHeightForWidth());
+        spinBox_2->setSizePolicy(sizePolicy);
+        spinBox_2->setFont(font);
+        spinBox_2->setAccelerated(true);
+        spinBox_2->setMinimum(2);
+        spinBox_2->setMaximum(900);
+        spinBox_2->setValue(50);
+
+        verticalLayout->addWidget(spinBox_2);
+
+        complete = new QPushButton(horizontalLayoutWidget);
+        complete->setObjectName(QString::fromUtf8("complete"));
+        sizePolicy.setHeightForWidth(complete->sizePolicy().hasHeightForWidth());
+        complete->setSizePolicy(sizePolicy);
+
+        verticalLayout->addWidget(complete);
+
+        stooge = new QPushButton(horizontalLayoutWidget);
+        stooge->setObjectName(QString::fromUtf8("stooge"));
+        sizePolicy.setHeightForWidth(stooge->sizePolicy().hasHeightForWidth());
+        stooge->setSizePolicy(sizePolicy);
+
+        verticalLayout->addWidget(stooge);
+
+        merge = new QPushButton(horizontalLayoutWidget);
+        merge->setObjectName(QString::fromUtf8("merge"));
+        sizePolicy.setHeightForWidth(merge->sizePolicy().hasHeightForWidth());
+        merge->setSizePolicy(sizePolicy);
+
+        verticalLayout->addWidget(merge);
+
+        pancake = new QPushButton(horizontalLayoutWidget);
         pancake->setObjectName(QString::fromUtf8("pancake"));
-        pancake->setGeometry(QRect(940, 298, 50, 23));
+        sizePolicy.setHeightForWidth(pancake->sizePolicy().hasHeightForWidth());
+        pancake->setSizePolicy(sizePolicy);
         pancake->setFont(font);
-        label_2 = new QLabel(centralWidget);
+
+        verticalLayout->addWidget(pancake);
+
+        radix = new QPushButton(horizontalLayoutWidget);
+        radix->setObjectName(QString::fromUtf8("radix"));
+        sizePolicy.setHeightForWidth(radix->sizePolicy().hasHeightForWidth());
+        radix->setSizePolicy(sizePolicy);
+        radix->setFont(font);
+
+        verticalLayout->addWidget(radix);
+
+        insertion = new QPushButton(horizontalLayoutWidget);
+        insertion->setObjectName(QString::fromUtf8("insertion"));
+        sizePolicy.setHeightForWidth(insertion->sizePolicy().hasHeightForWidth());
+        insertion->setSizePolicy(sizePolicy);
+        insertion->setFont(font);
+
+        verticalLayout->addWidget(insertion);
+
+        gnome = new QPushButton(horizontalLayoutWidget);
+        gnome->setObjectName(QString::fromUtf8("gnome"));
+        sizePolicy.setHeightForWidth(gnome->sizePolicy().hasHeightForWidth());
+        gnome->setSizePolicy(sizePolicy);
+        gnome->setFont(font);
+
+        verticalLayout->addWidget(gnome);
+
+        brick = new QPushButton(horizontalLayoutWidget);
+        brick->setObjectName(QString::fromUtf8("brick"));
+        sizePolicy.setHeightForWidth(brick->sizePolicy().hasHeightForWidth());
+        brick->setSizePolicy(sizePolicy);
+        brick->setFont(font);
+
+        verticalLayout->addWidget(brick);
+
+        bubble = new QPushButton(horizontalLayoutWidget);
+        bubble->setObjectName(QString::fromUtf8("bubble"));
+        sizePolicy.setHeightForWidth(bubble->sizePolicy().hasHeightForWidth());
+        bubble->setSizePolicy(sizePolicy);
+        bubble->setFont(font);
+
+        verticalLayout->addWidget(bubble);
+
+        quick = new QPushButton(horizontalLayoutWidget);
+        quick->setObjectName(QString::fromUtf8("quick"));
+        sizePolicy.setHeightForWidth(quick->sizePolicy().hasHeightForWidth());
+        quick->setSizePolicy(sizePolicy);
+        quick->setFont(font);
+
+        verticalLayout->addWidget(quick);
+
+        selection = new QPushButton(horizontalLayoutWidget);
+        selection->setObjectName(QString::fromUtf8("selection"));
+        sizePolicy.setHeightForWidth(selection->sizePolicy().hasHeightForWidth());
+        selection->setSizePolicy(sizePolicy);
+        selection->setFont(font);
+
+        verticalLayout->addWidget(selection);
+
+        cocktail = new QPushButton(horizontalLayoutWidget);
+        cocktail->setObjectName(QString::fromUtf8("cocktail"));
+        sizePolicy.setHeightForWidth(cocktail->sizePolicy().hasHeightForWidth());
+        cocktail->setSizePolicy(sizePolicy);
+        cocktail->setFont(font);
+
+        verticalLayout->addWidget(cocktail);
+
+        comb = new QPushButton(horizontalLayoutWidget);
+        comb->setObjectName(QString::fromUtf8("comb"));
+        sizePolicy.setHeightForWidth(comb->sizePolicy().hasHeightForWidth());
+        comb->setSizePolicy(sizePolicy);
+        comb->setFont(font);
+
+        verticalLayout->addWidget(comb);
+
+        label_2 = new QLabel(horizontalLayoutWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(940, 651, 50, 15));
+        sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy);
         label_2->setMaximumSize(QSize(16777215, 15));
         label_2->setLayoutDirection(Qt::LeftToRight);
         label_2->setAlignment(Qt::AlignCenter);
-        insertion = new QPushButton(centralWidget);
-        insertion->setObjectName(QString::fromUtf8("insertion"));
-        insertion->setGeometry(QRect(940, 11, 50, 23));
-        insertion->setFont(font);
-        brick = new QPushButton(centralWidget);
-        brick->setObjectName(QString::fromUtf8("brick"));
-        brick->setGeometry(QRect(940, 257, 50, 23));
-        brick->setFont(font);
-        bubble = new QPushButton(centralWidget);
-        bubble->setObjectName(QString::fromUtf8("bubble"));
-        bubble->setGeometry(QRect(940, 40, 50, 23));
-        bubble->setFont(font);
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 0, 931, 751));
-        widget->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+
+        verticalLayout->addWidget(label_2);
+
+        dijkstra = new QPushButton(horizontalLayoutWidget);
+        dijkstra->setObjectName(QString::fromUtf8("dijkstra"));
+        sizePolicy.setHeightForWidth(dijkstra->sizePolicy().hasHeightForWidth());
+        dijkstra->setSizePolicy(sizePolicy);
+
+        verticalLayout->addWidget(dijkstra);
+
+        alg_comboBox = new QComboBox(horizontalLayoutWidget);
+        alg_comboBox->setObjectName(QString::fromUtf8("alg_comboBox"));
+
+        verticalLayout->addWidget(alg_comboBox);
+
+        startButton = new QPushButton(horizontalLayoutWidget);
+        startButton->setObjectName(QString::fromUtf8("startButton"));
+
+        verticalLayout->addWidget(startButton);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1000, 21));
+        menuBar->setGeometry(QRect(0, 0, 1261, 21));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -164,23 +267,24 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Algorithm Visualizer", nullptr));
-        selection->setText(QCoreApplication::translate("MainWindow", "Selection", nullptr));
-        stooge->setText(QCoreApplication::translate("MainWindow", "Stooge", nullptr));
-        comb->setText(QCoreApplication::translate("MainWindow", "Comb", nullptr));
-        quick->setText(QCoreApplication::translate("MainWindow", "Quick", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Array size", nullptr));
         setDelay->setText(QCoreApplication::translate("MainWindow", "Set delay", nullptr));
-        gnome->setText(QCoreApplication::translate("MainWindow", "Gnome", nullptr));
-        cocktail->setText(QCoreApplication::translate("MainWindow", "Cocktail", nullptr));
-        merge->setText(QCoreApplication::translate("MainWindow", "Merge", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Array size", nullptr));
         complete->setText(QCoreApplication::translate("MainWindow", "Complete", nullptr));
-        dijkstra->setText(QCoreApplication::translate("MainWindow", "Dijkstra's", nullptr));
-        radix->setText(QCoreApplication::translate("MainWindow", "Radix", nullptr));
+        stooge->setText(QCoreApplication::translate("MainWindow", "Stooge", nullptr));
+        merge->setText(QCoreApplication::translate("MainWindow", "Merge", nullptr));
         pancake->setText(QCoreApplication::translate("MainWindow", "Pancake", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "PathFinding", nullptr));
+        radix->setText(QCoreApplication::translate("MainWindow", "Radix", nullptr));
         insertion->setText(QCoreApplication::translate("MainWindow", "Insertion", nullptr));
+        gnome->setText(QCoreApplication::translate("MainWindow", "Gnome", nullptr));
         brick->setText(QCoreApplication::translate("MainWindow", "Odd-Even", nullptr));
         bubble->setText(QCoreApplication::translate("MainWindow", "Bubble", nullptr));
+        quick->setText(QCoreApplication::translate("MainWindow", "Quick", nullptr));
+        selection->setText(QCoreApplication::translate("MainWindow", "Selection", nullptr));
+        cocktail->setText(QCoreApplication::translate("MainWindow", "Cocktail", nullptr));
+        comb->setText(QCoreApplication::translate("MainWindow", "Comb", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "PathFinding", nullptr));
+        dijkstra->setText(QCoreApplication::translate("MainWindow", "Dijkstra's", nullptr));
+        startButton->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
     } // retranslateUi
 
 };
