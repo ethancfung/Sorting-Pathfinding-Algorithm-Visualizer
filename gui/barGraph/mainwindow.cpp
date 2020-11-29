@@ -35,56 +35,8 @@ MainWindow::MainWindow(QWidget* parent) :
     connect(ui->dijkstra,SIGNAL(released()),this,SLOT(dijkstra_released()));
     TheDrawBars->delayTime = 10;
     TheDrawBars->amount = DefSize;
-    ui->centralWidget->setMaximumSize(TheDrawBars->size.width()/2,TheDrawBars->size.height()/2);
-    ui->centralWidget->setMinimumSize(TheDrawBars->size.width()/2,TheDrawBars->size.height()/2);
-    float spacing = (TheDrawBars->size.height()/2)-(15*(ui->insertion->height()));
-    spacing = spacing/15;
-    QFont font = ui->complete->font();
-    font.setPointSize(7560/TheDrawBars->size.height());
-    ui->spinBox->setFont(font);
-    ui->spinBox_2->setFont(font);
-    ui->insertion->setFont(font);
-    ui->insertion->setMinimumSize(TheDrawBars->size.width()/24,TheDrawBars->size.height()/75);
-    ui->insertion->move(TheDrawBars->size.width()/2-55,1*(ui->insertion->height()));
-    ui->bubble->setFont(font);
-    ui->bubble->move(TheDrawBars->size.width()/2-55,ui->insertion->pos().y()+(ui->insertion->height()));
-    ui->selection->setFont(font);
-    ui->selection->move(TheDrawBars->size.width()/2-55,ui->bubble->pos().y()+(ui->insertion->height()));
-    ui->radix->setFont(font);
-    ui->radix->move(TheDrawBars->size.width()/2-55,ui->selection->pos().y()+(ui->insertion->height()));
-    ui->quick->setFont(font);
-    ui->quick->move(TheDrawBars->size.width()/2-55,ui->radix->pos().y()+(ui->insertion->height()));
-    ui->cocktail->setFont(font);
-    ui->cocktail->move(TheDrawBars->size.width()/2-55,ui->quick->pos().y()+(ui->insertion->height()));
-    ui->comb->setFont(font);
-    ui->comb->move(TheDrawBars->size.width()/2-55,ui->cocktail->pos().y()+(ui->insertion->height()));
-    ui->brick->setFont(font);
-    ui->brick->move(TheDrawBars->size.width()/2-55,ui->comb->pos().y()+(ui->insertion->height()));
-    ui->pancake->setFont(font);
-    ui->pancake->move(TheDrawBars->size.width()/2-55,ui->brick->pos().y()+(ui->insertion->height()));
-    ui->gnome->setFont(font);
-    ui->gnome->move(TheDrawBars->size.width()/2-55,ui->pancake->pos().y()+(ui->insertion->height()));
-    ui->stooge->setFont(font);
-    ui->stooge->move(TheDrawBars->size.width()/2-55,ui->gnome->pos().y()+(ui->insertion->height()));
-    ui->merge->setFont(font);
-    ui->merge->move(TheDrawBars->size.width()/2-55,ui->stooge->pos().y()+(ui->insertion->height()));
-    ui->spinBox->move(TheDrawBars->size.width()/2-55,ui->merge->pos().y()+(ui->insertion->height()));
-    ui->setDelay->setFont(font);
-    ui->setDelay->move(TheDrawBars->size.width()/2-55,ui->spinBox->pos().y()+(ui->insertion->height()));
-    ui->label->move(TheDrawBars->size.width()/2-55,ui->setDelay->pos().y()+(ui->insertion->height()));
-    ui->spinBox_2->move(TheDrawBars->size.width()/2-55,ui->label->pos().y()+(ui->insertion->height()));
-    ui->complete->setFont(font);
-    ui->complete->move(TheDrawBars->size.width()/2-55,ui->spinBox_2->pos().y()+(ui->insertion->height()));
-    ui->label_2->move(TheDrawBars->size.width()/2-55,ui->complete->pos().y()+(ui->insertion->height()));
-    ui->dijkstra->setFont(font);
-    ui->dijkstra->move(TheDrawBars->size.width()/2-55,ui->label_2->pos().y()+(ui->insertion->height()));
-    //        MainWindow::setMinimumSize((TheDrawBars->size.width()/2,TheDrawBars->size.height()/2))
+    setupUI();
 
-    // }
-
-    //ui->graphicsView->setScene(scene);
-    //graph = new Graph(8, 0.3f);
-    //graph->draw(scene);
 }
 
 MainWindow::~MainWindow() {
@@ -756,3 +708,95 @@ void MainWindow::complete_released()
     }
 }
 
+void MainWindow::setupUI(){
+    ui->centralWidget->setMaximumSize(TheDrawBars->size.width()/2,TheDrawBars->size.height()/2);
+    ui->centralWidget->setMinimumSize(TheDrawBars->size.width()/2,TheDrawBars->size.height()/2);
+    float spacing = (TheDrawBars->size.height()/2)-(15*(ui->insertion->height()));
+    spacing = spacing/15;
+    QFont font = ui->complete->font();
+    font.setPointSize(5000/(TheDrawBars->size.height()/2));
+    ui->spinBox->setFont(font);
+    ui->spinBox_2->setFont(font);
+    ui->insertion->setFont(font);
+    int min = TheDrawBars->size.width()/50+10;
+    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->selection->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->selection->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->bubble->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->bubble->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->quick->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->quick->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->radix->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->radix->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->stooge->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->stooge->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->brick->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->brick->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->merge->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->merge->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->pancake->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->pancake->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->cocktail->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->cocktail->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->comb->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->comb->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->gnome->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->gnome->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->spinBox->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->spinBox->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->spinBox_2->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->spinBox_2->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->setDelay->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->setDelay->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->complete->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->complete->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+//    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+//    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+//    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+//    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+//    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+//    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+//    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+//    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    ui->insertion->move(TheDrawBars->size.width()/2-min,1*(ui->insertion->height()));
+    ui->bubble->setFont(font);
+    ui->bubble->move(TheDrawBars->size.width()/2-min,ui->insertion->pos().y()+(ui->insertion->height()));
+    ui->selection->setFont(font);
+    ui->selection->move(TheDrawBars->size.width()/2-min,ui->bubble->pos().y()+(ui->insertion->height()));
+    ui->radix->setFont(font);
+    ui->radix->move(TheDrawBars->size.width()/2-min,ui->selection->pos().y()+(ui->insertion->height()));
+    ui->quick->setFont(font);
+    ui->quick->move(TheDrawBars->size.width()/2-min,ui->radix->pos().y()+(ui->insertion->height()));
+    ui->cocktail->setFont(font);
+    ui->cocktail->move(TheDrawBars->size.width()/2-min,ui->quick->pos().y()+(ui->insertion->height()));
+    ui->comb->setFont(font);
+    ui->comb->move(TheDrawBars->size.width()/2-min,ui->cocktail->pos().y()+(ui->insertion->height()));
+    ui->brick->setFont(font);
+    ui->brick->move(TheDrawBars->size.width()/2-min,ui->comb->pos().y()+(ui->insertion->height()));
+    ui->pancake->setFont(font);
+    ui->pancake->move(TheDrawBars->size.width()/2-min,ui->brick->pos().y()+(ui->insertion->height()));
+    ui->gnome->setFont(font);
+    ui->gnome->move(TheDrawBars->size.width()/2-min,ui->pancake->pos().y()+(ui->insertion->height()));
+    ui->stooge->setFont(font);
+    ui->stooge->move(TheDrawBars->size.width()/2-min,ui->gnome->pos().y()+(ui->insertion->height()));
+    ui->merge->setFont(font);
+    ui->merge->move(TheDrawBars->size.width()/2-min,ui->stooge->pos().y()+(ui->insertion->height()));
+    ui->spinBox->move(TheDrawBars->size.width()/2-min,ui->merge->pos().y()+(ui->insertion->height()));
+    ui->setDelay->setFont(font);
+    ui->setDelay->move(TheDrawBars->size.width()/2-min,ui->spinBox->pos().y()+(ui->insertion->height()));
+    ui->label->move(TheDrawBars->size.width()/2-min,ui->setDelay->pos().y()+(ui->insertion->height()));
+    ui->spinBox_2->move(TheDrawBars->size.width()/2-min,ui->label->pos().y()+(ui->insertion->height()));
+    ui->complete->setFont(font);
+    ui->complete->move(TheDrawBars->size.width()/2-min,ui->spinBox_2->pos().y()+(ui->insertion->height()));
+    ui->label_2->move(TheDrawBars->size.width()/2-min,ui->complete->pos().y()+(ui->insertion->height()));
+    ui->dijkstra->setFont(font);
+    ui->dijkstra->move(TheDrawBars->size.width()/2-min,ui->label_2->pos().y()+(ui->insertion->height()));
+    //        MainWindow::setMinimumSize((TheDrawBars->size.width()/2,TheDrawBars->size.height()/2))
+
+    // }
+
+    //ui->graphicsView->setScene(scene);
+    //graph = new Graph(8, 0.3f);
+    //graph->draw(scene);
+}

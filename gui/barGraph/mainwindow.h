@@ -74,6 +74,7 @@ public:
     float DefSize = 50;
     DrawBars* TheDrawBars;
 private slots:
+    void setupUI();
     void bubble_released();
     void insertion_released();
     void selection_released();
