@@ -13,11 +13,13 @@ MainWindow::MainWindow(QWidget* parent) :
     //scene = new QGraphicsScene(this);
     TheDrawBars = new DrawBars;
     TheDrawBars->size = qApp->screens()[0]->availableSize();
-    TheDrawBars->resize(TheDrawBars->size.width()/2 - 100, TheDrawBars->size.height());
+    TheDrawBars->resize(ui->widget->width(), ui->widget->height());
     TheDrawBars->setParent(ui->widget);
+    TheDrawBars->xSize = ui->widget->width();
+    TheDrawBars->ySize=ui->widget->height();
     TheDrawBars->show();
     srand (time(NULL));
-
+    ui->spinBox_2->setMaximum(TheDrawBars->xSize);
     connect(ui->insertion,SIGNAL(released()),this,SLOT(insertion_released()));
     connect(ui->bubble,SIGNAL(released()),this,SLOT(bubble_released()));
     connect(ui->selection,SIGNAL(released()),this,SLOT(selection_released()));
@@ -283,6 +285,9 @@ void MainWindow::setDelay(){
 
 void MainWindow::setup()
 {
+    ui->spinBox_2->setMaximum(TheDrawBars->xSize);
+    TheDrawBars->xSize = ui->widget->width();
+    TheDrawBars->ySize=ui->widget->height();
     TheDrawBars->pathfinding = false;
     ui->complete->setText("complete");
     DefSize = ui->spinBox_2->value();
@@ -295,8 +300,8 @@ void MainWindow::setup()
     float x = 0;
     for (int var = 0; var < DefSize; ++var) {
         tmp.Pos = QPoint(x, DefSize);
-        x+=( (((TheDrawBars->size.width()/2-100))/DefSize));
-        tmp.Value = 5+(rand() % (TheDrawBars->size.height()/2-20));
+        x+=( TheDrawBars->xSize/DefSize);
+        tmp.Value = 5+(rand() % (TheDrawBars->ySize-30));
         tmp.Color = Qt::black;
         TheDrawBars->list.push_back(tmp);
     }
@@ -339,7 +344,7 @@ void MainWindow::radix_released() {
     float x = 0;
     for (int var = 0; var < DefSize; ++var) {
         tmp.Pos = QPoint(x, DefSize);
-        x+=( ((TheDrawBars->size.width()/2-100)/DefSize));
+        x+=(TheDrawBars->xSize/DefSize);
         tmp.Value = 5+(rand() % 10000);
         tmp.Color = Qt::black;
         TheDrawBars->list.push_back(tmp);
@@ -409,14 +414,14 @@ void DrawBars::paintEvent(QPaintEvent*) {
             for (int c = 0; c < int(list.size()); ++c) {
                 painter.setPen(list[c].Color);
                 QRect r;
-                r.setRect(list[c].Pos.rx(), size.height()/2, ((size.width()/2)/amount),isradix?-list[c].Value/13:-list[c].Value);
+                r.setRect(list[c].Pos.rx(), ySize, (xSize/amount),isradix?-list[c].Value/13:-list[c].Value);
                 painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
                 painter.drawRect(r);
                 QFont font = painter.font();
                 font.setPointSize(size.height()<2000?7:3);
                 painter.setFont(font);
                 if(amount <=50)
-                    painter.drawText(list[c].Pos.rx()+1, size.height()/2-10+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
+                    painter.drawText(list[c].Pos.rx()+1, ySize-3+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
             }//end for
         }else{
             QBrush greenBrush(Qt::green);
@@ -474,14 +479,14 @@ void DrawBars::paintEvent(QPaintEvent*) {
             for (int c = 0; c < int(list.size()); ++c) {
                 painter.setPen(list[c].Color);
                 QRect r;
-                r.setRect(list[c].Pos.rx(), 1600, ((1900)/amount),isradix?-list[c].Value/7:-list[c].Value);
+                r.setRect(list[c].Pos.rx(), ySize, ((xSize)/amount),isradix?-list[c].Value/7:-list[c].Value);
                 painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
                 painter.drawRect(r);
                 QFont font = painter.font();
                 font.setPointSize(7);
                 painter.setFont(font);
                 if(amount <=50)
-                    painter.drawText(list[c].Pos.rx()+1, 1590+(isradix?-list[c].Value/7:-list[c].Value), QString::number(list[c].Value));
+                    painter.drawText(list[c].Pos.rx()+1, ySize+(isradix?-list[c].Value/7:-list[c].Value), QString::number(list[c].Value));
             }//end for
         }else{
             QBrush greenBrush(Qt::green);
@@ -719,46 +724,38 @@ void MainWindow::setupUI(){
     ui->spinBox_2->setFont(font);
     ui->insertion->setFont(font);
     int min = TheDrawBars->size.width()/50+10;
-    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->selection->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->selection->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->bubble->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->bubble->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->quick->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->quick->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->radix->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->radix->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->stooge->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->stooge->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->brick->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->brick->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->merge->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->merge->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->pancake->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->pancake->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->cocktail->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->cocktail->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->comb->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->comb->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->gnome->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->gnome->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->spinBox->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->spinBox->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->spinBox_2->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->spinBox_2->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->setDelay->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->setDelay->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->complete->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-    ui->complete->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-//    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-//    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-//    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-//    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-//    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-//    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-//    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
-//    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->selection->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->selection->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->bubble->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->bubble->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->quick->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->quick->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->radix->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->radix->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->stooge->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->stooge->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->brick->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->brick->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->merge->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->merge->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->pancake->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->pancake->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->cocktail->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->cocktail->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->comb->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->comb->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->gnome->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->gnome->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->spinBox->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->spinBox->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->spinBox_2->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->spinBox_2->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->setDelay->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->setDelay->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //    ui->complete->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
+    //ui->complete->setMaximumSize(map(0,TheDrawBars->size.width(),0,200),TheDrawBars->size.height()/75);
     ui->insertion->move(TheDrawBars->size.width()/2-min,1*(ui->insertion->height()));
     ui->bubble->setFont(font);
     ui->bubble->move(TheDrawBars->size.width()/2-min,ui->insertion->pos().y()+(ui->insertion->height()));

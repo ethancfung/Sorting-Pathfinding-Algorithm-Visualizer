@@ -44,6 +44,8 @@ public:
     int delayTime;
     int b1;
     int b2;
+    int xSize;
+    int ySize;
     int amount;
     bool isradix;
     bool pathfinding;
