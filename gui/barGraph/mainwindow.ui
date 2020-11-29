@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Algorithm Visualizer</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="selection">
@@ -388,6 +388,9 @@
       <width>791</width>
       <height>481</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
   </widget>
