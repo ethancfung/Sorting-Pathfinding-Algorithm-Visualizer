@@ -56,6 +56,7 @@ public:
     void MergeSort(int leftIndex, int rightIndex);
     Graph *graph;
     QGraphicsScene *scene;
+    QSize size;
 protected:
     void paintEvent(QPaintEvent*);
 

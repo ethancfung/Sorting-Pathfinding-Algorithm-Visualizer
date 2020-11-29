@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <QTime>
 #include <time.h>
+#include <QScreen>
 
 MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
@@ -32,6 +33,29 @@ MainWindow::MainWindow(QWidget* parent) :
     connect(ui->dijkstra,SIGNAL(released()),this,SLOT(dijkstra_released()));
     TheDrawBars->delayTime = 10;
     TheDrawBars->amount = DefSize;
+    TheDrawBars->size = qApp->screens()[0]->availableSize();
+    if(TheDrawBars->size.height()>2000){
+      QFont font = ui->complete->font();
+      font.setPointSize(3);
+      ui->insertion->setFont(font);
+      ui->bubble->setFont(font);
+      ui->selection->setFont(font);
+      ui->radix->setFont(font);
+      ui->quick->setFont(font);
+      ui->cocktail->setFont(font);
+      ui->comb->setFont(font);
+      ui->brick->setFont(font);
+      ui->pancake->setFont(font);
+      ui->gnome->setFont(font);
+      ui->stooge->setFont(font);
+      ui->merge->setFont(font);
+      ui->setDelay->setFont(font);
+      ui->complete->setFont(font);
+      ui->dijkstra->setFont(font);
+
+
+    }
+
     //ui->graphicsView->setScene(scene);
     //graph = new Graph(8, 0.3f);
     //graph->draw(scene);
@@ -379,6 +403,7 @@ void MainWindow::merge_released()
     TheDrawBars->MergeSort(0,DefSize);
 }
 void MainWindow::dijkstra_released(){
+    TheDrawBars->graph = new Graph(8, 0.3f);
     TheDrawBars->pathfinding = true;
     //
     ui->complete->setText("next");
@@ -390,79 +415,143 @@ void MainWindow::dijkstra_released(){
 
 
 DrawBars::DrawBars() {
-    scene = new QGraphicsScene(this);
-    graph = new Graph(8, 0.3f);
-    graph->draw(scene);
 }
 
 
 void DrawBars::paintEvent(QPaintEvent*) {
     QPainter painter(this);
-    if(!pathfinding){
+    painter.drawText(100,100,QString::number(size.height()));
+    if(size.height()<2100){
+        if(!pathfinding){
 
-        painter.setRenderHint(QPainter::Antialiasing);
-        painter.drawRect(rect());
-        QBrush greenBrush(Qt::green, Qt::SolidPattern);
-        QBrush blueBrush(Qt::blue, Qt::SolidPattern);
-        for (int c = 0; c < int(list.size()); ++c) {
-            painter.setPen(list[c].Color);
-            QRect r;
-            r.setRect(list[c].Pos.rx(), 800, ((900)/amount),isradix?-list[c].Value/13:-list[c].Value);
-            painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
-            painter.drawRect(r);
-            QFont font = painter.font();
-            font.setPointSize(7);
-            painter.setFont(font);
-            if(amount <=50)
-                painter.drawText(list[c].Pos.rx()+1, 790+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
-        }//end for
-    }else{
-        QBrush greenBrush(Qt::green);
-        QBrush blueBrush(Qt::blue);
-        QBrush redBrush(Qt::red);
-        QBrush whiteBrush(Qt::white);
-        QPen outlinePen(Qt::black);
-        outlinePen.setWidth(1);
+            painter.setRenderHint(QPainter::Antialiasing);
+            painter.drawRect(rect());
+            QBrush greenBrush(Qt::green, Qt::SolidPattern);
+            QBrush blueBrush(Qt::blue, Qt::SolidPattern);
+            for (int c = 0; c < int(list.size()); ++c) {
+                painter.setPen(list[c].Color);
+                QRect r;
+                r.setRect(list[c].Pos.rx(), 800, ((900)/amount),isradix?-list[c].Value/13:-list[c].Value);
+                painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
+                painter.drawRect(r);
+                QFont font = painter.font();
+                font.setPointSize(size.height()<2000?7:3);
+                painter.setFont(font);
+                if(amount <=50)
+                    painter.drawText(list[c].Pos.rx()+1, 790+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
+            }//end for
+        }else{
+            QBrush greenBrush(Qt::green);
+            QBrush blueBrush(Qt::blue);
+            QBrush redBrush(Qt::red);
+            QBrush whiteBrush(Qt::white);
+            QPen outlinePen(Qt::black);
+            outlinePen.setWidth(1);
 
-        // legend
-        //painter.fillEllipse(r, QBrush(c==b1 or c ==b2?Qt::green:Qt::blue, Qt::SolidPattern));
-        painter.setBrush(blueBrush);
-        painter.setPen(outlinePen);
-        painter.drawEllipse(50, 50, 10, 10);
-        painter.drawText(60, 60," : Unknown");
-        painter.setBrush(greenBrush);
-        painter.drawEllipse(50, 60, 10, 10);
-        painter.drawText(60, 70," : Known");
-        painter.setBrush(redBrush);
-        painter.drawEllipse(50, 70, 10, 10);
-        painter.drawText(60, 80," : Queued");
-        painter.drawText(50, 96,"Distance from start");
-        painter.drawLine(90, 105, 140, 155);
-        painter.setBrush(whiteBrush);
-        painter.drawEllipse(85, 100, 10, 10);
-        painter.drawText(115, 125,"Distance");
+            // legend
+            //painter.fillEllipse(r, QBrush(c==b1 or c ==b2?Qt::green:Qt::blue, Qt::SolidPattern));
+            painter.setBrush(blueBrush);
+            painter.setPen(outlinePen);
+            painter.drawEllipse(50, 50, 10, 10);
+            painter.drawText(60, 60," : Unknown");
+            painter.setBrush(greenBrush);
+            painter.drawEllipse(50, 60, 10, 10);
+            painter.drawText(60, 70," : Known");
+            painter.setBrush(redBrush);
+            painter.drawEllipse(50, 70, 10, 10);
+            painter.drawText(60, 80," : Queued");
+            painter.drawText(50, 96,"Distance from start");
+            painter.drawLine(90, 105, 140, 155);
+            painter.setBrush(whiteBrush);
+            painter.drawEllipse(85, 100, 10, 10);
+            painter.drawText(115, 125,"Distance");
 
 
-        for (int i = 0; i < (int)graph->nodes.size(); ++i) { // TODO omnibus use iterator instead
-            Node n = graph->nodes[i];
-            for (int j = 0; j < (int)n.adj_nodes.size(); ++j) {
-                Node adj_node = graph->nodes[n.adj_nodes[j]];
-                painter.drawLine(adj_node.x + 5, adj_node.y + 5, n.x + 5, n.y + 5);
-                 bool horiz_off = abs((adj_node.y - n.y) / (adj_node.x - n.x)) > 1; // displace text slightly based on slope of line
-                painter.drawText((adj_node.x + n.x) / 2 + (horiz_off ? 10 : 0) - 3, (adj_node.y + n.y) / 2 + (horiz_off ? 0 : 10) + 5,QString::number(n.adj_dist[j]));
+            for (int i = 0; i < (int)graph->nodes.size(); ++i) { // TODO omnibus use iterator instead
+                Node n = graph->nodes[i];
+                for (int j = 0; j < (int)n.adj_nodes.size(); ++j) {
+                    Node adj_node = graph->nodes[n.adj_nodes[j]];
+                    painter.drawLine(adj_node.x + 5, adj_node.y + 5, n.x + 5, n.y + 5);
+                    bool horiz_off = abs((adj_node.y - n.y) / (adj_node.x - n.x)) > 1; // displace text slightly based on slope of line
+                    painter.drawText((adj_node.x + n.x) / 2 + (horiz_off ? 10 : 0) - 3, (adj_node.y + n.y) / 2 + (horiz_off ? 0 : 10) + 5,QString::number(n.adj_dist[j]));
 
-                //text->setPos((adj_node.x + n.x) / 2 + (horiz_off ? 10 : 0) - 5, (adj_node.y + n.y) / 2 + (horiz_off ? 0 : 10) - 5);
+                    //text->setPos((adj_node.x + n.x) / 2 + (horiz_off ? 10 : 0) - 5, (adj_node.y + n.y) / 2 + (horiz_off ? 0 : 10) - 5);
+                }
+                painter.setBrush(n.known ? greenBrush : n.cost == INT_MAX ? blueBrush : redBrush);
+                painter.drawEllipse(n.x, n.y, 10, 10);
+
+                if (n.cost != INT_MAX) {
+                    painter.drawText(n.x+2, n.y - 8,QString::number(n.cost));
+
+                }
             }
-            painter.setBrush(n.known ? greenBrush : n.cost == INT_MAX ? blueBrush : redBrush);
-            painter.drawEllipse(n.x, n.y, 10, 10);
+        }
+    }else{//if small screen
+        if(!pathfinding){
 
-            if (n.cost != INT_MAX) {
-                painter.drawText(n.x+2, n.y - 8,QString::number(n.cost));
+            painter.setRenderHint(QPainter::Antialiasing);
+            painter.drawRect(rect());
+            QBrush greenBrush(Qt::green, Qt::SolidPattern);
+            QBrush blueBrush(Qt::blue, Qt::SolidPattern);
+            for (int c = 0; c < int(list.size()); ++c) {
+                painter.setPen(list[c].Color);
+                QRect r;
+                r.setRect(list[c].Pos.rx(), 1600, ((1900)/amount),isradix?-list[c].Value/7:-list[c].Value);
+                painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
+                painter.drawRect(r);
+                QFont font = painter.font();
+                font.setPointSize(7);
+                painter.setFont(font);
+                if(amount <=50)
+                    painter.drawText(list[c].Pos.rx()+1, 1590+(isradix?-list[c].Value/7:-list[c].Value), QString::number(list[c].Value));
+            }//end for
+        }else{
+            QBrush greenBrush(Qt::green);
+            QBrush blueBrush(Qt::blue);
+            QBrush redBrush(Qt::red);
+            QBrush whiteBrush(Qt::white);
+            QPen outlinePen(Qt::black);
+            outlinePen.setWidth(1);
 
+            // legend
+            //painter.fillEllipse(r, QBrush(c==b1 or c ==b2?Qt::green:Qt::blue, Qt::SolidPattern));
+            painter.setBrush(blueBrush);
+            painter.setPen(outlinePen);
+            painter.drawEllipse(50, 50, 10, 10);
+            painter.drawText(60, 60," : Unknown");
+            painter.setBrush(greenBrush);
+            painter.drawEllipse(50, 60, 10, 10);
+            painter.drawText(60, 70," : Known");
+            painter.setBrush(redBrush);
+            painter.drawEllipse(50, 70, 10, 10);
+            painter.drawText(60, 80," : Queued");
+            painter.drawText(50, 96,"Distance from start");
+            painter.drawLine(90, 105, 140, 155);
+            painter.setBrush(whiteBrush);
+            painter.drawEllipse(85, 100, 10, 10);
+            painter.drawText(115, 125,"Distance");
+
+
+            for (int i = 0; i < (int)graph->nodes.size(); ++i) { // TODO omnibus use iterator instead
+                Node n = graph->nodes[i];
+                for (int j = 0; j < (int)n.adj_nodes.size(); ++j) {
+                    Node adj_node = graph->nodes[n.adj_nodes[j]];
+                    painter.drawLine(adj_node.x + 5, adj_node.y + 5, n.x + 5, n.y + 5);
+                    bool horiz_off = abs((adj_node.y - n.y) / (adj_node.x - n.x)) > 1; // displace text slightly based on slope of line
+                    painter.drawText((adj_node.x + n.x) / 2 + (horiz_off ? 10 : 0) - 3, (adj_node.y + n.y) / 2 + (horiz_off ? 0 : 10) + 5,QString::number(n.adj_dist[j]));
+
+                    //text->setPos((adj_node.x + n.x) / 2 + (horiz_off ? 10 : 0) - 5, (adj_node.y + n.y) / 2 + (horiz_off ? 0 : 10) - 5);
+                }
+                painter.setBrush(n.known ? greenBrush : n.cost == INT_MAX ? blueBrush : redBrush);
+                painter.drawEllipse(n.x, n.y, 10, 10);
+
+                if (n.cost != INT_MAX) {
+                    painter.drawText(n.x+2, n.y - 8,QString::number(n.cost));
+
+                }
             }
         }
     }
-
 }
 //**********Helper Functions**********
 
