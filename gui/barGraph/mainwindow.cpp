@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget* parent) :
     TheDrawBars = new DrawBars;
     TheDrawBars->size = qApp->screens()[0]->availableSize();
     TheDrawBars->resize(TheDrawBars->size.width()/2 - 100, TheDrawBars->size.height());
-    TheDrawBars->setParent(this);
+    TheDrawBars->setParent(ui->widget);
     TheDrawBars->show();
     srand (time(NULL));
 
