@@ -381,16 +381,20 @@ DrawBars::DrawBars() {
 
 void DrawBars::paintEvent(QPaintEvent*) {
     QPainter painter(this);
-//    painter.setBrush(QBrush(Qt::white));
+    //    painter.setBrush(QBrush(Qt::white));
     //painter.drawText(100,100,QString::number(size.height()));
-//    if(size.height()<2100){
+    //    if(size.height()<2100){
     if(start){
-    if(!pathfinding){
 
+        if(!pathfinding){
+            QRect r1;
+            r1.setRect(-1, -1, xSize+10,ySize+10);
+            painter.fillRect(r1, QColor(	150, 131, 236));
+            painter.drawRect(r1);
             painter.setRenderHint(QPainter::Antialiasing);
             painter.drawRect(rect());
-            QBrush greenBrush(start?Qt::green:Qt::white, Qt::SolidPattern);
-            QBrush blueBrush(start?Qt::blue:Qt::white, Qt::SolidPattern);
+            QBrush greenBrush(start?QColor(243, 91, 4, 255):Qt::white, Qt::SolidPattern);
+            QBrush blueBrush(start?QColor(247, 184, 1, 255):Qt::white, Qt::SolidPattern);
             QPen oPen(start?Qt::black:Qt::white);
             painter.setPen(oPen);
             for (int c = 0; c < int(list.size()); ++c) {
@@ -451,10 +455,10 @@ void DrawBars::paintEvent(QPaintEvent*) {
                 }
             }
         }
-}else{
+    }else{
         QRect r;
         r.setRect(-1, -1, xSize+10,ySize+10);
-        painter.fillRect(r, Qt::white);
+        painter.fillRect(r, QColor(	150, 131, 236));
         painter.drawRect(r);
     }
 
