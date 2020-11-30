@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget* parent) :
     ui->alg_comboBox->addItem("StoogeSort");
     ui->alg_comboBox->addItem("MergeSort");
     ui->alg_comboBox->addItem("Dijkstra's");
-    ui->widget->setMinimumSize(700, 700);
+    ui->widget->setMinimumSize(1000, 700);
     TheDrawBars = new DrawBars;
     TheDrawBars->resize(ui->widget->width(), ui->widget->height());
     TheDrawBars->setParent(ui->widget);
