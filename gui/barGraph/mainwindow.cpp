@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget* parent) :
     ui->alg_comboBox->addItem("StoogeSort");
     ui->alg_comboBox->addItem("MergeSort");
     ui->alg_comboBox->addItem("Dijkstra's");
-    ui->widget->setMinimumSize(1000, 700);
+    ui->widget->setMinimumSize(900, 900);
     TheDrawBars = new DrawBars;
     TheDrawBars->resize(ui->widget->width(), ui->widget->height());
     TheDrawBars->setParent(ui->widget);
@@ -290,7 +290,7 @@ void MainWindow::setup()
     TheDrawBars->xSize = ui->widget->width();
     TheDrawBars->ySize=ui->widget->height();
     TheDrawBars->pathfinding = false;
-    ui->complete->setText("complete");
+    ui->complete->setText("Complete");
     DefSize = ui->spinBox_2->value();
     TheDrawBars->delayTime = ui->spinBox->value();
     TheDrawBars->amount = DefSize;
@@ -327,6 +327,7 @@ void MainWindow::on_startButton_clicked()
         setup();
         TheDrawBars->SelectionSort();
     }else if(ui->alg_comboBox->currentText() == "RadixSort"){
+        setup();
         DefSize = ui->spinBox_2->value();
         TheDrawBars->amount = DefSize;
         TheDrawBars->isradix = false;
@@ -621,7 +622,7 @@ void DrawBars::merge( int left, int middle, int right) {
 
 void MainWindow::complete_released()
 {
-    if(ui->complete->text() == "complete"){
+    if(ui->complete->text() == "Complete"){
         TheDrawBars->delayTime=-1;
     }else{
         TheDrawBars->graph->update();
@@ -638,11 +639,13 @@ void MainWindow::on_alg_comboBox_currentTextChanged(const QString &arg1)
         ui->spinBox->hide();
         ui->spinBox_2->hide();
         ui->label->hide();
+        ui->label_2->hide();
         ui->setDelay->hide();
     }else{
         ui->spinBox->show();
         ui->spinBox_2->show();
         ui->label->show();
+        ui->label_2->show();
         ui->setDelay->show();
     }
 }

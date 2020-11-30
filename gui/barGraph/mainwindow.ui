@@ -6,27 +6,55 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1500</width>
+    <width>918</width>
     <height>1000</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="minimumSize">
+   <size>
+    <width>918</width>
+    <height>1000</height>
+   </size>
+  </property>
+  <property name="maximumSize">
    <size>
     <width>900</width>
     <height>900</height>
    </size>
   </property>
-  <property name="maximumSize">
-   <size>
-    <width>1500</width>
-    <height>1000</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Algorithm Visualizer</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(150, 131, 236);</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label_4">
+      <property name="font">
+       <font>
+        <family>Roman</family>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+        <underline>true</underline>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(93, 22, 166);</string>
+      </property>
+      <property name="text">
+       <string>The Algorithm Visualizer!</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
@@ -36,6 +64,12 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
         </property>
         <property name="text">
          <string>Pick an Algorithm:</string>
@@ -48,10 +82,19 @@
       <item>
        <widget class="QComboBox" name="alg_comboBox">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(247, 184, 1);</string>
         </property>
         <property name="maxVisibleItems">
          <number>15</number>
@@ -61,13 +104,41 @@
       <item>
        <widget class="QPushButton" name="startButton">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(241, 135, 1);</string>
+        </property>
         <property name="text">
          <string>Start</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Delay</string>
         </property>
        </widget>
       </item>
@@ -79,10 +150,19 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <pointsize>7</pointsize>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(247, 184, 1);</string>
         </property>
         <property name="accelerated">
          <bool>true</bool>
@@ -106,10 +186,19 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <pointsize>7</pointsize>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(241, 135, 1);</string>
         </property>
         <property name="text">
          <string>Set delay</string>
@@ -124,20 +213,26 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>15</height>
+          <height>25</height>
          </size>
         </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
-         <string>Array size</string>
+         <string>Array size:</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -149,10 +244,19 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="font">
          <font>
           <pointsize>7</pointsize>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(247, 184, 1);</string>
         </property>
         <property name="accelerated">
          <bool>true</bool>
@@ -179,6 +283,15 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(241, 135, 1);</string>
+        </property>
         <property name="text">
          <string>Complete</string>
         </property>
@@ -196,8 +309,8 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>1000</width>
-        <height>700</height>
+        <width>900</width>
+        <height>900</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -206,16 +319,6 @@
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1500</width>
-     <height>21</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
