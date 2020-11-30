@@ -384,7 +384,8 @@ void DrawBars::paintEvent(QPaintEvent*) {
 //    painter.setBrush(QBrush(Qt::white));
     //painter.drawText(100,100,QString::number(size.height()));
 //    if(size.height()<2100){
-        if(!pathfinding){
+    if(start){
+    if(!pathfinding){
 
             painter.setRenderHint(QPainter::Antialiasing);
             painter.drawRect(rect());
@@ -450,7 +451,12 @@ void DrawBars::paintEvent(QPaintEvent*) {
                 }
             }
         }
-
+}else{
+        QRect r;
+        r.setRect(-1, -1, xSize+10,ySize+10);
+        painter.fillRect(r, Qt::white);
+        painter.drawRect(r);
+    }
 
 }
 //**********Helper Functions**********
