@@ -28,10 +28,12 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
+    QLabel *label_4;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_3;
     QComboBox *alg_comboBox;
     QPushButton *startButton;
+    QLabel *label_2;
     QSpinBox *spinBox;
     QPushButton *setDelay;
     QLabel *label;
@@ -59,6 +61,19 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        label_4 = new QLabel(centralWidget);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        QFont font;
+        font.setFamily(QString::fromUtf8("Roman"));
+        font.setPointSize(16);
+        font.setBold(true);
+        font.setUnderline(true);
+        font.setWeight(75);
+        label_4->setFont(font);
+        label_4->setStyleSheet(QString::fromUtf8("color: rgb(93, 22, 166);"));
+
+        verticalLayout->addWidget(label_4);
+
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -89,13 +104,20 @@ public:
 
         horizontalLayout_2->addWidget(startButton);
 
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        sizePolicy1.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_2->addWidget(label_2);
+
         spinBox = new QSpinBox(centralWidget);
         spinBox->setObjectName(QString::fromUtf8("spinBox"));
         sizePolicy1.setHeightForWidth(spinBox->sizePolicy().hasHeightForWidth());
         spinBox->setSizePolicy(sizePolicy1);
-        QFont font;
-        font.setPointSize(7);
-        spinBox->setFont(font);
+        QFont font1;
+        font1.setPointSize(7);
+        spinBox->setFont(font1);
         spinBox->setStyleSheet(QString::fromUtf8("background-color: rgb(247, 184, 1);"));
         spinBox->setAccelerated(true);
         spinBox->setMinimum(0);
@@ -108,7 +130,7 @@ public:
         setDelay->setObjectName(QString::fromUtf8("setDelay"));
         sizePolicy1.setHeightForWidth(setDelay->sizePolicy().hasHeightForWidth());
         setDelay->setSizePolicy(sizePolicy1);
-        setDelay->setFont(font);
+        setDelay->setFont(font1);
         setDelay->setStyleSheet(QString::fromUtf8("background-color: rgb(241, 135, 1);"));
 
         horizontalLayout_2->addWidget(setDelay);
@@ -127,7 +149,7 @@ public:
         spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
         sizePolicy1.setHeightForWidth(spinBox_2->sizePolicy().hasHeightForWidth());
         spinBox_2->setSizePolicy(sizePolicy1);
-        spinBox_2->setFont(font);
+        spinBox_2->setFont(font1);
         spinBox_2->setStyleSheet(QString::fromUtf8("background-color: rgb(247, 184, 1);"));
         spinBox_2->setAccelerated(true);
         spinBox_2->setMinimum(2);
@@ -173,10 +195,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Algorithm Visualizer", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "The Algorithm Visualizer!", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Pick an Algorithm:", nullptr));
         startButton->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Delay", nullptr));
         setDelay->setText(QCoreApplication::translate("MainWindow", "Set delay", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Array size", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Array size:", nullptr));
         complete->setText(QCoreApplication::translate("MainWindow", "Complete", nullptr));
     } // retranslateUi
 
