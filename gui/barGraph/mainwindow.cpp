@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget* parent) :
     ui->widget->setMinimumSize(700, 700);
     //scene = new QGraphicsScene(this);
     TheDrawBars = new DrawBars;
-    TheDrawBars->size = qApp->screens()[0]->availableSize();
+//    TheDrawBars->size = qApp->screens()[0]->availableSize();
     TheDrawBars->resize(ui->widget->width(), ui->widget->height());
     TheDrawBars->setParent(ui->widget);
     TheDrawBars->xSize = ui->widget->width();
@@ -483,8 +483,8 @@ DrawBars::DrawBars() {
 
 void DrawBars::paintEvent(QPaintEvent*) {
     QPainter painter(this);
-    painter.drawText(100,100,QString::number(size.height()));
-    if(size.height()<2100){
+    //painter.drawText(100,100,QString::number(size.height()));
+//    if(size.height()<2100){
         if(!pathfinding){
 
             painter.setRenderHint(QPainter::Antialiasing);
@@ -498,7 +498,7 @@ void DrawBars::paintEvent(QPaintEvent*) {
                 painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
                 painter.drawRect(r);
                 QFont font = painter.font();
-                font.setPointSize(size.height()<2000?7:3);
+                font.setPointSize(ySize<2000?7:3);
                 painter.setFont(font);
                 if(amount <=50)
                     painter.drawText(list[c].Pos.rx()+1, ySize-3+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
@@ -549,72 +549,11 @@ void DrawBars::paintEvent(QPaintEvent*) {
                 }
             }
         }
-    }else{//if small screen
-        if(!pathfinding){
-
-            painter.setRenderHint(QPainter::Antialiasing);
-            painter.drawRect(rect());
-            QBrush greenBrush(Qt::green, Qt::SolidPattern);
-            QBrush blueBrush(Qt::blue, Qt::SolidPattern);
-            for (int c = 0; c < int(list.size()); ++c) {
-                painter.setPen(list[c].Color);
-                QRect r;
-                r.setRect(list[c].Pos.rx(), ySize, ((xSize)/amount),isradix?-list[c].Value/7:-list[c].Value);
-                painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
-                painter.drawRect(r);
-                QFont font = painter.font();
-                font.setPointSize(7);
-                painter.setFont(font);
-                if(amount <=50)
-                    painter.drawText(list[c].Pos.rx()+1, ySize+(isradix?-list[c].Value/7:-list[c].Value), QString::number(list[c].Value));
-            }//end for
-        }else{
-            QBrush greenBrush(Qt::green);
-            QBrush blueBrush(Qt::blue);
-            QBrush redBrush(Qt::red);
-            QBrush whiteBrush(Qt::white);
-            QPen outlinePen(Qt::black);
-            outlinePen.setWidth(1);
-
-            // legend
-            //painter.fillEllipse(r, QBrush(c==b1 or c ==b2?Qt::green:Qt::blue, Qt::SolidPattern));
-            painter.setBrush(blueBrush);
-            painter.setPen(outlinePen);
-            painter.drawEllipse(50, 50, 10, 10);
-            painter.drawText(60, 60," : Unknown");
-            painter.setBrush(greenBrush);
-            painter.drawEllipse(50, 60, 10, 10);
-            painter.drawText(60, 70," : Known");
-            painter.setBrush(redBrush);
-            painter.drawEllipse(50, 70, 10, 10);
-            painter.drawText(60, 80," : Queued");
-            painter.drawText(50, 96,"Distance from start");
-            painter.drawLine(90, 105, 140, 155);
-            painter.setBrush(whiteBrush);
-            painter.drawEllipse(85, 100, 10, 10);
-            painter.drawText(115, 125,"Distance");
+//    }else{//if small screen
 
 
-            for (int i = 0; i < (int)graph->nodes.size(); ++i) { // TODO omnibus use iterator instead
-                Node n = graph->nodes[i];
-                for (int j = 0; j < (int)n.adj_nodes.size(); ++j) {
-                    Node adj_node = graph->nodes[n.adj_nodes[j]];
-                    painter.drawLine(adj_node.x + 5, adj_node.y + 5, n.x + 5, n.y + 5);
-                    bool horiz_off = abs((adj_node.y - n.y) / (adj_node.x - n.x)) > 1; // displace text slightly based on slope of line
-                    painter.drawText((adj_node.x + n.x) / 2 + (horiz_off ? 10 : 0) - 3, (adj_node.y + n.y) / 2 + (horiz_off ? 0 : 10) + 5,QString::number(n.adj_dist[j]));
 
-                    //text->setPos((adj_node.x + n.x) / 2 + (horiz_off ? 10 : 0) - 5, (adj_node.y + n.y) / 2 + (horiz_off ? 0 : 10) - 5);
-                }
-                painter.setBrush(n.known ? greenBrush : n.cost == INT_MAX ? blueBrush : redBrush);
-                painter.drawEllipse(n.x, n.y, 10, 10);
 
-                if (n.cost != INT_MAX) {
-                    painter.drawText(n.x+2, n.y - 8,QString::number(n.cost));
-
-                }
-            }
-        }
-    }
 }
 //**********Helper Functions**********
 
@@ -794,16 +733,16 @@ void MainWindow::complete_released()
 }
 
 void MainWindow::setupUI(){
-    ui->centralWidget->setMaximumSize(TheDrawBars->size.width()/2,TheDrawBars->size.height()/2);
-    ui->centralWidget->setMinimumSize(TheDrawBars->size.width()/2,TheDrawBars->size.height()/2);
-    float spacing = (TheDrawBars->size.height()/2)-(15*(ui->insertion->height()));
-    spacing = spacing/15;
-    QFont font = ui->complete->font();
-    font.setPointSize(5000/(TheDrawBars->size.height()/2));
-    ui->spinBox->setFont(font);
-    ui->spinBox_2->setFont(font);
-    ui->insertion->setFont(font);
-    int min = TheDrawBars->size.width()/50+10;
+//    ui->centralWidget->setMaximumSize(TheDrawBars->size.width()/2,TheDrawBars->size.height()/2);
+//    ui->centralWidget->setMinimumSize(TheDrawBars->size.width()/2,TheDrawBars->size.height()/2);
+//    float spacing = (TheDrawBars->size.height()/2)-(15*(ui->insertion->height()));
+//    spacing = spacing/15;
+//    QFont font = ui->complete->font();
+//    font.setPointSize(5000/(TheDrawBars->size.height()/2));
+//    ui->spinBox->setFont(font);
+//    ui->spinBox_2->setFont(font);
+//    ui->insertion->setFont(font);
+//    int min = TheDrawBars->size.width()/50+10;
     //    ui->insertion->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
     //    ui->insertion->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
     //    ui->selection->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
@@ -836,39 +775,39 @@ void MainWindow::setupUI(){
     //    ui->setDelay->setMaximumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
     //    ui->complete->setMinimumSize(TheDrawBars->size.width()/50,TheDrawBars->size.height()/75);
     //ui->complete->setMaximumSize(map(0,TheDrawBars->size.width(),0,200),TheDrawBars->size.height()/75);
-    ui->insertion->move(TheDrawBars->size.width()/2-min,1*(ui->insertion->height()));
-    ui->bubble->setFont(font);
-    ui->bubble->move(TheDrawBars->size.width()/2-min,ui->insertion->pos().y()+(ui->insertion->height()));
-    ui->selection->setFont(font);
-    ui->selection->move(TheDrawBars->size.width()/2-min,ui->bubble->pos().y()+(ui->insertion->height()));
-    ui->radix->setFont(font);
-    ui->radix->move(TheDrawBars->size.width()/2-min,ui->selection->pos().y()+(ui->insertion->height()));
-    ui->quick->setFont(font);
-    ui->quick->move(TheDrawBars->size.width()/2-min,ui->radix->pos().y()+(ui->insertion->height()));
-    ui->cocktail->setFont(font);
-    ui->cocktail->move(TheDrawBars->size.width()/2-min,ui->quick->pos().y()+(ui->insertion->height()));
-    ui->comb->setFont(font);
-    ui->comb->move(TheDrawBars->size.width()/2-min,ui->cocktail->pos().y()+(ui->insertion->height()));
-    ui->brick->setFont(font);
-    ui->brick->move(TheDrawBars->size.width()/2-min,ui->comb->pos().y()+(ui->insertion->height()));
-    ui->pancake->setFont(font);
-    ui->pancake->move(TheDrawBars->size.width()/2-min,ui->brick->pos().y()+(ui->insertion->height()));
-    ui->gnome->setFont(font);
-    ui->gnome->move(TheDrawBars->size.width()/2-min,ui->pancake->pos().y()+(ui->insertion->height()));
-    ui->stooge->setFont(font);
-    ui->stooge->move(TheDrawBars->size.width()/2-min,ui->gnome->pos().y()+(ui->insertion->height()));
-    ui->merge->setFont(font);
-    ui->merge->move(TheDrawBars->size.width()/2-min,ui->stooge->pos().y()+(ui->insertion->height()));
-    ui->spinBox->move(TheDrawBars->size.width()/2-min,ui->merge->pos().y()+(ui->insertion->height()));
-    ui->setDelay->setFont(font);
-    ui->setDelay->move(TheDrawBars->size.width()/2-min,ui->spinBox->pos().y()+(ui->insertion->height()));
-    ui->label->move(TheDrawBars->size.width()/2-min,ui->setDelay->pos().y()+(ui->insertion->height()));
-    ui->spinBox_2->move(TheDrawBars->size.width()/2-min,ui->label->pos().y()+(ui->insertion->height()));
-    ui->complete->setFont(font);
-    ui->complete->move(TheDrawBars->size.width()/2-min,ui->spinBox_2->pos().y()+(ui->insertion->height()));
-    ui->label_2->move(TheDrawBars->size.width()/2-min,ui->complete->pos().y()+(ui->insertion->height()));
-    ui->dijkstra->setFont(font);
-    ui->dijkstra->move(TheDrawBars->size.width()/2-min,ui->label_2->pos().y()+(ui->insertion->height()));
+//    ui->insertion->move(TheDrawBars->size.width()/2-min,1*(ui->insertion->height()));
+//    ui->bubble->setFont(font);
+//    ui->bubble->move(TheDrawBars->size.width()/2-min,ui->insertion->pos().y()+(ui->insertion->height()));
+//    ui->selection->setFont(font);
+//    ui->selection->move(TheDrawBars->size.width()/2-min,ui->bubble->pos().y()+(ui->insertion->height()));
+//    ui->radix->setFont(font);
+//    ui->radix->move(TheDrawBars->size.width()/2-min,ui->selection->pos().y()+(ui->insertion->height()));
+//    ui->quick->setFont(font);
+//    ui->quick->move(TheDrawBars->size.width()/2-min,ui->radix->pos().y()+(ui->insertion->height()));
+//    ui->cocktail->setFont(font);
+//    ui->cocktail->move(TheDrawBars->size.width()/2-min,ui->quick->pos().y()+(ui->insertion->height()));
+//    ui->comb->setFont(font);
+//    ui->comb->move(TheDrawBars->size.width()/2-min,ui->cocktail->pos().y()+(ui->insertion->height()));
+//    ui->brick->setFont(font);
+//    ui->brick->move(TheDrawBars->size.width()/2-min,ui->comb->pos().y()+(ui->insertion->height()));
+//    ui->pancake->setFont(font);
+//    ui->pancake->move(TheDrawBars->size.width()/2-min,ui->brick->pos().y()+(ui->insertion->height()));
+//    ui->gnome->setFont(font);
+//    ui->gnome->move(TheDrawBars->size.width()/2-min,ui->pancake->pos().y()+(ui->insertion->height()));
+//    ui->stooge->setFont(font);
+//    ui->stooge->move(TheDrawBars->size.width()/2-min,ui->gnome->pos().y()+(ui->insertion->height()));
+//    ui->merge->setFont(font);
+//    ui->merge->move(TheDrawBars->size.width()/2-min,ui->stooge->pos().y()+(ui->insertion->height()));
+//    ui->spinBox->move(TheDrawBars->size.width()/2-min,ui->merge->pos().y()+(ui->insertion->height()));
+//    ui->setDelay->setFont(font);
+//    ui->setDelay->move(TheDrawBars->size.width()/2-min,ui->spinBox->pos().y()+(ui->insertion->height()));
+//    ui->label->move(TheDrawBars->size.width()/2-min,ui->setDelay->pos().y()+(ui->insertion->height()));
+//    ui->spinBox_2->move(TheDrawBars->size.width()/2-min,ui->label->pos().y()+(ui->insertion->height()));
+//    ui->complete->setFont(font);
+//    ui->complete->move(TheDrawBars->size.width()/2-min,ui->spinBox_2->pos().y()+(ui->insertion->height()));
+//    ui->label_2->move(TheDrawBars->size.width()/2-min,ui->complete->pos().y()+(ui->insertion->height()));
+//    ui->dijkstra->setFont(font);
+//    ui->dijkstra->move(TheDrawBars->size.width()/2-min,ui->label_2->pos().y()+(ui->insertion->height()));
     //        MainWindow::setMinimumSize((TheDrawBars->size.width()/2,TheDrawBars->size.height()/2))
 
     // }
