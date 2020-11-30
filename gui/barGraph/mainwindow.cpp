@@ -410,6 +410,12 @@ void DrawBars::paintEvent(QPaintEvent*) {
                     painter.drawText(list[c].Pos.rx()+1, ySize-3+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
             }//end for
         }else{
+            QRect r1;
+            r1.setRect(-1, -1, xSize+10,ySize+10);
+            painter.fillRect(r1, QColor(	150, 131, 236));
+            painter.drawRect(r1);
+            painter.setRenderHint(QPainter::Antialiasing);
+            painter.drawRect(rect());
             QBrush greenBrush(Qt::green);
             QBrush blueBrush(Qt::blue);
             QBrush redBrush(Qt::red);
