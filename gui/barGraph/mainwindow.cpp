@@ -34,21 +34,8 @@ MainWindow::MainWindow(QWidget* parent) :
     TheDrawBars->pathfinding = false;
     srand (time(NULL));
     ui->spinBox_2->setMaximum(TheDrawBars->xSize);
-    connect(ui->insertion,SIGNAL(released()),this,SLOT(insertion_released()));
-    connect(ui->bubble,SIGNAL(released()),this,SLOT(bubble_released()));
-    connect(ui->selection,SIGNAL(released()),this,SLOT(selection_released()));
-    connect(ui->radix,SIGNAL(released()),this,SLOT(radix_released()));
-    connect(ui->quick,SIGNAL(released()),this,SLOT(quick_released()));
-    connect(ui->cocktail,SIGNAL(released()),this,SLOT(cocktail_released()));
-    connect(ui->comb,SIGNAL(released()),this,SLOT(comb_released()));
-    connect(ui->brick,SIGNAL(released()),this,SLOT(brick_released()));
-    connect(ui->pancake,SIGNAL(released()),this,SLOT(pancake_released()));
-    connect(ui->gnome,SIGNAL(released()),this,SLOT(gnome_released()));
-    connect(ui->stooge,SIGNAL(released()),this,SLOT(stooge_released()));
-    connect(ui->merge,SIGNAL(released()),this,SLOT(merge_released()));
     connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
     connect(ui->complete,SIGNAL(released()),this,SLOT(complete_released()));
-    connect(ui->dijkstra,SIGNAL(released()),this,SLOT(dijkstra_released()));
     TheDrawBars->delayTime = 10;
     TheDrawBars->amount = DefSize;
 
@@ -384,95 +371,6 @@ void MainWindow::on_startButton_clicked()
     }
 }
 
-void MainWindow::bubble_released()
-{
-    setup();
-    TheDrawBars->BubbleSort();
-}
-void MainWindow::pancake_released()
-{
-    setup();
-    TheDrawBars->PancakeSort(DefSize);
-}
-
-void MainWindow::insertion_released()
-{
-    setup();
-    TheDrawBars->InsertionSort();
-}
-void MainWindow::brick_released()
-{
-    setup();
-    TheDrawBars->BrickSort();
-}
-void MainWindow::selection_released()
-{
-    setup();
-    TheDrawBars->SelectionSort();
-}
-void MainWindow::radix_released() {
-    DefSize = ui->spinBox_2->value();
-    TheDrawBars->amount = DefSize;
-    TheDrawBars->isradix = false;
-    TheDrawBars->delayTime = ui->spinBox->value();
-    TheDrawBars->list.clear();
-    MyValue tmp;
-    // create value list
-    float x = 0;
-    for (int var = 0; var < DefSize; ++var) {
-        tmp.Pos = QPoint(x, DefSize);
-        x+=(TheDrawBars->xSize/DefSize);
-        tmp.Value = 5+(rand() % 10000);
-        tmp.Color = Qt::black;
-        TheDrawBars->list.push_back(tmp);
-    }
-    TheDrawBars->isradix = true;
-    TheDrawBars->RadixSort(DefSize);
-}
-void MainWindow::gnome_released()
-{
-    setup();
-    TheDrawBars->GnomeSort(DefSize);
-}
-void MainWindow::quick_released()
-{
-    setup();
-    TheDrawBars->QuickSort(0,int(DefSize));
-}
-
-void MainWindow::cocktail_released()
-{
-    setup();
-    TheDrawBars->CocktailSort();
-}
-
-void MainWindow::comb_released()
-{
-    setup();
-    TheDrawBars->CombSort(DefSize);
-}
-void MainWindow::stooge_released()
-{
-    setup();
-    TheDrawBars->StoogeSort(0,DefSize);
-}
-
-void MainWindow::merge_released()
-{
-    setup();
-    TheDrawBars->MergeSort(0,DefSize);
-}
-void MainWindow::dijkstra_released(){
-    TheDrawBars->graph = new Graph(8, 0.3f);
-    TheDrawBars->pathfinding = true;
-    //
-    ui->complete->setText("next");
-    //    ui->graphicsView->setScene(scene);
-
-    update();
-}
-
-
 
 DrawBars::DrawBars() {
 }
@@ -730,3 +628,18 @@ void MainWindow::complete_released()
 }
 
 
+
+void MainWindow::on_alg_comboBox_currentTextChanged(const QString &arg1)
+{
+    if(arg1 == "Dijkstra's"){
+        ui->spinBox->hide();
+        ui->spinBox_2->hide();
+        ui->label->hide();
+        ui->setDelay->hide();
+    }else{
+        ui->spinBox->show();
+        ui->spinBox_2->show();
+        ui->label->show();
+        ui->setDelay->show();
+    }
+}

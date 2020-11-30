@@ -76,24 +76,13 @@ public:
     float DefSize = 50;
     DrawBars* TheDrawBars;
 private slots:
-    void bubble_released();
-    void insertion_released();
-    void selection_released();
-    void brick_released();
-    void radix_released();
-    void quick_released();
-    void cocktail_released();
-    void comb_released();
     void setDelay();
     void setup();
-    void pancake_released();
-    void gnome_released();
-    void stooge_released();
     void complete_released();
-    void merge_released();
-    void dijkstra_released();
 
     void on_startButton_clicked();
+
+    void on_alg_comboBox_currentTextChanged(const QString &arg1);
 
 private:
     Ui::MainWindow* ui;
