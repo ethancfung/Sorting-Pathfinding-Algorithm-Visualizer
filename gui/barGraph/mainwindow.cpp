@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent) :
     TheDrawBars->pathfinding = false;
     srand (time(NULL));
     ui->spinBox_2->setMaximum(TheDrawBars->xSize-1);
-    connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
+    connect(ui->spinBox,SIGNAL(valueChanged(int)),this,SLOT(setDelay()));
     connect(ui->complete,SIGNAL(released()),this,SLOT(complete_released()));
     TheDrawBars->delayTime = 10;
     TheDrawBars->amount = DefSize;
@@ -656,12 +656,12 @@ void MainWindow::on_alg_comboBox_currentTextChanged(const QString &arg1)
         ui->spinBox_2->hide();
         ui->label->hide();
         ui->label_2->hide();
-        ui->setDelay->hide();
+        //ui->setDelay->hide();
     }else{
         ui->spinBox->show();
         ui->spinBox_2->show();
         ui->label->show();
         ui->label_2->show();
-        ui->setDelay->show();
+       // ui->setDelay->show();
     }
 }
