@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
@@ -28,8 +29,12 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
+    QGridLayout *gridLayout;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label_3;
+    QComboBox *alg_comboBox;
+    QPushButton *startButton;
     QWidget *widget;
-    QWidget *horizontalLayoutWidget;
     QVBoxLayout *verticalLayout;
     QSpinBox *spinBox;
     QPushButton *setDelay;
@@ -50,11 +55,6 @@ public:
     QPushButton *comb;
     QLabel *label_2;
     QPushButton *dijkstra;
-    QWidget *horizontalLayoutWidget_2;
-    QHBoxLayout *horizontalLayout_2;
-    QLabel *label_3;
-    QComboBox *alg_comboBox;
-    QPushButton *startButton;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
 
@@ -67,25 +67,56 @@ public:
         MainWindow->setMaximumSize(QSize(2000, 1600));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(30, 50, 811, 591));
-        widget->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
-        horizontalLayoutWidget = new QWidget(centralWidget);
-        horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(860, 70, 171, 537));
-        verticalLayout = new QVBoxLayout(horizontalLayoutWidget);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        spinBox = new QSpinBox(horizontalLayoutWidget);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        label_3 = new QLabel(centralWidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(spinBox->sizePolicy().hasHeightForWidth());
-        spinBox->setSizePolicy(sizePolicy);
+        sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy);
+
+        horizontalLayout_2->addWidget(label_3);
+
+        alg_comboBox = new QComboBox(centralWidget);
+        alg_comboBox->setObjectName(QString::fromUtf8("alg_comboBox"));
+        alg_comboBox->setMaxVisibleItems(15);
+
+        horizontalLayout_2->addWidget(alg_comboBox);
+
+        startButton = new QPushButton(centralWidget);
+        startButton->setObjectName(QString::fromUtf8("startButton"));
+
+        horizontalLayout_2->addWidget(startButton);
+
+
+        gridLayout->addLayout(horizontalLayout_2, 0, 0, 1, 1);
+
+        widget = new QWidget(centralWidget);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
+        widget->setSizePolicy(sizePolicy1);
+        widget->setMinimumSize(QSize(700, 700));
+        widget->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+
+        gridLayout->addWidget(widget, 1, 0, 1, 1);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        spinBox = new QSpinBox(centralWidget);
+        spinBox->setObjectName(QString::fromUtf8("spinBox"));
+        sizePolicy1.setHeightForWidth(spinBox->sizePolicy().hasHeightForWidth());
+        spinBox->setSizePolicy(sizePolicy1);
         QFont font;
         font.setPointSize(7);
         spinBox->setFont(font);
@@ -96,28 +127,28 @@ public:
 
         verticalLayout->addWidget(spinBox);
 
-        setDelay = new QPushButton(horizontalLayoutWidget);
+        setDelay = new QPushButton(centralWidget);
         setDelay->setObjectName(QString::fromUtf8("setDelay"));
-        sizePolicy.setHeightForWidth(setDelay->sizePolicy().hasHeightForWidth());
-        setDelay->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(setDelay->sizePolicy().hasHeightForWidth());
+        setDelay->setSizePolicy(sizePolicy1);
         setDelay->setFont(font);
 
         verticalLayout->addWidget(setDelay);
 
-        label = new QLabel(horizontalLayoutWidget);
+        label = new QLabel(centralWidget);
         label->setObjectName(QString::fromUtf8("label"));
-        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy1);
         label->setMaximumSize(QSize(16777215, 15));
         label->setLayoutDirection(Qt::LeftToRight);
         label->setAlignment(Qt::AlignCenter);
 
         verticalLayout->addWidget(label);
 
-        spinBox_2 = new QSpinBox(horizontalLayoutWidget);
+        spinBox_2 = new QSpinBox(centralWidget);
         spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
-        sizePolicy.setHeightForWidth(spinBox_2->sizePolicy().hasHeightForWidth());
-        spinBox_2->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(spinBox_2->sizePolicy().hasHeightForWidth());
+        spinBox_2->setSizePolicy(sizePolicy1);
         spinBox_2->setFont(font);
         spinBox_2->setAccelerated(true);
         spinBox_2->setMinimum(2);
@@ -126,152 +157,126 @@ public:
 
         verticalLayout->addWidget(spinBox_2);
 
-        complete = new QPushButton(horizontalLayoutWidget);
+        complete = new QPushButton(centralWidget);
         complete->setObjectName(QString::fromUtf8("complete"));
-        sizePolicy.setHeightForWidth(complete->sizePolicy().hasHeightForWidth());
-        complete->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(complete->sizePolicy().hasHeightForWidth());
+        complete->setSizePolicy(sizePolicy1);
 
         verticalLayout->addWidget(complete);
 
-        stooge = new QPushButton(horizontalLayoutWidget);
+        stooge = new QPushButton(centralWidget);
         stooge->setObjectName(QString::fromUtf8("stooge"));
-        sizePolicy.setHeightForWidth(stooge->sizePolicy().hasHeightForWidth());
-        stooge->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(stooge->sizePolicy().hasHeightForWidth());
+        stooge->setSizePolicy(sizePolicy1);
 
         verticalLayout->addWidget(stooge);
 
-        merge = new QPushButton(horizontalLayoutWidget);
+        merge = new QPushButton(centralWidget);
         merge->setObjectName(QString::fromUtf8("merge"));
-        sizePolicy.setHeightForWidth(merge->sizePolicy().hasHeightForWidth());
-        merge->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(merge->sizePolicy().hasHeightForWidth());
+        merge->setSizePolicy(sizePolicy1);
 
         verticalLayout->addWidget(merge);
 
-        pancake = new QPushButton(horizontalLayoutWidget);
+        pancake = new QPushButton(centralWidget);
         pancake->setObjectName(QString::fromUtf8("pancake"));
-        sizePolicy.setHeightForWidth(pancake->sizePolicy().hasHeightForWidth());
-        pancake->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(pancake->sizePolicy().hasHeightForWidth());
+        pancake->setSizePolicy(sizePolicy1);
         pancake->setFont(font);
 
         verticalLayout->addWidget(pancake);
 
-        radix = new QPushButton(horizontalLayoutWidget);
+        radix = new QPushButton(centralWidget);
         radix->setObjectName(QString::fromUtf8("radix"));
-        sizePolicy.setHeightForWidth(radix->sizePolicy().hasHeightForWidth());
-        radix->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(radix->sizePolicy().hasHeightForWidth());
+        radix->setSizePolicy(sizePolicy1);
         radix->setFont(font);
 
         verticalLayout->addWidget(radix);
 
-        insertion = new QPushButton(horizontalLayoutWidget);
+        insertion = new QPushButton(centralWidget);
         insertion->setObjectName(QString::fromUtf8("insertion"));
-        sizePolicy.setHeightForWidth(insertion->sizePolicy().hasHeightForWidth());
-        insertion->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(insertion->sizePolicy().hasHeightForWidth());
+        insertion->setSizePolicy(sizePolicy1);
         insertion->setFont(font);
 
         verticalLayout->addWidget(insertion);
 
-        gnome = new QPushButton(horizontalLayoutWidget);
+        gnome = new QPushButton(centralWidget);
         gnome->setObjectName(QString::fromUtf8("gnome"));
-        sizePolicy.setHeightForWidth(gnome->sizePolicy().hasHeightForWidth());
-        gnome->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(gnome->sizePolicy().hasHeightForWidth());
+        gnome->setSizePolicy(sizePolicy1);
         gnome->setFont(font);
 
         verticalLayout->addWidget(gnome);
 
-        brick = new QPushButton(horizontalLayoutWidget);
+        brick = new QPushButton(centralWidget);
         brick->setObjectName(QString::fromUtf8("brick"));
-        sizePolicy.setHeightForWidth(brick->sizePolicy().hasHeightForWidth());
-        brick->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(brick->sizePolicy().hasHeightForWidth());
+        brick->setSizePolicy(sizePolicy1);
         brick->setFont(font);
 
         verticalLayout->addWidget(brick);
 
-        bubble = new QPushButton(horizontalLayoutWidget);
+        bubble = new QPushButton(centralWidget);
         bubble->setObjectName(QString::fromUtf8("bubble"));
-        sizePolicy.setHeightForWidth(bubble->sizePolicy().hasHeightForWidth());
-        bubble->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(bubble->sizePolicy().hasHeightForWidth());
+        bubble->setSizePolicy(sizePolicy1);
         bubble->setFont(font);
 
         verticalLayout->addWidget(bubble);
 
-        quick = new QPushButton(horizontalLayoutWidget);
+        quick = new QPushButton(centralWidget);
         quick->setObjectName(QString::fromUtf8("quick"));
-        sizePolicy.setHeightForWidth(quick->sizePolicy().hasHeightForWidth());
-        quick->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(quick->sizePolicy().hasHeightForWidth());
+        quick->setSizePolicy(sizePolicy1);
         quick->setFont(font);
 
         verticalLayout->addWidget(quick);
 
-        selection = new QPushButton(horizontalLayoutWidget);
+        selection = new QPushButton(centralWidget);
         selection->setObjectName(QString::fromUtf8("selection"));
-        sizePolicy.setHeightForWidth(selection->sizePolicy().hasHeightForWidth());
-        selection->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(selection->sizePolicy().hasHeightForWidth());
+        selection->setSizePolicy(sizePolicy1);
         selection->setFont(font);
 
         verticalLayout->addWidget(selection);
 
-        cocktail = new QPushButton(horizontalLayoutWidget);
+        cocktail = new QPushButton(centralWidget);
         cocktail->setObjectName(QString::fromUtf8("cocktail"));
-        sizePolicy.setHeightForWidth(cocktail->sizePolicy().hasHeightForWidth());
-        cocktail->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(cocktail->sizePolicy().hasHeightForWidth());
+        cocktail->setSizePolicy(sizePolicy1);
         cocktail->setFont(font);
 
         verticalLayout->addWidget(cocktail);
 
-        comb = new QPushButton(horizontalLayoutWidget);
+        comb = new QPushButton(centralWidget);
         comb->setObjectName(QString::fromUtf8("comb"));
-        sizePolicy.setHeightForWidth(comb->sizePolicy().hasHeightForWidth());
-        comb->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(comb->sizePolicy().hasHeightForWidth());
+        comb->setSizePolicy(sizePolicy1);
         comb->setFont(font);
 
         verticalLayout->addWidget(comb);
 
-        label_2 = new QLabel(horizontalLayoutWidget);
+        label_2 = new QLabel(centralWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy1);
         label_2->setMaximumSize(QSize(16777215, 15));
         label_2->setLayoutDirection(Qt::LeftToRight);
         label_2->setAlignment(Qt::AlignCenter);
 
         verticalLayout->addWidget(label_2);
 
-        dijkstra = new QPushButton(horizontalLayoutWidget);
+        dijkstra = new QPushButton(centralWidget);
         dijkstra->setObjectName(QString::fromUtf8("dijkstra"));
-        sizePolicy.setHeightForWidth(dijkstra->sizePolicy().hasHeightForWidth());
-        dijkstra->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(dijkstra->sizePolicy().hasHeightForWidth());
+        dijkstra->setSizePolicy(sizePolicy1);
 
         verticalLayout->addWidget(dijkstra);
 
-        horizontalLayoutWidget_2 = new QWidget(centralWidget);
-        horizontalLayoutWidget_2->setObjectName(QString::fromUtf8("horizontalLayoutWidget_2"));
-        horizontalLayoutWidget_2->setGeometry(QRect(39, 0, 801, 41));
-        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_2);
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_3 = new QLabel(horizontalLayoutWidget_2);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
-        label_3->setSizePolicy(sizePolicy1);
 
-        horizontalLayout_2->addWidget(label_3);
-
-        alg_comboBox = new QComboBox(horizontalLayoutWidget_2);
-        alg_comboBox->setObjectName(QString::fromUtf8("alg_comboBox"));
-        alg_comboBox->setMaxVisibleItems(15);
-
-        horizontalLayout_2->addWidget(alg_comboBox);
-
-        startButton = new QPushButton(horizontalLayoutWidget_2);
-        startButton->setObjectName(QString::fromUtf8("startButton"));
-
-        horizontalLayout_2->addWidget(startButton);
+        gridLayout->addLayout(verticalLayout, 1, 1, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -293,6 +298,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Algorithm Visualizer", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "Pick an Algorithm:", nullptr));
+        startButton->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
         setDelay->setText(QCoreApplication::translate("MainWindow", "Set delay", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Array size", nullptr));
         complete->setText(QCoreApplication::translate("MainWindow", "Complete", nullptr));
@@ -310,8 +317,6 @@ public:
         comb->setText(QCoreApplication::translate("MainWindow", "Comb", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "PathFinding", nullptr));
         dijkstra->setText(QCoreApplication::translate("MainWindow", "Dijkstra's", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindow", "Pick an Algorithm:", nullptr));
-        startButton->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
     } // retranslateUi
 
 };

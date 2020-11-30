@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget* parent) :
     ui->alg_comboBox->addItem("StoogeSort");
     ui->alg_comboBox->addItem("MergeSort");
     ui->alg_comboBox->addItem("Dijkstra's");
-
+    ui->widget->setMinimumSize(700, 700);
     //scene = new QGraphicsScene(this);
     TheDrawBars = new DrawBars;
     TheDrawBars->size = qApp->screens()[0]->availableSize();
@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget* parent) :
     TheDrawBars->xSize = ui->widget->width();
     TheDrawBars->ySize=ui->widget->height();
     TheDrawBars->show();
+    TheDrawBars->pathfinding = false;
     srand (time(NULL));
     ui->spinBox_2->setMaximum(TheDrawBars->xSize);
     connect(ui->insertion,SIGNAL(released()),this,SLOT(insertion_released()));
