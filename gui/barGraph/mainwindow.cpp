@@ -290,7 +290,7 @@ void MainWindow::setup()
     TheDrawBars->xSize = ui->widget->width();
     TheDrawBars->ySize=ui->widget->height();
     TheDrawBars->pathfinding = false;
-    ui->complete->setText("complete");
+    ui->complete->setText("Complete");
     DefSize = ui->spinBox_2->value();
     TheDrawBars->delayTime = ui->spinBox->value();
     TheDrawBars->amount = DefSize;
@@ -326,6 +326,7 @@ void MainWindow::on_startButton_clicked()
         setup();
         TheDrawBars->SelectionSort();
     }else if(ui->alg_comboBox->currentText() == "RadixSort"){
+        setup();
         DefSize = ui->spinBox_2->value();
         TheDrawBars->amount = DefSize;
         TheDrawBars->isradix = false;
@@ -620,7 +621,7 @@ void DrawBars::merge( int left, int middle, int right) {
 
 void MainWindow::complete_released()
 {
-    if(ui->complete->text() == "complete"){
+    if(ui->complete->text() == "Complete"){
         TheDrawBars->delayTime=-1;
     }else{
         TheDrawBars->graph->update();

@@ -84,6 +84,7 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
         label_3->setSizePolicy(sizePolicy1);
+        label_3->setMinimumSize(QSize(0, 25));
 
         horizontalLayout_2->addWidget(label_3);
 
@@ -91,6 +92,7 @@ public:
         alg_comboBox->setObjectName(QString::fromUtf8("alg_comboBox"));
         sizePolicy1.setHeightForWidth(alg_comboBox->sizePolicy().hasHeightForWidth());
         alg_comboBox->setSizePolicy(sizePolicy1);
+        alg_comboBox->setMinimumSize(QSize(0, 25));
         alg_comboBox->setStyleSheet(QString::fromUtf8("background-color: rgb(247, 184, 1);"));
         alg_comboBox->setMaxVisibleItems(15);
 
@@ -100,6 +102,7 @@ public:
         startButton->setObjectName(QString::fromUtf8("startButton"));
         sizePolicy1.setHeightForWidth(startButton->sizePolicy().hasHeightForWidth());
         startButton->setSizePolicy(sizePolicy1);
+        startButton->setMinimumSize(QSize(0, 25));
         startButton->setStyleSheet(QString::fromUtf8("background-color: rgb(241, 135, 1);"));
 
         horizontalLayout_2->addWidget(startButton);
@@ -108,6 +111,7 @@ public:
         label_2->setObjectName(QString::fromUtf8("label_2"));
         sizePolicy1.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
         label_2->setSizePolicy(sizePolicy1);
+        label_2->setMinimumSize(QSize(0, 25));
 
         horizontalLayout_2->addWidget(label_2);
 
@@ -115,6 +119,7 @@ public:
         spinBox->setObjectName(QString::fromUtf8("spinBox"));
         sizePolicy1.setHeightForWidth(spinBox->sizePolicy().hasHeightForWidth());
         spinBox->setSizePolicy(sizePolicy1);
+        spinBox->setMinimumSize(QSize(0, 25));
         QFont font1;
         font1.setPointSize(7);
         spinBox->setFont(font1);
@@ -130,6 +135,7 @@ public:
         setDelay->setObjectName(QString::fromUtf8("setDelay"));
         sizePolicy1.setHeightForWidth(setDelay->sizePolicy().hasHeightForWidth());
         setDelay->setSizePolicy(sizePolicy1);
+        setDelay->setMinimumSize(QSize(0, 25));
         setDelay->setFont(font1);
         setDelay->setStyleSheet(QString::fromUtf8("background-color: rgb(241, 135, 1);"));
 
@@ -139,9 +145,10 @@ public:
         label->setObjectName(QString::fromUtf8("label"));
         sizePolicy1.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
         label->setSizePolicy(sizePolicy1);
-        label->setMaximumSize(QSize(16777215, 15));
+        label->setMinimumSize(QSize(0, 25));
+        label->setMaximumSize(QSize(16777215, 25));
         label->setLayoutDirection(Qt::LeftToRight);
-        label->setAlignment(Qt::AlignCenter);
+        label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
         horizontalLayout_2->addWidget(label);
 
@@ -149,6 +156,7 @@ public:
         spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
         sizePolicy1.setHeightForWidth(spinBox_2->sizePolicy().hasHeightForWidth());
         spinBox_2->setSizePolicy(sizePolicy1);
+        spinBox_2->setMinimumSize(QSize(0, 25));
         spinBox_2->setFont(font1);
         spinBox_2->setStyleSheet(QString::fromUtf8("background-color: rgb(247, 184, 1);"));
         spinBox_2->setAccelerated(true);
@@ -163,6 +171,7 @@ public:
         complete->setEnabled(false);
         sizePolicy1.setHeightForWidth(complete->sizePolicy().hasHeightForWidth());
         complete->setSizePolicy(sizePolicy1);
+        complete->setMinimumSize(QSize(0, 25));
         complete->setStyleSheet(QString::fromUtf8("background-color: rgb(241, 135, 1);"));
 
         horizontalLayout_2->addWidget(complete);
