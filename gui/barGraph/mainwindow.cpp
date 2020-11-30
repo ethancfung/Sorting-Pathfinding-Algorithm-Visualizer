@@ -387,10 +387,9 @@ void DrawBars::paintEvent(QPaintEvent*) {
     if(start){
 
         if(!pathfinding){
-            QRect r1;
-            r1.setRect(-1, -1, xSize+10,ySize+10);
-            painter.fillRect(r1, QColor(	150, 131, 236));
-            painter.drawRect(r1);
+            r.setRect(-1, -1, xSize+10,ySize+10);
+            painter.fillRect(r, QColor(	150, 131, 236));
+            painter.drawRect(r);
             painter.setRenderHint(QPainter::Antialiasing);
             painter.drawRect(rect());
             QBrush greenBrush(start?QColor(243, 91, 4, 255):Qt::white, Qt::SolidPattern);
@@ -399,7 +398,7 @@ void DrawBars::paintEvent(QPaintEvent*) {
             painter.setPen(oPen);
             for (int c = 0; c < int(list.size()); ++c) {
                 //painter.setPen(list[c].Color);
-                QRect r;
+//                QRect r;
                 r.setRect(list[c].Pos.rx(), ySize-1, (xSize/amount),isradix?-list[c].Value/13:-list[c].Value);
                 painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
                 painter.drawRect(r);
@@ -410,10 +409,9 @@ void DrawBars::paintEvent(QPaintEvent*) {
                     painter.drawText(list[c].Pos.rx()+1, ySize-3+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
             }//end for
         }else{
-            QRect r1;
-            r1.setRect(-1, -1, xSize+10,ySize+10);
-            painter.fillRect(r1, QColor(	150, 131, 236));
-            painter.drawRect(r1);
+            r.setRect(-1, -1, xSize+10,ySize+10);
+            painter.fillRect(r, QColor(	150, 131, 236));
+            painter.drawRect(r);
             painter.setRenderHint(QPainter::Antialiasing);
             painter.drawRect(rect());
             QBrush greenBrush(Qt::green);
@@ -462,7 +460,6 @@ void DrawBars::paintEvent(QPaintEvent*) {
             }
         }
     }else{
-        QRect r;
         r.setRect(-1, -1, xSize+10,ySize+10);
         painter.fillRect(r, QColor(	150, 131, 236));
         painter.drawRect(r);

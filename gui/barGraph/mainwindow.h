@@ -59,6 +59,7 @@ public:
     Graph *graph;
     QGraphicsScene *scene;
     bool start;
+    QRect r;
 //    QSize size;
 protected:
     void paintEvent(QPaintEvent*);
