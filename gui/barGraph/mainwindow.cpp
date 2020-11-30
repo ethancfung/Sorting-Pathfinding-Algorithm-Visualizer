@@ -465,6 +465,7 @@ void MainWindow::merge_released()
     TheDrawBars->MergeSort(0,DefSize);
 }
 void MainWindow::dijkstra_released(){
+    ui->complete->setEnabled(true);
     TheDrawBars->graph = new Graph(8, 0.3f);
     TheDrawBars->pathfinding = true;
     //
