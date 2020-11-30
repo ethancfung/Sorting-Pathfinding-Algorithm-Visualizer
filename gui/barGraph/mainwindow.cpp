@@ -375,7 +375,7 @@ void MainWindow::on_startButton_clicked()
     }else if(ui->alg_comboBox->currentText() == "MergeSort"){
         setup();
         TheDrawBars->MergeSort(0,DefSize);
-    }else if(ui->alg_comboBox->currentText() == "Dijsktra's"){
+    }else if(ui->alg_comboBox->currentText() == "Dijkstra's"){
         TheDrawBars->graph = new Graph(8, 0.3f);
         TheDrawBars->pathfinding = true;
         //

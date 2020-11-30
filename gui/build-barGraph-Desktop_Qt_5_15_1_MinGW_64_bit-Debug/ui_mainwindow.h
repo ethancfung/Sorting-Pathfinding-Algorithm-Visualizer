@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -49,6 +50,9 @@ public:
     QPushButton *comb;
     QLabel *label_2;
     QPushButton *dijkstra;
+    QWidget *horizontalLayoutWidget_2;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label_3;
     QComboBox *alg_comboBox;
     QPushButton *startButton;
     QMenuBar *menuBar;
@@ -65,7 +69,7 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         widget = new QWidget(centralWidget);
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(10, 10, 811, 591));
+        widget->setGeometry(QRect(30, 50, 811, 591));
         widget->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
         horizontalLayoutWidget = new QWidget(centralWidget);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
@@ -240,15 +244,34 @@ public:
 
         verticalLayout->addWidget(dijkstra);
 
-        alg_comboBox = new QComboBox(horizontalLayoutWidget);
+        horizontalLayoutWidget_2 = new QWidget(centralWidget);
+        horizontalLayoutWidget_2->setObjectName(QString::fromUtf8("horizontalLayoutWidget_2"));
+        horizontalLayoutWidget_2->setGeometry(QRect(39, 0, 801, 41));
+        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_2);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        label_3 = new QLabel(horizontalLayoutWidget_2);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_2->addWidget(label_3);
+
+        alg_comboBox = new QComboBox(horizontalLayoutWidget_2);
         alg_comboBox->setObjectName(QString::fromUtf8("alg_comboBox"));
+        alg_comboBox->setMaxVisibleItems(15);
 
-        verticalLayout->addWidget(alg_comboBox);
+        horizontalLayout_2->addWidget(alg_comboBox);
 
-        startButton = new QPushButton(horizontalLayoutWidget);
+        startButton = new QPushButton(horizontalLayoutWidget_2);
         startButton->setObjectName(QString::fromUtf8("startButton"));
 
-        verticalLayout->addWidget(startButton);
+        horizontalLayout_2->addWidget(startButton);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -258,6 +281,9 @@ public:
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         MainWindow->setStatusBar(statusBar);
+#if QT_CONFIG(shortcut)
+        label_3->setBuddy(alg_comboBox);
+#endif // QT_CONFIG(shortcut)
 
         retranslateUi(MainWindow);
 
@@ -284,6 +310,7 @@ public:
         comb->setText(QCoreApplication::translate("MainWindow", "Comb", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "PathFinding", nullptr));
         dijkstra->setText(QCoreApplication::translate("MainWindow", "Dijkstra's", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "Pick an Algorithm:", nullptr));
         startButton->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
     } // retranslateUi
 
