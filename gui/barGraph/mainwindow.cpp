@@ -51,7 +51,6 @@ MainWindow::MainWindow(QWidget* parent) :
     connect(ui->dijkstra,SIGNAL(released()),this,SLOT(dijkstra_released()));
     TheDrawBars->delayTime = 10;
     TheDrawBars->amount = DefSize;
-    setupUI();
 
 }
 
