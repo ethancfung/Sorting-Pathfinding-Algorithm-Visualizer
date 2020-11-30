@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget* parent) :
     TheDrawBars->show();
     TheDrawBars->pathfinding = false;
     srand (time(NULL));
-    ui->spinBox_2->setMaximum(TheDrawBars->xSize);
+    ui->spinBox_2->setMaximum(TheDrawBars->xSize-1);
     connect(ui->setDelay,SIGNAL(released()),this,SLOT(setDelay()));
     connect(ui->complete,SIGNAL(released()),this,SLOT(complete_released()));
     TheDrawBars->delayTime = 10;
@@ -301,7 +301,7 @@ void MainWindow::setup()
     float x = 0;
     for (int var = 0; var < DefSize; ++var) {
         tmp.Pos = QPoint(x, DefSize);
-        x+=( TheDrawBars->xSize/DefSize);
+        x+=( (TheDrawBars->xSize-1)/DefSize);
         tmp.Value = 5+(rand() % (TheDrawBars->ySize-30));
         tmp.Color = Qt::black;
         TheDrawBars->list.push_back(tmp);
@@ -310,6 +310,7 @@ void MainWindow::setup()
 //**********SLOTS for BUTTONS**********
 void MainWindow::on_startButton_clicked()
 {
+    TheDrawBars->start = true;
     if(ui->alg_comboBox->currentText() == "BubbleSort"){
         setup();
         TheDrawBars->BubbleSort();
@@ -379,18 +380,21 @@ DrawBars::DrawBars() {
 
 void DrawBars::paintEvent(QPaintEvent*) {
     QPainter painter(this);
+//    painter.setBrush(QBrush(Qt::white));
     //painter.drawText(100,100,QString::number(size.height()));
 //    if(size.height()<2100){
         if(!pathfinding){
 
             painter.setRenderHint(QPainter::Antialiasing);
             painter.drawRect(rect());
-            QBrush greenBrush(Qt::green, Qt::SolidPattern);
-            QBrush blueBrush(Qt::blue, Qt::SolidPattern);
+            QBrush greenBrush(start?Qt::green:Qt::white, Qt::SolidPattern);
+            QBrush blueBrush(start?Qt::blue:Qt::white, Qt::SolidPattern);
+            QPen oPen(start?Qt::black:Qt::white);
+            painter.setPen(oPen);
             for (int c = 0; c < int(list.size()); ++c) {
-                painter.setPen(list[c].Color);
+                //painter.setPen(list[c].Color);
                 QRect r;
-                r.setRect(list[c].Pos.rx(), ySize, (xSize/amount),isradix?-list[c].Value/13:-list[c].Value);
+                r.setRect(list[c].Pos.rx(), ySize-1, (xSize/amount),isradix?-list[c].Value/13:-list[c].Value);
                 painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
                 painter.drawRect(r);
                 QFont font = painter.font();
@@ -445,9 +449,6 @@ void DrawBars::paintEvent(QPaintEvent*) {
                 }
             }
         }
-//    }else{//if small screen
-
-
 
 
 }
@@ -632,6 +633,7 @@ void MainWindow::complete_released()
 
 void MainWindow::on_alg_comboBox_currentTextChanged(const QString &arg1)
 {
+    TheDrawBars->start = false;
     if(arg1 == "Dijkstra's"){
         ui->spinBox->hide();
         ui->spinBox_2->hide();

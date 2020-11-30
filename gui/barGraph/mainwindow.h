@@ -58,6 +58,7 @@ public:
     void MergeSort(int leftIndex, int rightIndex);
     Graph *graph;
     QGraphicsScene *scene;
+    bool start;
 //    QSize size;
 protected:
     void paintEvent(QPaintEvent*);
@@ -75,6 +76,7 @@ public:
     ~MainWindow();
     float DefSize = 50;
     DrawBars* TheDrawBars;
+    Ui::MainWindow* ui;
 private slots:
     void setDelay();
     void setup();
@@ -85,7 +87,7 @@ private slots:
     void on_alg_comboBox_currentTextChanged(const QString &arg1);
 
 private:
-    Ui::MainWindow* ui;
+
 
 };
 
