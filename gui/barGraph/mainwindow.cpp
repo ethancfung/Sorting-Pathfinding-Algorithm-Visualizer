@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget* parent) :
     TheDrawBars->pathfinding = false;
     srand (time(NULL));
     ui->spinBox_2->setMaximum(TheDrawBars->xSize);
+    ui->complete->setEnabled(false);
     connect(ui->insertion,SIGNAL(released()),this,SLOT(insertion_released()));
     connect(ui->bubble,SIGNAL(released()),this,SLOT(bubble_released()));
     connect(ui->selection,SIGNAL(released()),this,SLOT(selection_released()));
@@ -298,6 +299,7 @@ void MainWindow::setDelay(){
 
 void MainWindow::setup()
 {
+    ui->complete->setEnabled(true);
     ui->spinBox_2->setMaximum(TheDrawBars->xSize);
     TheDrawBars->xSize = ui->widget->width();
     TheDrawBars->ySize=ui->widget->height();
