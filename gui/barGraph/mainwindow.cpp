@@ -404,7 +404,7 @@ void DrawBars::paintEvent(QPaintEvent*) {
                 painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
                 painter.drawRect(r);
                 QFont font = painter.font();
-                font.setPointSize(ySize<2000?7:3);
+                font.setPointSize(ySize<2000?5:3);
                 painter.setFont(font);
                 if(amount <=50)
                     painter.drawText(list[c].Pos.rx()+1, ySize-3+(isradix?-list[c].Value/13:-list[c].Value), QString::number(list[c].Value));
