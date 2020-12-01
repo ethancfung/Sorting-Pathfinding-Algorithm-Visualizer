@@ -302,7 +302,7 @@ void MainWindow::setup()
     for (int var = 0; var < DefSize; ++var) {
         tmp.Pos = QPoint(x, DefSize);
         x+=( (TheDrawBars->xSize-1)/DefSize);
-        tmp.Value = 5+(rand() % (TheDrawBars->ySize-30));
+        tmp.Value = 30+(rand() % (TheDrawBars->ySize-50));
         tmp.Color = Qt::black;
         TheDrawBars->list.push_back(tmp);
     }
