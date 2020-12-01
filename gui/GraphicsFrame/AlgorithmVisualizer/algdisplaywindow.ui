@@ -100,6 +100,14 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>	Gnome sort: Based on the concept of a Garden Gnome sorting his flower pots. Look at previous and next data. If they are in correct order move to next data point, or else swap data and move to previous data point. 
+</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label_11">
         <property name="text">
          <string>- Dijkstra's algorithm:  Finds the shortest path from a starting node to a target node in a weighted graph by creating a tree of shortest paths from the starting vertex, the source, to all other points in the graph.</string>
