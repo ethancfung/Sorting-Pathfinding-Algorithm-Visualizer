@@ -115,6 +115,14 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string>	Stooge sort: A recursive sorting algorithm. If value at index 0 is greater than value at last index, swap them. Recursively sorts the initial and last 2/3rds of the array.
+</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label_11">
         <property name="text">
          <string>- Dijkstra's algorithm:  Finds the shortest path from a starting node to a target node in a weighted graph by creating a tree of shortest paths from the starting vertex, the source, to all other points in the graph.</string>
