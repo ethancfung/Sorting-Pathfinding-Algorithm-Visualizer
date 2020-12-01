@@ -290,7 +290,6 @@ void MainWindow::setup()
     TheDrawBars->xSize = ui->widget->width();
     TheDrawBars->ySize=ui->widget->height();
     TheDrawBars->pathfinding = false;
-    ui->complete->setText("Complete");
     DefSize = ui->spinBox_2->value();
     TheDrawBars->delayTime = ui->spinBox->value();
     TheDrawBars->amount = DefSize;
@@ -307,6 +306,9 @@ void MainWindow::setup()
         TheDrawBars->list.push_back(tmp);
     }
 }
+
+
+
 //**********SLOTS for BUTTONS**********
 void MainWindow::on_startButton_clicked()
 {
@@ -378,27 +380,25 @@ void MainWindow::on_startButton_clicked()
 DrawBars::DrawBars() {
 }
 
-
+//paint event...redraw screen when event is triggered...update() triggers event
 void DrawBars::paintEvent(QPaintEvent*) {
     QPainter painter(this);
-    //    painter.setBrush(QBrush(Qt::white));
-    //painter.drawText(100,100,QString::number(size.height()));
-    //    if(size.height()<2100){
+    QColor backgroundcolor(150, 131, 236);
+    QColor maincolor(243, 91, 4, 255);
+    QColor highlight(247, 184, 1, 255);
     if(start){
 
         if(!pathfinding){
             r.setRect(-1, -1, xSize+10,ySize+10);
-            painter.fillRect(r, QColor(	150, 131, 236));
+            painter.fillRect(r, backgroundcolor);
             painter.drawRect(r);
             painter.setRenderHint(QPainter::Antialiasing);
             painter.drawRect(rect());
-            QBrush greenBrush(start?QColor(243, 91, 4, 255):Qt::white, Qt::SolidPattern);
-            QBrush blueBrush(start?QColor(247, 184, 1, 255):Qt::white, Qt::SolidPattern);
+            QBrush greenBrush(maincolor, Qt::SolidPattern);
+            QBrush blueBrush(highlight, Qt::SolidPattern);
             QPen oPen(start?Qt::black:Qt::white);
             painter.setPen(oPen);
             for (int c = 0; c < int(list.size()); ++c) {
-                //painter.setPen(list[c].Color);
-//                QRect r;
                 r.setRect(list[c].Pos.rx(), ySize-1, (xSize/amount),isradix?-list[c].Value/13:-list[c].Value);
                 painter.fillRect(r, c==b1 or c ==b2?greenBrush:blueBrush);
                 painter.drawRect(r);
@@ -410,7 +410,7 @@ void DrawBars::paintEvent(QPaintEvent*) {
             }//end for
         }else{
             r.setRect(-1, -1, xSize+10,ySize+10);
-            painter.fillRect(r, QColor(	150, 131, 236));
+            painter.fillRect(r, backgroundcolor);
             painter.drawRect(r);
             painter.setRenderHint(QPainter::Antialiasing);
             painter.drawRect(rect());
@@ -461,7 +461,7 @@ void DrawBars::paintEvent(QPaintEvent*) {
         }
     }else{
         r.setRect(-1, -1, xSize+10,ySize+10);
-        painter.fillRect(r, QColor(	150, 131, 236));
+        painter.fillRect(r, backgroundcolor);
         painter.drawRect(r);
     }
 
@@ -661,7 +661,7 @@ void MainWindow::on_alg_comboBox_currentTextChanged(const QString &arg1)
         ui->label->show();
         ui->label_2->show();
         ui->complete->setText("complete");
-       // ui->setDelay->show();
+        // ui->setDelay->show();
     }
     update();
 }
