@@ -87,6 +87,10 @@ private slots:
 
     void on_alg_comboBox_currentTextChanged(const QString &arg1);
 
+    void on_pushButton_pressed();
+
+    void on_pushButton_released();
+
 private:
 
 

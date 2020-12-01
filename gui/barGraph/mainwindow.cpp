@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    ui->frame_2->hide();
     // Combo box setup
     ui->alg_comboBox->addItem("BubbleSort");
     ui->alg_comboBox->addItem("PancakeSort");
@@ -383,7 +384,7 @@ DrawBars::DrawBars() {
 //paint event...redraw screen when event is triggered...update() triggers event
 void DrawBars::paintEvent(QPaintEvent*) {
     QPainter painter(this);
-    QColor backgroundcolor(150, 131, 236);
+    QColor backgroundcolor(243, 243, 243);
     QColor maincolor(243, 91, 4, 255);
     QColor highlight(247, 184, 1, 255);
     if(start){
@@ -664,4 +665,15 @@ void MainWindow::on_alg_comboBox_currentTextChanged(const QString &arg1)
         // ui->setDelay->show();
     }
     update();
+}
+
+void MainWindow::on_pushButton_pressed()
+{
+    ui->frame_2->show();
+    ui->frame_2->raise();
+}
+
+void MainWindow::on_pushButton_released()
+{
+    ui->frame_2->hide();
 }
