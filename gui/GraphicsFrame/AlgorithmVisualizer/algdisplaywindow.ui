@@ -86,13 +86,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>- A* algorithm: A best-first search, meaning that it is formulated in terms of weighted graphs: starting from a specific starting node of a graph, it aims to find a path to the given goal node having the smallest cost</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QLabel" name="label_11">
         <property name="text">
          <string>- Dijkstra's algorithm:  Finds the shortest path from a starting node to a target node in a weighted graph by creating a tree of shortest paths from the starting vertex, the source, to all other points in the graph.</string>
