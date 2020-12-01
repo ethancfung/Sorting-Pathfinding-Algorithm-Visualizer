@@ -636,7 +636,7 @@ void DrawBars::merge( int left, int middle, int right) {
 
 void MainWindow::complete_released()
 {
-    if(ui->complete->text() == "Complete"){
+    if(ui->complete->text() == "Complete"||ui->complete->text() == "complete"){
         TheDrawBars->delayTime=-1;
     }else{
         TheDrawBars->graph->update();
