@@ -79,13 +79,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string>- Heap sort: Finds the maximum element and place the maximum element at the end. It repeats the same process for the remaining elements.</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QLabel" name="label_9">
         <property name="text">
          <string>- Cocktail sort: similar to bubble sort but traverse and swaps in both directions alternatively instead of just one way</string>
