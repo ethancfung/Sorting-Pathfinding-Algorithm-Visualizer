@@ -54,14 +54,14 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(918, 1000);
+        MainWindow->resize(918, 1050);
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
-        MainWindow->setMinimumSize(QSize(918, 1000));
-        MainWindow->setMaximumSize(QSize(900, 900));
+        MainWindow->setMinimumSize(QSize(918, 1050));
+        MainWindow->setMaximumSize(QSize(918, 1034));
         QIcon icon(QIcon::fromTheme(QString::fromUtf8("appicon")));
         MainWindow->setWindowIcon(icon);
         MainWindow->setStyleSheet(QString::fromUtf8("background-color: rgb(190, 190, 190);"));
@@ -229,9 +229,10 @@ public:
         frame_2 = new QFrame(widget);
         frame_2->setObjectName(QString::fromUtf8("frame_2"));
         frame_2->setGeometry(QRect(30, 30, 831, 741));
-        frame_2->setStyleSheet(QString::fromUtf8("background-color: rgb(211, 197, 232);"));
-        frame_2->setFrameShape(QFrame::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Raised);
+        frame_2->setStyleSheet(QString::fromUtf8("background-color: rgb(211, 197, 232);\n"
+"border-color: rgb(0, 0, 0);"));
+        frame_2->setFrameShape(QFrame::Panel);
+        frame_2->setFrameShadow(QFrame::Plain);
         verticalLayout_2 = new QVBoxLayout(frame_2);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
