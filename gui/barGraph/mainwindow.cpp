@@ -653,12 +653,15 @@ void MainWindow::on_alg_comboBox_currentTextChanged(const QString &arg1)
         ui->spinBox_2->hide();
         ui->label->hide();
         ui->label_2->hide();
+        ui->complete->setText("next");
         //ui->setDelay->hide();
     }else{
         ui->spinBox->show();
         ui->spinBox_2->show();
         ui->label->show();
         ui->label_2->show();
+        ui->complete->setText("complete");
        // ui->setDelay->show();
     }
+    update();
 }
