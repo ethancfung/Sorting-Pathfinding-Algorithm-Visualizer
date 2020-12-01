@@ -86,6 +86,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Pancake sort: Pancake are the data points and a spatula can be inserted at any point in the stack and used to flip all pancakes above it.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label_11">
         <property name="text">
          <string>- Dijkstra's algorithm:  Finds the shortest path from a starting node to a target node in a weighted graph by creating a tree of shortest paths from the starting vertex, the source, to all other points in the graph.</string>
