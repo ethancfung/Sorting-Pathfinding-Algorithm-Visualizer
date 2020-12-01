@@ -93,6 +93,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Brick sort: A variation of bubble-sort. The algorithm runs until the array elements are sorted and in each iteration two phases occurs- Odd and Even Phases.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label_11">
         <property name="text">
          <string>- Dijkstra's algorithm:  Finds the shortest path from a starting node to a target node in a weighted graph by creating a tree of shortest paths from the starting vertex, the source, to all other points in the graph.</string>
